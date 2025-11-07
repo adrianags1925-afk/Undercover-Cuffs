@@ -1,0 +1,359 @@
+@charset "UTF-8";
+/* CSS Document */
+body{
+      /*background-image: url("../imagenes/fondo3.jpg");*/
+      background-color: darkslategray;
+      background-size: 250px;
+}
+h1{
+      font-family:Consolas, 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Courier New', 'monospace';
+      text-align: center;
+      text-shadow: 2px 2px 2px;
+
+      box-shadow:10px 5px 0px 0px #220003;
+      background: rgb(255,189,0);
+      background: linear-gradient(180deg, rgba(255,189,0,1) 0%, rgba(255,103,0,1) 100%);
+}
+
+h2{
+      font-family:Consolas, 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Courier New', 'monospace';
+      font-size: 25px;
+      text-align: center;
+      text-shadow: 2px 2px 2px;
+      background: rgb(255,189,0);
+      background: linear-gradient(180deg, rgba(255,189,0,1) 0%, rgba(255,103,0,1) 100%);
+      box-shadow:10px 5px 0px 0px #220003;
+      padding-top:10px;
+      padding-bottom: 10px;
+}
+
+h3{
+      font-family:Consolas, 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Courier New', 'monospace';
+      text-shadow: 2px 2px 2px;	
+      text-align: center;
+      background: rgb(255,189,0);
+      background: linear-gradient(180deg, rgba(255,189,0,1) 0%, rgba(255,103,0,1) 100%);
+      margin-left: 300px;
+      margin-right: 300px;
+      box-shadow:10px 5px 0px 0px #220003;
+	    margin-top: 15px;
+}
+
+img{
+      height: 30px;
+      width: 30px;
+      /*float: right;*/
+      /*margin-bottom:900px;*/
+	    /*margin-top: 30px;*/
+}
+
+
+a{
+    /*margin-left:80px;
+    margin-right: 90px;
+	  margin-bottom: 5px;
+	  margin-top: 20px;*/
+
+}
+
+.navmenu{ 
+  list-style:none;
+  line-height:40px;
+  font-size:20px;
+  font-weight:700;
+  text-align: center;
+}
+
+.navmenu a{
+  color:#ffffff;
+}
+
+input{
+
+    /*float: right;*/
+	  /*margin-top: 35px;*/
+    padding: 5px;
+    border-radius:8px;
+    border:none;
+}
+p{
+      background-color:rgba(255,103,0,1);
+      width:400px;
+      font-size:28px;
+      box-shadow:8px 5px 7px 0px black;
+      padding:30px;
+      /*margin-left: 100px;*/
+}
+
+
+.info{
+
+  display:flex; 
+  border:solid 0px; 
+  justify-content: space-between; 
+  align-items:center
+
+}
+
+.info p{
+  margin-left:50px;
+}
+
+.redes_sociales{
+  text-align: right;
+}
+
+.redes_sociales li{
+  display: inline;
+  list-style: none;
+  margin-right: 10px;
+}
+
+
+.busquedas{
+  text-align: right;
+}
+
+.busquedas li{
+  display: inline;
+  list-style: none;
+}
+
+#lupa{ 
+  position:relative; 
+  top:10px;
+
+}
+
+.logo {
+      height: auto;
+      width: 450px;
+      top:0;
+      margin-right:0 auto;
+}
+.E {
+      margin-top:30px;
+      width: 300px;
+      /*margin-left:150px;*/
+}
+.y {
+      margin:0;
+      margin-left:0px;
+      width: 50px;
+      color: indianred;
+	    margin-top: 20px;
+}
+.o{
+      color:indianred;
+      
+}
+
+
+.Ch{
+	  margin:370px 0px 30px;
+	  font-size: 40px;
+	  padding-right: 95px;
+	  text-align: center;
+}
+.video {
+	height: 500px;
+	width: 500px;
+}
+.w {
+    color: indianred;
+    margin-left:0px;
+    margin-top:0px;
+    width:500px;
+	margin-bottom: 20px;
+}
+.inf{
+	color:indianred;
+    margin: 0px;
+	width: 500px;
+	margin-top:10px;
+}
+.shop{
+	width: 500px;
+  height:auto !important;
+	
+}
+
+footer{
+	background-color:rgba(255,103,0,1);
+	text-align: center;
+	margin-top:500px;
+  padding:30px;
+
+	
+	
+}
+.contenedor{
+	max-width: 1200px;
+	margin:0 auto;
+	padding: 16px;
+}
+/* Estilo por defecto para pantallas grandes */
+body {
+  font-size: 18px;
+  margin: 20px;
+}
+
+/* Para tabletas (pantallas medianas) */
+@media (max-width : 1118px ){
+  body {
+    font-size: 16px;
+    margin: 10px;
+  }
+}
+
+/* Para móviles (pantallas pequeñas) */
+@media (max-width : 1118px ){
+  body {
+    font-size: 14px;
+    margin: 5px;
+  }
+}
+     
+.thae {
+font-size: 40px;
+margin-top:200px;
+text-align: center;
+}
+.prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      z-index: 10;
+      font-size: 18px;
+    }
+
+.en {
+		display: flex;
+		margin-left:550px;
+}
+
+    .slides2 img {
+      width: 100%;
+      height: auto;
+	  transition:transform 0.5s ease-in-out;
+	  display: flex;
+    }
+    .controls2 {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display:flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+	  margin-top: -1000px;
+    }
+    .prev, .next {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+		cursor: pointer;}
+
+  button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor:pointer;
+  z-index: 10;
+}
+
+button.prev {
+  left: 10px;
+}
+
+button.next {
+  right: 10px;
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.slide2 {
+	 display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 100%;
+}
+.d{
+	margin-left:0px;
+	/*margin-top:-800px;*/
+	
+}
+audio{
+	margin-top:30px;
+	
+}.mar {
+	margin-left: 0px;
+}
+
+
+.contenedor-audios{
+  width:100%;
+  display:flex;
+  gap:20px;
+}
+
+.archivo-audio{
+  width: auto;
+  flex-grow:1;
+}
+
+.archivo-audio p{
+  width: auto;
+}
+
+.desplegable{  
+  display:none;
+
+}
+
+.abrirdesplegable:hover >.desplegable{
+  display:block;
+  width:100px;
+  height:100px;
+  background-color:white;
+  padding:20px;
+}
+
+
+
+.desplegable {
+  display: none;
+  position: absolute;
+  width: 150px;
+  height: auto;
+  border: 0px solid #fff;
+  background: white;
+  color: #000;
+  left: 51%;
+  top: 320px;
+  transform: translate(-50%, -50%);
+  z-index: 99999 !important;
+  padding:30px;
+  cursor: pointer;
+}
+
+.fairytale-hover:hover > .desplegable {
+  display: block;
+  cursor: pointer;
+  color:#000000;
+
+}
+
+.titulo-desplegable{ 
+color:#ffffff;
+text-decoration: underline;
+ }
