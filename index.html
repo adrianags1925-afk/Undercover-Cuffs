@@ -12,10 +12,11 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 	
     <style>
+  
         .swiper-container {
             width: 100%;
             max-width: 1080px;
-            margin: 50px auto;
+            margin: 30px auto;
             overflow: hidden;
             position: relative;
             border-radius: 10px;
@@ -31,15 +32,15 @@
             position: absolute;
             top: calc(50% + 20px);
             transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
+            width: clamp(30px, 6vw, 40px);
+            height: clamp(30px, 6vw, 40px);
             background: rgba(0, 0, 0, 0.5);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: clamp(18px, 4vw, 24px);
             cursor: pointer;
             z-index: 10;
         }
@@ -57,15 +58,20 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            max-width: 1400px;
-            margin: 50px auto;
+            max-width: min(95%, 1400px);
+            margin: 30px auto;
+            padding: 0 10px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         .swiper-container-main {
             flex: 1;
+            min-width: 0;
+            width: 100%;
         }
         .swiper-circular {
-            width: 200px;
-            height: 200px;
+            width: clamp(150px, 25vw, 200px);
+            height: clamp(150px, 25vw, 200px);
             border-radius: 50%;
             background: blue;
             display: none;
@@ -88,14 +94,465 @@
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 24px;
+            font-size: clamp(16px, 3vw, 24px);
             font-weight: bold;
+        }
+        
+        @media only screen and (max-width: 768px) {
+            .swiper-container {
+                margin: 20px auto;
+                border-radius: 8px;
+            }
+            
+            .swiper-wrapper-container {
+                margin: 20px auto;
+                gap: 15px;
+                flex-direction: column;
+            }
+            
+            .swiper-container-main {
+                width: 100%;
+            }
+            
+            .swiper-button-prev,
+            .swiper-button-next {
+                width: 35px;
+                height: 35px;
+                font-size: 20px;
+            }
+            
+            .swiper-button-prev {
+                left: 5px;
+            }
+            
+            .swiper-button-next {
+                right: 5px;
+            }
+        }
+        
+        @media only screen and (max-width: 480px) {
+            .swiper-container {
+                margin: 15px auto;
+            }
+            
+            .swiper-wrapper-container {
+                margin: 15px auto;
+                gap: 10px;
+                padding: 0 5px;
+            }
+            
+            .swiper-button-prev,
+            .swiper-button-next {
+                width: 30px;
+                height: 30px;
+                font-size: 18px;
+            }
+        }
+        
+        /* Estilos para garabatos animados */
+        .doodles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .doodle {
+            position: absolute;
+            opacity: 0.5;
+        }
+        
+        .doodle svg {
+            width: clamp(30px, 5vw, 60px);
+            height: clamp(30px, 5vw, 60px);
+        }
+        
+        /* Garabatos flotando desde abajo */
+        .doodle.float-up {
+            animation: floatUp 15s infinite ease-in-out;
+        }
+        
+        .doodle.float-up:nth-child(1) { left: 5%; animation-duration: 12s; animation-delay: 0s; }
+        .doodle.float-up:nth-child(2) { left: 15%; animation-duration: 18s; animation-delay: 2s; }
+        .doodle.float-up:nth-child(3) { left: 25%; animation-duration: 16s; animation-delay: 4s; }
+        .doodle.float-up:nth-child(4) { left: 35%; animation-duration: 20s; animation-delay: 1s; }
+        .doodle.float-up:nth-child(5) { left: 45%; animation-duration: 14s; animation-delay: 3s; }
+        .doodle.float-up:nth-child(6) { left: 55%; animation-duration: 17s; animation-delay: 5s; }
+        .doodle.float-up:nth-child(7) { left: 65%; animation-duration: 19s; animation-delay: 2.5s; }
+        .doodle.float-up:nth-child(8) { left: 75%; animation-duration: 15s; animation-delay: 0.5s; }
+        .doodle.float-up:nth-child(9) { left: 85%; animation-duration: 21s; animation-delay: 3.5s; }
+        .doodle.float-up:nth-child(10) { left: 95%; animation-duration: 13s; animation-delay: 1.5s; }
+        
+        /* Garabatos flotando desde la izquierda */
+        .doodle.float-right {
+            animation: floatRight 20s infinite ease-in-out;
+            top: 20%;
+        }
+        
+        .doodle.float-right:nth-child(11) { top: 10%; animation-duration: 18s; animation-delay: 0s; }
+        .doodle.float-right:nth-child(12) { top: 25%; animation-duration: 22s; animation-delay: 3s; }
+        .doodle.float-right:nth-child(13) { top: 40%; animation-duration: 16s; animation-delay: 1s; }
+        .doodle.float-right:nth-child(14) { top: 55%; animation-duration: 24s; animation-delay: 4s; }
+        .doodle.float-right:nth-child(15) { top: 70%; animation-duration: 19s; animation-delay: 2s; }
+        .doodle.float-right:nth-child(16) { top: 85%; animation-duration: 21s; animation-delay: 5s; }
+        
+        /* Garabatos flotando desde la derecha */
+        .doodle.float-left {
+            animation: floatLeft 20s infinite ease-in-out;
+            top: 30%;
+            right: 0;
+            left: auto;
+        }
+        
+        .doodle.float-left:nth-child(17) { top: 15%; animation-duration: 17s; animation-delay: 1s; }
+        .doodle.float-left:nth-child(18) { top: 35%; animation-duration: 23s; animation-delay: 3.5s; }
+        .doodle.float-left:nth-child(19) { top: 50%; animation-duration: 15s; animation-delay: 0.5s; }
+        .doodle.float-left:nth-child(20) { top: 65%; animation-duration: 20s; animation-delay: 4s; }
+        .doodle.float-left:nth-child(21) { top: 80%; animation-duration: 18s; animation-delay: 2s; }
+        
+        /* Garabatos flotando desde arriba */
+        .doodle.float-down {
+            animation: floatDown 18s infinite ease-in-out;
+            top: -50px;
+        }
+        
+        .doodle.float-down:nth-child(22) { left: 12%; animation-duration: 16s; animation-delay: 0s; }
+        .doodle.float-down:nth-child(23) { left: 28%; animation-duration: 19s; animation-delay: 2s; }
+        .doodle.float-down:nth-child(24) { left: 44%; animation-duration: 21s; animation-delay: 4s; }
+        .doodle.float-down:nth-child(25) { left: 60%; animation-duration: 17s; animation-delay: 1s; }
+        .doodle.float-down:nth-child(26) { left: 76%; animation-duration: 20s; animation-delay: 3s; }
+        .doodle.float-down:nth-child(27) { left: 92%; animation-duration: 18s; animation-delay: 5s; }
+        
+        /* Garabatos rotando en posiciones fijas */
+        .doodle.rotate-fixed {
+            animation: rotateFixed 8s infinite linear;
+        }
+        
+        .doodle.rotate-fixed:nth-child(28) { top: 5%; left: 8%; animation-duration: 10s; }
+        .doodle.rotate-fixed:nth-child(29) { top: 5%; right: 8%; animation-duration: 12s; }
+        .doodle.rotate-fixed:nth-child(30) { bottom: 5%; left: 8%; animation-duration: 9s; }
+        .doodle.rotate-fixed:nth-child(31) { bottom: 5%; right: 8%; animation-duration: 11s; }
+        .doodle.rotate-fixed:nth-child(32) { top: 50%; left: 2%; animation-duration: 13s; }
+        .doodle.rotate-fixed:nth-child(33) { top: 50%; right: 2%; animation-duration: 10s; }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes floatRight {
+            0% {
+                transform: translateX(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px)) rotate(-360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes floatLeft {
+            0% {
+                transform: translateX(100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateX(calc(-100vw - 100px)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes floatDown {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(calc(100vh + 100px)) rotate(-360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes rotateFixed {
+            from {
+                transform: rotate(0deg) scale(1);
+                opacity: 0.4;
+            }
+            50% {
+                transform: rotate(180deg) scale(1.1);
+                opacity: 0.6;
+            }
+            to {
+                transform: rotate(360deg) scale(1);
+                opacity: 0.4;
+            }
+        }
+        
+        .doodle svg {
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
     </style>	
 	
 </head>
 
 <body>
+
+<!-- Garabatos animados -->
+<div class="doodles-container">
+    <!-- Garabatos flotando desde abajo (1-10) -->
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#ff6b6b" stroke-width="3"/>
+            <circle cx="35" cy="40" r="5" fill="#ff6b6b"/>
+            <circle cx="65" cy="40" r="5" fill="#ff6b6b"/>
+            <path d="M 35 60 Q 50 70 65 60" stroke="#ff6b6b" stroke-width="3" fill="none"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 10 L 60 40 L 90 40 L 68 58 L 75 90 L 50 70 L 25 90 L 32 58 L 10 40 L 40 40 Z" fill="#ffd93d" stroke="#ff6b6b" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="35" fill="#6bcf7f" stroke="#4a9b5a" stroke-width="2"/>
+            <circle cx="40" cy="45" r="4" fill="#fff"/>
+            <circle cx="60" cy="45" r="4" fill="#fff"/>
+            <path d="M 40 60 Q 50 65 60 60" stroke="#fff" stroke-width="2" fill="none"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 20 L 70 45 L 95 50 L 75 70 L 50 90 L 25 70 L 5 50 L 30 45 Z" fill="#ff9ff3" stroke="#ff6b9d" stroke-width="2"/>
+            <circle cx="50" cy="50" r="8" fill="#fff"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="30" r="20" fill="#ffe66d" stroke="#ffd93d" stroke-width="2"/>
+            <path d="M 50 50 L 30 80 L 70 80 Z" fill="#ffe66d" stroke="#ffd93d" stroke-width="2"/>
+            <circle cx="43" cy="28" r="3" fill="#ff6b6b"/>
+            <circle cx="57" cy="28" r="3" fill="#ff6b6b"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 15 Q 30 20 30 40 Q 30 55 50 75 Q 70 55 70 40 Q 70 20 50 15" fill="#ff6b9d" stroke="#ff4757" stroke-width="2"/>
+            <circle cx="45" cy="38" r="3" fill="#fff"/>
+            <circle cx="55" cy="38" r="3" fill="#fff"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,10 60,40 90,40 68,58 75,90 50,70 25,90 32,58 10,40 40,40" fill="#74b9ff" stroke="#0984e3" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="30" fill="#a8e6cf" stroke="#6bcf7f" stroke-width="3"/>
+            <circle cx="50" cy="50" r="20" fill="none" stroke="#4a9b5a" stroke-width="2"/>
+            <circle cx="50" cy="50" r="10" fill="#4a9b5a"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="25" y="25" width="50" height="50" rx="10" fill="#ffd93d" stroke="#ff6b6b" stroke-width="2"/>
+            <circle cx="40" cy="40" r="5" fill="#ff6b6b"/>
+            <circle cx="60" cy="40" r="5" fill="#ff6b6b"/>
+            <path d="M 40 60 Q 50 65 60 60" stroke="#ff6b6b" stroke-width="2" fill="none"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 10 L 90 50 L 50 90 L 10 50 Z" fill="#ff9ff3" stroke="#ff6b9d" stroke-width="2"/>
+            <circle cx="50" cy="50" r="15" fill="#fff"/>
+        </svg>
+    </div>
+    
+    <!-- Garabatos flotando desde la izquierda (11-16) -->
+    <div class="doodle float-right">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="35" fill="none" stroke="#74b9ff" stroke-width="4"/>
+            <circle cx="50" cy="50" r="25" fill="none" stroke="#0984e3" stroke-width="3"/>
+            <circle cx="50" cy="50" r="15" fill="#0984e3"/>
+        </svg>
+    </div>
+    <div class="doodle float-right">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 30 50 L 50 30 L 70 50 L 50 70 Z" fill="#6bcf7f" stroke="#4a9b5a" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle float-right">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="50" cy="50" rx="30" ry="20" fill="#ffe66d" stroke="#ffd93d" stroke-width="2"/>
+            <circle cx="40" cy="45" r="4" fill="#ff6b6b"/>
+            <circle cx="60" cy="45" r="4" fill="#ff6b6b"/>
+        </svg>
+    </div>
+    <div class="doodle float-right">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,20 70,60 50,80 30,60" fill="#ff6b9d" stroke="#ff4757" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle float-right">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="25" fill="#a8e6cf" stroke="#6bcf7f" stroke-width="3"/>
+            <path d="M 35 50 L 50 35 L 65 50 L 50 65 Z" fill="#4a9b5a"/>
+        </svg>
+    </div>
+    <div class="doodle float-right">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 10 Q 70 30 50 50 Q 30 70 50 90" stroke="#74b9ff" stroke-width="4" fill="none"/>
+            <circle cx="50" cy="50" r="8" fill="#0984e3"/>
+        </svg>
+    </div>
+    
+    <!-- Garabatos flotando desde la derecha (17-21) -->
+    <div class="doodle float-left">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="35" fill="#ff6b6b" opacity="0.7"/>
+            <circle cx="50" cy="50" r="25" fill="#ffd93d" opacity="0.8"/>
+            <circle cx="50" cy="50" r="15" fill="#ff6b6b"/>
+        </svg>
+    </div>
+    <div class="doodle float-left">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,15 75,40 75,60 50,85 25,60 25,40" fill="#6bcf7f" stroke="#4a9b5a" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle float-left">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="30" width="60" height="40" rx="5" fill="#ff9ff3" stroke="#ff6b9d" stroke-width="2"/>
+            <circle cx="35" cy="45" r="4" fill="#fff"/>
+            <circle cx="65" cy="45" r="4" fill="#fff"/>
+        </svg>
+    </div>
+    <div class="doodle float-left">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 20 L 80 50 L 50 80 L 20 50 Z" fill="#ffe66d" stroke="#ffd93d" stroke-width="2"/>
+            <circle cx="50" cy="50" r="12" fill="#ff6b6b"/>
+        </svg>
+    </div>
+    <div class="doodle float-left">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="50" cy="50" rx="25" ry="35" fill="#74b9ff" stroke="#0984e3" stroke-width="2"/>
+            <circle cx="50" cy="40" r="5" fill="#fff"/>
+            <path d="M 45 55 Q 50 60 55 55" stroke="#fff" stroke-width="2" fill="none"/>
+        </svg>
+    </div>
+    
+    <!-- Garabatos flotando desde arriba (22-27) -->
+    <div class="doodle float-down">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="30" fill="#ff6b6b" stroke="#ff4757" stroke-width="3"/>
+            <circle cx="40" cy="45" r="5" fill="#fff"/>
+            <circle cx="60" cy="45" r="5" fill="#fff"/>
+            <path d="M 40 60 Q 50 65 60 60" stroke="#fff" stroke-width="2" fill="none"/>
+        </svg>
+    </div>
+    <div class="doodle float-down">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,10 65,35 90,40 70,55 75,80 50,70 25,80 30,55 10,40 35,35" fill="#ffd93d" stroke="#ff6b6b" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle float-down">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="35" fill="#6bcf7f" opacity="0.8"/>
+            <circle cx="50" cy="50" r="25" fill="#4a9b5a" opacity="0.9"/>
+            <circle cx="50" cy="50" r="15" fill="#fff"/>
+        </svg>
+    </div>
+    <div class="doodle float-down">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 15 L 70 50 L 50 85 L 30 50 Z" fill="#ff9ff3" stroke="#ff6b9d" stroke-width="2"/>
+            <circle cx="50" cy="50" r="10" fill="#fff"/>
+        </svg>
+    </div>
+    <div class="doodle float-down">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="30" y="30" width="40" height="40" rx="8" fill="#ffe66d" stroke="#ffd93d" stroke-width="2"/>
+            <circle cx="42" cy="42" r="3" fill="#ff6b6b"/>
+            <circle cx="58" cy="42" r="3" fill="#ff6b6b"/>
+            <path d="M 42 58 Q 50 63 58 58" stroke="#ff6b6b" stroke-width="2" fill="none"/>
+        </svg>
+    </div>
+    <div class="doodle float-down">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="50" cy="50" rx="30" ry="25" fill="#74b9ff" stroke="#0984e3" stroke-width="2"/>
+            <circle cx="45" cy="45" r="4" fill="#fff"/>
+            <circle cx="55" cy="45" r="4" fill="#fff"/>
+            <path d="M 45 58 Q 50 63 55 58" stroke="#fff" stroke-width="2" fill="none"/>
+        </svg>
+    </div>
+    
+    <!-- Garabatos rotando en posiciones fijas (28-33) -->
+    <div class="doodle rotate-fixed">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 10 L 60 40 L 90 40 L 68 58 L 75 90 L 50 70 L 25 90 L 32 58 L 10 40 L 40 40 Z" fill="#ffd93d" stroke="#ff6b6b" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle rotate-fixed">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="35" fill="#6bcf7f" stroke="#4a9b5a" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle rotate-fixed">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 20 L 70 45 L 95 50 L 75 70 L 50 90 L 25 70 L 5 50 L 30 45 Z" fill="#ff9ff3" stroke="#ff6b9d" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle rotate-fixed">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="30" fill="#74b9ff" stroke="#0984e3" stroke-width="3"/>
+            <circle cx="50" cy="50" r="20" fill="#0984e3" opacity="0.5"/>
+        </svg>
+    </div>
+    <div class="doodle rotate-fixed">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,15 75,40 75,60 50,85 25,60 25,40" fill="#ffe66d" stroke="#ffd93d" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle rotate-fixed">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="25" fill="#ff6b6b" stroke="#ff4757" stroke-width="2"/>
+            <circle cx="50" cy="50" r="15" fill="#fff"/>
+        </svg>
+    </div>
+</div>
 
 <!-- ESTA ES LA CABECERA CON EL MENÚ -->
 
@@ -104,9 +561,9 @@
 
 <nav>
     <ul class="navmenu">
-        <li><a href="characters.html" >Characters</a> </li>
-        <li><a href="https://youtube.com/@tomateviviente5393?feature=shared" target="_blank">Video</a></li>
-        <li><a href="shop.html" >Shop</a></li>
+        <li><a href="characters.html">Characters</a></li>
+        <li><a href="video.html">Video</a></li>
+        <li><a href="shop.html">Shop</a></li>
     </ul>
 </nav>
 
@@ -156,7 +613,7 @@ It will bring back childhood and laughter with a unique and wild experience.</p>
 </article>
 
 <article>
-<p class="Ch"><a href="characters"></a>Characters</p>
+<p class="Ch"><a href="characters.html">Characters</a></p>
 	
 	<div class="swiper-wrapper-container">
         <div class="swiper-container swiper-container-main" id="main-swiper">
@@ -181,29 +638,6 @@ It will bring back childhood and laughter with a unique and wild experience.</p>
     </div>
 </article>
 
-<article>
-
-    <div style="display:flex; border:solid 0px; justify-content: center; align-items:center">
-	   <video loop controls class="video"> <source src="videos/IMG_0-2.MOV" type="video/mp4"> </video>
-    </div>  
-</article>
-
-<article>	
-    <div class="swiper-container">
-
-        <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="imagenes/108 sin título2_20241226140403.png" alt="Imagen 1"></div>
-            <div class="swiper-slide"><img src="imagenes/177 sin título_20241226142657.png" alt="Imagen 1"></div>
-            <div class="swiper-slide"><img src="imagenes/106 sin título_20241226140307.png" alt="Imagen 1"></div>
-        </div>
-
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev">&#10094;</div>
-        <div class="swiper-button-next">&#10095;</div>
-
-    </div>
-</article>	
-
 <!-- ******************************* FIN DE LOS ARTÍCULOS ******************************* -->
 
 </main>
@@ -211,7 +645,7 @@ It will bring back childhood and laughter with a unique and wild experience.</p>
 <!-- IMAGEN FINAL -->
 <div class="imagen-final">
     <img src="imagenes/IMG_3232.png" alt="Imagen final" id="imagen-final">
-    <h1 style="font-size: 4em; text-align: center; margin-top: 20px; font-weight: bold; background: transparent; border: none; padding: 0;">WELCOME</h1>
+    <h1 style="font-size: clamp(2rem, 8vw, 4em); text-align: center; margin-top: 20px; font-weight: bold; background: transparent; border: none; padding: 0;">WELCOME</h1>
 </div>
 
 <!-- PIE DE PÁGINA -->

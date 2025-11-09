@@ -1,0 +1,146 @@
+<!doctype html>
+
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">	
+<meta charset="UTF-8">
+	
+<title>Video - UndercoverCuffs.HTML</title>
+	
+<link href="css/UndercoverCuffs.css" rel="stylesheet" type="text/css">
+	
+    <style>
+        body {
+            background-color: #000000;
+            background-image: none;
+        }
+        
+        .video-container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            padding: 40px 20px;
+            background-color: #000000;
+        }
+        
+        .video-wrapper {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+            position: relative;
+        }
+        
+        .video-wrapper video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            margin-bottom: 0;
+        }
+        
+        header h1 {
+            margin: 10px;
+        }
+        
+        .navmenu a {
+            color: #ffffff;
+        }
+        
+        footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: #ffffff;
+            margin-top: 0;
+        }
+        
+        @media only screen and (max-width: 768px) {
+            .video-container {
+                padding: 20px 10px;
+                gap: 15px;
+            }
+            
+            .video-wrapper {
+                min-width: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+	
+</head>
+
+<body>
+
+<!-- ESTA ES LA CABECERA CON EL MENÚ -->
+
+<header>   
+    <h1>Undercover Cuffs</h1>
+
+<nav>
+    <ul class="navmenu">
+        <li><a href="characters.html">Characters</a></li>
+        <li><a href="video.html">Video</a></li>
+        <li><a href="shop.html">Shop</a></li>
+    </ul>
+</nav>
+
+</header>
+
+<!-- CONTENEDOR DE VIDEOS -->
+<div class="video-container">
+    <div class="video-wrapper">
+        <video loop autoplay muted playsinline>
+            <source src="videos/IMG_0-2.MOV" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
+    </div>
+    
+    <!-- Puedes agregar más videos aquí si los tienes -->
+    <!--
+    <div class="video-wrapper">
+        <video loop autoplay muted playsinline>
+            <source src="videos/otro-video.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
+    </div>
+    -->
+</div>
+
+<!-- PIE DE PÁGINA -->
+<footer>Undercover Cuffs</footer>
+
+<script>
+    // Asegurar que los videos se reproduzcan en loop
+    document.addEventListener('DOMContentLoaded', function() {
+        const videos = document.querySelectorAll('video');
+        videos.forEach(video => {
+            video.loop = true;
+            video.autoplay = true;
+            video.muted = true;
+            video.playsInline = true;
+            
+            // Si el video se detiene, volver a reproducirlo
+            video.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play();
+            });
+            
+            // Intentar reproducir el video
+            video.play().catch(error => {
+                console.log('Error al reproducir video:', error);
+            });
+        });
+    });
+</script>
+	
+</body>
+</html>
+

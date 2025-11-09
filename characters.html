@@ -1,50 +1,482 @@
 <!doctype html>
-<html lang="es">
+
+<html lang="es" xml:lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Characters – Undercover Cuffs</title>
+	
+<title>Characters - Undercover Cuffs</title>
+	
+<link href="css/UndercoverCuffs.css" rel="stylesheet" type="text/css">
+	
 <style>
-    :root {
-        color-scheme: dark;
+    .characters-container {
+        max-width: 1400px;
+        margin: 30px auto;
+        padding: 20px;
     }
-    body {
-        margin: 0;
-        min-height: 100vh;
+    
+    .characters-title {
+        text-align: center;
+        margin: 30px 0;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+    }
+    
+    .characters-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+        padding: 20px;
+    }
+    
+    .character-card {
+        background: rgba(255, 189, 0, 0.95);
+        border: 4px solid #220003;
+        box-shadow: 10px 8px 0px 0px rgba(34, 0, 3, 0.6);
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 350px;
+        cursor: pointer;
+    }
+    
+    .character-card:not(.locked):hover {
+        transform: translateY(-5px);
+        box-shadow: 15px 12px 0px 0px rgba(34, 0, 3, 0.8);
+    }
+    
+    .character-image {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: 250px;
+        object-fit: contain;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .character-name {
+        font-family: Consolas, 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Courier New', 'monospace';
+        font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+        font-weight: bold;
+        color: #220003;
+        margin-top: 10px;
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+    }
+    
+    .character-card.locked {
+        background: rgba(34, 0, 3, 0.8);
+        opacity: 0.85;
+        cursor: not-allowed;
+    }
+    
+    .character-card.locked:hover {
+        transform: none;
+        box-shadow: 10px 8px 0px 0px rgba(34, 0, 3, 0.6);
+    }
+    
+    .character-card.locked .character-name {
+        color: rgba(255, 255, 255, 0.7);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+    
+    .locked-image {
+        width: 100%;
+        max-width: 100%;
+        min-height: 250px;
+        max-height: 250px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        background: #000;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #000;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #f4f4f4;
+        padding: 40px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
     }
-    .lock-wrapper {
+    
+    .lock-icon-svg {
+        width: 100%;
+        max-width: 120px;
+        height: auto;
+    }
+    
+    @media only screen and (max-width: 768px) {
+        .characters-grid {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 10px;
+        }
+        
+        .character-card {
+            padding: 15px;
+        }
+        
+        .characters-container {
+            padding: 10px;
+        }
+    }
+    
+    @media only screen and (max-width: 480px) {
+        .characters-grid {
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        
+        .character-card {
+            padding: 12px;
+            min-height: auto;
+        }
+        
+        .character-image {
+            max-height: 200px;
+        }
+        
+        .locked-image {
+            max-height: 200px;
+            padding: 30px;
+        }
+        
+        .lock-icon-svg {
+            max-width: 80px;
+        }
+    }
+    
+    /* Estilos del Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.9);
+        animation: fadeIn 0.3s ease;
+    }
+    
+    .modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    .modal-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 90vh;
+        margin: auto;
+        animation: zoomIn 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    @keyframes zoomIn {
+        from {
+            transform: scale(0.8);
+            opacity: 0;
+        }
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+    
+    .modal-image {
+        max-width: 100%;
+        max-height: 80vh;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        border-radius: 10px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .modal-name {
+        font-family: Consolas, 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Courier New', 'monospace';
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        font-weight: bold;
+        color: #fff;
+        margin-top: 20px;
         text-align: center;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        background: rgba(255, 189, 0, 0.9);
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: 3px solid #220003;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
     }
-    .lock-icon {
-        width: 160px;
-        max-width: 60vw;
+    
+    .close {
+        position: absolute;
+        top: 20px;
+        right: 35px;
+        color: #fff;
+        font-size: 35px;
+        font-weight: bold;
+        line-height: 1;
+        cursor: pointer;
+        z-index: 1001;
+        transition: color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(34, 0, 3, 0.9);
+        border-radius: 50%;
+        border: 3px solid #fff;
+        text-decoration: none;
     }
-    .lock-text {
-        margin-top: 24px;
-        font-size: 1.25rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+    
+    .close:hover,
+    .close:focus {
+        color: #ffbd00;
+        transform: rotate(90deg);
+        background: rgba(34, 0, 3, 1);
+        border-color: #ffbd00;
+    }
+    
+    @media only screen and (max-width: 768px) {
+        .modal-content {
+            max-width: 95%;
+        }
+        
+        .close {
+            top: 10px;
+            right: 15px;
+            font-size: 30px;
+            width: 40px;
+            height: 40px;
+        }
+        
+        .modal-name {
+            margin-top: 15px;
+            padding: 8px 15px;
+        }
     }
 </style>
+	
 </head>
+
 <body>
-    <div class="lock-wrapper">
-        <svg class="lock-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="candadoCharactersTitulo candadoCharactersDesc">
-            <title id="candadoCharactersTitulo">Candado</title>
-            <desc id="candadoCharactersDesc">Candado que indica que la página de personajes está en construcción</desc>
-            <path d="M32 10a12 12 0 0 1 12 12v8h-6v-8a6 6 0 0 0-12 0v8h-6v-8A12 12 0 0 1 32 10z" fill="#9c7cff"/>
-            <rect x="14" y="26" width="36" height="30" rx="6" fill="#6b32ff"/>
-            <circle cx="32" cy="41" r="5" fill="#140033"/>
-            <rect x="30" y="41" width="4" height="8" rx="2" fill="#140033"/>
-        </svg>
-        <p class="lock-text">Characters en construcción</p>
+
+<!-- ESTA ES LA CABECERA CON EL MENÚ -->
+
+<header>   
+    <h1>Undercover Cuffs</h1>
+
+<nav>
+    <ul class="navmenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="https://youtube.com/@tomateviviente5393?feature=shared" target="_blank">Video</a></li>
+        <li><a href="shop.html">Shop</a></li>
+    </ul>
+</nav>
+
+</header>
+
+<!-- CONTENIDO PRINCIPAL -->
+<main>
+    <div class="characters-container">
+        <h2 class="characters-title">Characters</h2>
+        
+        <div class="characters-grid">
+            <!-- Personaje 1 -->
+            <div class="character-card" data-image="imagenes/IMG_1449(1).png" data-name="Thae">
+                <img src="imagenes/IMG_1449(1).png" alt="Thae" class="character-image">
+                <div class="character-name">Thae</div>
+            </div>
+            
+            <!-- Personaje 2 -->
+            <div class="character-card" data-image="imagenes/miss heed.png" data-name="Miss Heed">
+                <img src="imagenes/miss heed.png" alt="Miss Heed" class="character-image">
+                <div class="character-name">Miss Heed</div>
+            </div>
+            
+            <!-- Personaje 3 -->
+            <div class="character-card" data-image="imagenes/marth.png" data-name="Marth">
+                <img src="imagenes/marth.png" alt="Marth" class="character-image">
+                <div class="character-name">Marth</div>
+            </div>
+            
+            <!-- Personaje 4 -->
+            <div class="character-card" data-image="imagenes/Dim.png" data-name="Dim">
+                <img src="imagenes/Dim.png" alt="Dim" class="character-image">
+                <div class="character-name">Dim</div>
+            </div>
+            
+            <!-- Personaje 5 -->
+            <div class="character-card" data-image="imagenes/squofool.png" data-name="Squofool">
+                <img src="imagenes/squofool.png" alt="Squofool" class="character-image">
+                <div class="character-name">Squofool</div>
+            </div>
+            
+            <!-- Personaje 6 -->
+            <div class="character-card" data-image="imagenes/Noisy.png" data-name="Noisy">
+                <img src="imagenes/Noisy.png" alt="Noisy" class="character-image">
+                <div class="character-name">Noisy</div>
+            </div>
+            
+            <!-- Personaje 7 -->
+            <div class="character-card" data-image="imagenes/Wyll.png" data-name="Wyll">
+                <img src="imagenes/Wyll.png" alt="Wyll" class="character-image">
+                <div class="character-name">Wyll</div>
+            </div>
+            
+            <!-- Personaje 8 -->
+            <div class="character-card locked">
+                <div class="locked-image">
+                    <svg class="lock-icon-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                        <title>Candado</title>
+                        <path d="M32 10a12 12 0 0 1 12 12v8h-6v-8a6 6 0 0 0-12 0v8h-6v-8A12 12 0 0 1 32 10z" fill="#9c7cff"/>
+                        <rect x="14" y="26" width="36" height="30" rx="6" fill="#6b32ff"/>
+                        <circle cx="32" cy="41" r="5" fill="#140033"/>
+                        <rect x="30" y="41" width="4" height="8" rx="2" fill="#140033"/>
+                    </svg>
+                </div>
+                <div class="character-name">Locked</div>
+            </div>
+            
+            <!-- Personaje 9 -->
+            <div class="character-card locked">
+                <div class="locked-image">
+                    <svg class="lock-icon-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                        <title>Candado</title>
+                        <path d="M32 10a12 12 0 0 1 12 12v8h-6v-8a6 6 0 0 0-12 0v8h-6v-8A12 12 0 0 1 32 10z" fill="#9c7cff"/>
+                        <rect x="14" y="26" width="36" height="30" rx="6" fill="#6b32ff"/>
+                        <circle cx="32" cy="41" r="5" fill="#140033"/>
+                        <rect x="30" y="41" width="4" height="8" rx="2" fill="#140033"/>
+                    </svg>
+                </div>
+                <div class="character-name">Locked</div>
+            </div>
+            
+            <!-- Personaje 10 -->
+            <div class="character-card locked">
+                <div class="locked-image">
+                    <svg class="lock-icon-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                        <title>Candado</title>
+                        <path d="M32 10a12 12 0 0 1 12 12v8h-6v-8a6 6 0 0 0-12 0v8h-6v-8A12 12 0 0 1 32 10z" fill="#9c7cff"/>
+                        <rect x="14" y="26" width="36" height="30" rx="6" fill="#6b32ff"/>
+                        <circle cx="32" cy="41" r="5" fill="#140033"/>
+                        <rect x="30" y="41" width="4" height="8" rx="2" fill="#140033"/>
+                    </svg>
+                </div>
+                <div class="character-name">Locked</div>
+            </div>
+            
+            <!-- Personaje 11 -->
+            <div class="character-card locked">
+                <div class="locked-image">
+                    <svg class="lock-icon-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                        <title>Candado</title>
+                        <path d="M32 10a12 12 0 0 1 12 12v8h-6v-8a6 6 0 0 0-12 0v8h-6v-8A12 12 0 0 1 32 10z" fill="#9c7cff"/>
+                        <rect x="14" y="26" width="36" height="30" rx="6" fill="#6b32ff"/>
+                        <circle cx="32" cy="41" r="5" fill="#140033"/>
+                        <rect x="30" y="41" width="4" height="8" rx="2" fill="#140033"/>
+                    </svg>
+                </div>
+                <div class="character-name">Locked</div>
+            </div>
+            
+            <!-- Personaje 12 -->
+            <div class="character-card locked">
+                <div class="locked-image">
+                    <svg class="lock-icon-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                        <title>Candado</title>
+                        <path d="M32 10a12 12 0 0 1 12 12v8h-6v-8a6 6 0 0 0-12 0v8h-6v-8A12 12 0 0 1 32 10z" fill="#9c7cff"/>
+                        <rect x="14" y="26" width="36" height="30" rx="6" fill="#6b32ff"/>
+                        <circle cx="32" cy="41" r="5" fill="#140033"/>
+                        <rect x="30" y="41" width="4" height="8" rx="2" fill="#140033"/>
+                    </svg>
+                </div>
+                <div class="character-name">Locked</div>
+            </div>
+        </div>
     </div>
+</main>
+
+<!-- PIE DE PÁGINA -->
+<footer>Undercover Cuffs</footer>
+
+<!-- Modal para mostrar imágenes en grande -->
+<div id="characterModal" class="modal">
+    <span class="close">&times;</span>
+    <div class="modal-content">
+        <img id="modalImage" class="modal-image" src="" alt="Character">
+        <div id="modalName" class="modal-name"></div>
+    </div>
+</div>
+
+<script>
+    // Obtener el modal
+    const modal = document.getElementById('characterModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalName = document.getElementById('modalName');
+    const closeBtn = document.querySelector('.close');
+    
+    // Obtener todas las tarjetas de personajes que no están bloqueadas
+    const characterCards = document.querySelectorAll('.character-card:not(.locked)');
+    
+    // Agregar evento de clic a cada tarjeta
+    characterCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const imageSrc = this.getAttribute('data-image');
+            const characterName = this.getAttribute('data-name');
+            
+            modalImage.src = imageSrc;
+            modalImage.alt = characterName;
+            modalName.textContent = characterName;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevenir scroll del body
+        });
+    });
+    
+    // Cerrar modal al hacer clic en la X
+    closeBtn.addEventListener('click', function() {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Restaurar scroll del body
+    });
+    
+    // Cerrar modal al hacer clic fuera de la imagen
+    modal.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restaurar scroll del body
+        }
+    });
+    
+    // Cerrar modal con la tecla Escape
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && modal.classList.contains('active')) {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restaurar scroll del body
+        }
+    });
+</script>
+	
 </body>
 </html>
-
