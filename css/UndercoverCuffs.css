@@ -4,21 +4,25 @@ body{
       /*background-image: url("../imagenes/fondo1.jpg");*/
       background-image:url("../imagenes/fondo1.jpg");
 	  background-repeat: no-repeat;
-	  background-size:2600px 5700px;
+	  background-size: cover;
+	  background-position: center;
+	  background-attachment: fixed;
 }
 h1{
       font-family:Consolas, 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Courier New', 'monospace';
       text-align: center;
       text-shadow: 2px 2px 2px;
-
       box-shadow:10px 5px 0px 0px #220003;
       background: rgb(255,189,0);
       background: linear-gradient(180deg, rgba(255,189,0,1) 0%, rgba(255,103,0,1) 100%);
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      padding: 10px 20px;
+      margin: 10px;
 }
 
 h2{
       font-family:Consolas, 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Courier New', 'monospace';
-      font-size: 25px;
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
       text-align: center;
       text-shadow: 2px 2px 2px;
       background: rgb(255,189,0);
@@ -26,6 +30,7 @@ h2{
       box-shadow:10px 5px 0px 0px #220003;
       padding-top:10px;
       padding-bottom: 10px;
+      margin: 10px;
 }
 
 h3{
@@ -34,10 +39,11 @@ h3{
       text-align: center;
       background: rgb(255,189,0);
       background: linear-gradient(180deg, rgba(255,189,0,1) 0%, rgba(255,103,0,1) 100%);
-      margin-left: 300px;
-      margin-right: 300px;
+      margin-left: 10px;
+      margin-right: 10px;
       box-shadow:10px 5px 0px 0px #220003;
 	    margin-top: 15px;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
 }
 
 img{
@@ -60,9 +66,15 @@ a{
 .navmenu{ 
   list-style:none;
   line-height:40px;
-  font-size:20px;
+  font-size: clamp(0.9rem, 2.5vw, 1.25rem);
   font-weight:700;
   text-align: center;
+  padding: 0;
+  margin: 10px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
 }
 
 .navmenu a{
@@ -79,10 +91,10 @@ input{
 }
 p{
       background-color:rgba(255,103,0,1);
-      width:400px;
-      font-size:28px;
+      width: min(90%, 400px);
+      font-size: clamp(1rem, 2.5vw, 1.75rem);
       box-shadow:8px 5px 7px 0px black;
-      padding:30px;
+      padding: clamp(15px, 3vw, 30px);
       margin:20px auto;
 }
 
@@ -92,9 +104,9 @@ p{
   display:flex; 
   justify-content:center; 
   align-items:center;
-  margin:40px auto;
-  padding:30px;
-  max-width:900px;
+  margin:20px auto;
+  padding: clamp(15px, 4vw, 30px);
+  max-width: min(95%, 900px);
   border:4px solid #220003; 
   box-shadow:10px 8px 0px 0px rgba(34,0,3,0.6);
   background:rgba(255,189,0,0.85);
@@ -105,6 +117,9 @@ p{
 .info p{
   margin:0 auto 20px;
   text-align:center;
+  width: 100%;
+  max-width: 100%;
+  font-size: clamp(0.9rem, 2.2vw, 1.1rem);
 }
 
 .info p:last-child{
@@ -112,8 +127,9 @@ p{
 }
 
 .redes_sociales{
-  text-align: right;
-  padding-right: 20px;
+  text-align: center;
+  padding: 10px 20px;
+  margin: 10px 0;
 }
 
 .redes_sociales li{
@@ -123,8 +139,8 @@ p{
 }
 
 .redes_sociales img {
-  width: 60px;
-  height: 60px;
+  width: clamp(40px, 8vw, 60px);
+  height: clamp(40px, 8vw, 60px);
 }
 
 
@@ -145,8 +161,9 @@ p{
 
 .E {
       margin-top:30px;
-      width: 300px;
-      /*margin-left:150px;*/
+      width: min(90%, 300px);
+      margin-left: auto;
+      margin-right: auto;
 }
 .y {
       margin:0;
@@ -162,13 +179,14 @@ p{
 
 
 .Ch{
-	  margin:50px auto 30px;
-	  font-size: 40px;
+	  margin:30px auto 20px;
+	  font-size: clamp(1.5rem, 5vw, 2.5rem);
 	  text-align: center;
 }
 .video {
-	height: 500px;
-	width: 500px;
+	height: auto;
+	width: min(95%, 500px);
+	max-width: 500px;
 }
 .w {
     color: indianred;
@@ -210,26 +228,67 @@ body {
   font-size: 18px;
   margin: 0px;
   padding: 20px;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+main {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+article {
+  width: 100%;
+  max-width: 100%;
+  margin: 20px 0;
+  padding: 0 10px;
 }
 
 header{
-  margin-top:40px;
+  margin-top:20px;
   position:relative;
+  padding: 0 10px;
 }
 
-/* Para tabletas (pantallas medianas) */
+header nav {
+  margin-top: 15px;
+}
+
+/* Para tabletas y móviles */
 @media (max-width : 768px ){
   body {
     font-size: 14px;
     margin: 5px;
+    padding: 10px;
   }
-}
-
-/* Para móviles (pantallas pequeñas) */
-@media (max-width : 768px ){
-  body {
-    font-size: 14px;
-    margin: 5px;
+  
+  .navmenu {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .navmenu li {
+    width: 100%;
+  }
+  
+  .info {
+    margin: 15px auto;
+    padding: 20px 15px;
+  }
+  
+  h3 {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  
+  footer {
+    margin: 30px -10px 0;
+    padding: 15px 0;
+    font-size: clamp(1rem, 3vw, 1.6rem);
   }
 }
      
@@ -405,21 +464,71 @@ text-decoration: underline;
 
  @media only screen and (max-width: 768px) {
   .imagen-principal {
-    margin: 20px auto;
+    margin: 15px auto;
     padding: 10px 0;
   }
   
   .imagen-principal img {
     max-height: 250px;
+    width: 95%;
   }
   
   .imagen-final {
-    margin: 30px auto 20px;
+    margin: 25px auto 15px;
     padding: 10px 0;
   }
   
   .imagen-final img {
     max-height: 250px;
+    width: 95%;
+  }
+  
+  .imagen-final h1 {
+    font-size: clamp(2rem, 8vw, 4em) !important;
+    margin-top: 15px !important;
+  }
+}
+
+/* Para móviles pequeños */
+@media only screen and (max-width: 480px) {
+  body {
+    padding: 5px;
+  }
+  
+  .imagen-principal img,
+  .imagen-final img {
+    max-height: 200px;
+  }
+  
+  .video {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .redes_sociales {
+    padding: 5px 10px;
+  }
+  
+  .redes_sociales li {
+    margin-right: 5px;
+  }
+  
+  article {
+    padding: 0 5px;
+    margin: 15px 0;
+  }
+  
+  .Ch {
+    font-size: clamp(1.2rem, 6vw, 2rem);
+  }
+  
+  .info {
+    padding: 15px 10px;
+  }
+  
+  .info p {
+    padding: 15px;
+    margin: 15px auto;
   }
 }
  
