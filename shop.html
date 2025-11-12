@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,19 +31,53 @@
         letter-spacing: 0.08em;
         text-transform: uppercase;
     }
+    
+    @media only screen and (max-width: 768px) {
+        .lock-icon {
+            width: 120px;
+            max-width: 50vw;
+        }
+        
+        .lock-text {
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            margin-top: 20px;
+            padding: 0 20px;
+        }
+        
+        body {
+            padding: 20px;
+        }
+    }
+    
+    @media only screen and (max-width: 480px) {
+        .lock-icon {
+            width: 100px;
+            max-width: 45vw;
+        }
+        
+        .lock-text {
+            font-size: clamp(0.8rem, 4vw, 1rem);
+            margin-top: 15px;
+            padding: 0 15px;
+        }
+        
+        body {
+            padding: 15px;
+        }
+    }
 </style>
 </head>
 <body>
     <div class="lock-wrapper">
-        <svg class="lock-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="candadoTitulo candadoDesc">
-            <title id="candadoTitulo">Candado</title>
-            <desc id="candadoDesc">Candado que indica tienda protegida</desc>
+        <svg class="lock-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="lockTitle lockDesc">
+            <title id="lockTitle">Lock</title>
+            <desc id="lockDesc">Lock indicating protected shop</desc>
             <path d="M32 10a12 12 0 0 1 12 12v8h-6v-8a6 6 0 0 0-12 0v8h-6v-8A12 12 0 0 1 32 10z" fill="#ffb500"/>
             <rect x="14" y="26" width="36" height="30" rx="6" fill="#ff7a00"/>
             <circle cx="32" cy="41" r="5" fill="#220003"/>
             <rect x="30" y="41" width="4" height="8" rx="2" fill="#220003"/>
         </svg>
-        <p class="lock-text">Shop en construcción</p>
+        <p class="lock-text">Under Construction</p>
     </div>
 </body>
 </html>
