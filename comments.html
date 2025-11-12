@@ -1,0 +1,1752 @@
+<!doctype html>
+
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">	
+<meta charset="UTF-8">
+	
+<title>Comments - Undercover Cuffs</title>
+	
+<link href="css/UndercoverCuffs.css" rel="stylesheet" type="text/css">
+	
+    <style>
+        /* Estructura de página para footer al final */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            flex-shrink: 0;
+        }
+        
+        #seccion-comentarios {
+            flex: 1;
+            min-height: 0;
+        }
+        
+        footer {
+            margin-top: auto;
+            padding: 30px 0;
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            width: 100%;
+            flex-shrink: 0;
+        }
+        
+        /* Estilos para garabatos animados */
+        .doodles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .doodle {
+            position: absolute;
+            opacity: 0.5;
+        }
+        
+        .doodle svg {
+            width: clamp(30px, 5vw, 60px);
+            height: clamp(30px, 5vw, 60px);
+        }
+        
+        /* Garabatos flotando desde abajo */
+        .doodle.float-up {
+            animation: floatUp 15s infinite ease-in-out;
+        }
+        
+        .doodle.float-up:nth-child(1) { left: 5%; animation-duration: 12s; animation-delay: 0s; }
+        .doodle.float-up:nth-child(2) { left: 15%; animation-duration: 18s; animation-delay: 2s; }
+        .doodle.float-up:nth-child(3) { left: 25%; animation-duration: 16s; animation-delay: 4s; }
+        .doodle.float-up:nth-child(4) { left: 35%; animation-duration: 20s; animation-delay: 1s; }
+        .doodle.float-up:nth-child(5) { left: 45%; animation-duration: 14s; animation-delay: 3s; }
+        .doodle.float-up:nth-child(6) { left: 55%; animation-duration: 17s; animation-delay: 5s; }
+        .doodle.float-up:nth-child(7) { left: 65%; animation-duration: 19s; animation-delay: 2.5s; }
+        .doodle.float-up:nth-child(8) { left: 75%; animation-duration: 15s; animation-delay: 0.5s; }
+        .doodle.float-up:nth-child(9) { left: 85%; animation-duration: 21s; animation-delay: 3.5s; }
+        .doodle.float-up:nth-child(10) { left: 95%; animation-duration: 13s; animation-delay: 1.5s; }
+        
+        /* Garabatos flotando desde la izquierda */
+        .doodle.float-right {
+            animation: floatRight 20s infinite ease-in-out;
+            top: 20%;
+        }
+        
+        .doodle.float-right:nth-child(11) { top: 10%; animation-duration: 18s; animation-delay: 0s; }
+        .doodle.float-right:nth-child(12) { top: 25%; animation-duration: 22s; animation-delay: 3s; }
+        .doodle.float-right:nth-child(13) { top: 40%; animation-duration: 16s; animation-delay: 1s; }
+        .doodle.float-right:nth-child(14) { top: 55%; animation-duration: 24s; animation-delay: 4s; }
+        .doodle.float-right:nth-child(15) { top: 70%; animation-duration: 19s; animation-delay: 2s; }
+        .doodle.float-right:nth-child(16) { top: 85%; animation-duration: 21s; animation-delay: 5s; }
+        
+        /* Garabatos flotando desde la derecha */
+        .doodle.float-left {
+            animation: floatLeft 20s infinite ease-in-out;
+            top: 30%;
+            right: 0;
+            left: auto;
+        }
+        
+        .doodle.float-left:nth-child(17) { top: 15%; animation-duration: 17s; animation-delay: 1s; }
+        .doodle.float-left:nth-child(18) { top: 35%; animation-duration: 23s; animation-delay: 3.5s; }
+        .doodle.float-left:nth-child(19) { top: 50%; animation-duration: 15s; animation-delay: 0.5s; }
+        .doodle.float-left:nth-child(20) { top: 65%; animation-duration: 20s; animation-delay: 4s; }
+        .doodle.float-left:nth-child(21) { top: 80%; animation-duration: 18s; animation-delay: 2s; }
+        
+        /* Garabatos flotando desde arriba */
+        .doodle.float-down {
+            animation: floatDown 18s infinite ease-in-out;
+            top: -50px;
+        }
+        
+        .doodle.float-down:nth-child(22) { left: 12%; animation-duration: 16s; animation-delay: 0s; }
+        .doodle.float-down:nth-child(23) { left: 28%; animation-duration: 19s; animation-delay: 2s; }
+        .doodle.float-down:nth-child(24) { left: 44%; animation-duration: 21s; animation-delay: 4s; }
+        .doodle.float-down:nth-child(25) { left: 60%; animation-duration: 17s; animation-delay: 1s; }
+        .doodle.float-down:nth-child(26) { left: 76%; animation-duration: 20s; animation-delay: 3s; }
+        .doodle.float-down:nth-child(27) { left: 92%; animation-duration: 18s; animation-delay: 5s; }
+        
+        /* Garabatos rotando en posiciones fijas */
+        .doodle.rotate-fixed {
+            animation: rotateFixed 8s infinite linear;
+        }
+        
+        .doodle.rotate-fixed:nth-child(28) { top: 5%; left: 8%; animation-duration: 10s; }
+        .doodle.rotate-fixed:nth-child(29) { top: 5%; right: 8%; animation-duration: 12s; }
+        .doodle.rotate-fixed:nth-child(30) { bottom: 5%; left: 8%; animation-duration: 9s; }
+        .doodle.rotate-fixed:nth-child(31) { bottom: 5%; right: 8%; animation-duration: 11s; }
+        .doodle.rotate-fixed:nth-child(32) { top: 50%; left: 2%; animation-duration: 13s; }
+        .doodle.rotate-fixed:nth-child(33) { top: 50%; right: 2%; animation-duration: 10s; }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes floatRight {
+            0% {
+                transform: translateX(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px)) rotate(-360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes floatLeft {
+            0% {
+                transform: translateX(100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateX(calc(-100vw - 100px)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes floatDown {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(calc(100vh + 100px)) rotate(-360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes rotateFixed {
+            from {
+                transform: rotate(0deg) scale(1);
+                opacity: 0.4;
+            }
+            50% {
+                transform: rotate(180deg) scale(1.1);
+                opacity: 0.6;
+            }
+            to {
+                transform: rotate(360deg) scale(1);
+                opacity: 0.4;
+            }
+        }
+        
+        .doodle svg {
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+        
+        /* Estilos para la sección de comentarios */
+        .comentarios-section {
+            max-width: 1200px;
+            width: 95%;
+            margin: 50px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .comentarios-section h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 15px;
+            text-align: center;
+            color: #333;
+        }
+        
+        .comentarios-section .miss-heed-text {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            text-align: center;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .comentario-form {
+            margin-bottom: 30px;
+        }
+        
+        .comentario-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 100px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+        
+        .comentario-input:focus {
+            outline: none;
+            border-color: #74b9ff;
+        }
+        
+        .btn-enviar {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: bold;
+        }
+        
+        .btn-enviar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(116, 185, 255, 0.4);
+        }
+        
+        .btn-enviar:active {
+            transform: translateY(0);
+        }
+        
+        .lista-comentarios {
+            margin-top: 30px;
+        }
+        
+        .comentario-item {
+            background: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #74b9ff;
+            animation: fadeIn 0.3s ease-in;
+            transition: all 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+        
+        .comentario-item.eliminando {
+            animation: fadeOut 0.3s ease-out forwards;
+        }
+        
+        .comentario-texto {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            word-wrap: break-word;
+        }
+        
+        .comentario-fecha {
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+        }
+        
+        /* Botón de eliminar comentario */
+        .comentario-item {
+            position: relative;
+            padding-right: 20px;
+        }
+        
+        .btn-eliminar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            line-height: 1;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+        
+        .btn-eliminar:hover {
+            background: #ff4757;
+            transform: scale(1.1);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-eliminar:active {
+            transform: scale(0.95);
+        }
+        
+        /* Mostrar botones de eliminar solo cuando el modo admin esté activo */
+        body.modo-admin .btn-eliminar {
+            display: flex;
+        }
+        
+        body.modo-admin .comentario-item {
+            padding-right: 50px;
+        }
+        
+        /* Botón de modo admin */
+        .admin-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .btn-admin {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-admin:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .btn-admin:active {
+            transform: translateY(0);
+        }
+        
+        .btn-admin.activo {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+        
+        .btn-admin.activo:hover {
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+        }
+        
+        /* Modal de contraseña */
+        .modal-contraseña {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-contraseña.mostrar {
+            display: flex;
+        }
+        
+        .modal-contraseña-contenido {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: modalPop 0.3s ease-out;
+        }
+        
+        @keyframes modalPop {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .modal-contraseña h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.5rem;
+        }
+        
+        .modal-contraseña input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        
+        .modal-contraseña input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .modal-contraseña-botones {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        .modal-contraseña-botones button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cancelar {
+            background: #ddd;
+            color: #333;
+        }
+        
+        .btn-cancelar:hover {
+            background: #ccc;
+        }
+        
+        .btn-confirmar {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .btn-confirmar:hover {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+        }
+        
+        .error-mensaje {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-top: -15px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .error-mensaje.mostrar {
+            display: block;
+        }
+        
+        @media only screen and (max-width: 768px) {
+            footer {
+                padding: 20px 0;
+            }
+        }
+        
+        /* Aviso de censura */
+        .aviso-censura {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, #ff6b6b, #ee5a6f, #ff4757);
+            color: white;
+            padding: 40px 60px;
+            border-radius: 25px;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(255, 71, 87, 0.6), 
+                        0 5px 20px rgba(0, 0, 0, 0.5),
+                        inset 0 2px 10px rgba(255, 255, 255, 0.3);
+            z-index: 10000;
+            border: 6px solid #fff;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5),
+                         0 0 20px rgba(255, 255, 255, 0.5);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0;
+        }
+        
+        .aviso-censura.show {
+            animation: censuraPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards,
+                       censuraShake 0.15s ease-in-out 0.7s infinite;
+            opacity: 1;
+        }
+        
+        .aviso-censura::before {
+            content: "🚫";
+            display: block;
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+        
+        .aviso-censura.show::before {
+            animation: censuraIconSpin 0.8s ease-in-out 0.2s,
+                       censuraIconBounce 0.4s ease-in-out 1s infinite;
+        }
+        
+        .aviso-censura::after {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 30px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a6f, #ff4757, #ff6b6b);
+            background-size: 400% 400%;
+            z-index: -1;
+            opacity: 0;
+            filter: blur(10px);
+        }
+        
+        .aviso-censura.show::after {
+            opacity: 0.8;
+            animation: censuraGlow 2s ease infinite,
+                       censuraRotate 3s linear infinite;
+        }
+        
+        @keyframes censuraPop {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            60% {
+                transform: translate(-50%, -50%) scale(1.15) rotate(10deg);
+                opacity: 1;
+            }
+            80% {
+                transform: translate(-50%, -50%) scale(0.95) rotate(-5deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes censuraShake {
+            0%, 100% {
+                transform: translate(-50%, -50%) translateX(0);
+            }
+            25% {
+                transform: translate(-50%, -50%) translateX(-8px) rotate(2deg);
+            }
+            75% {
+                transform: translate(-50%, -50%) translateX(8px) rotate(-2deg);
+            }
+        }
+        
+        @keyframes censuraIconSpin {
+            0% {
+                transform: rotate(0deg) scale(0.5);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.3);
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+        
+        @keyframes censuraIconBounce {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-15px) scale(1.1);
+            }
+        }
+        
+        @keyframes censuraGlow {
+            0%, 100% {
+                background-position: 0% 50%;
+                opacity: 0.7;
+            }
+            50% {
+                background-position: 100% 50%;
+                opacity: 1;
+            }
+        }
+        
+        @keyframes censuraRotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .aviso-censura.hide {
+            animation: censuraHide 0.4s ease-in forwards;
+        }
+        
+        @keyframes censuraHide {
+            0% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1) rotate(180deg);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @media only screen and (max-width: 768px) {
+            .comentarios-section {
+                max-width: 95%;
+                width: 95%;
+                margin: 30px auto;
+                padding: 25px;
+            }
+            
+            .comentarios-section h2 {
+                font-size: clamp(1.3rem, 5vw, 2rem);
+                margin-bottom: 12px;
+            }
+            
+            .comentarios-section .miss-heed-text {
+                font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+                padding: 12px;
+                margin-bottom: 25px;
+            }
+            
+            .comentario-form {
+                margin-bottom: 25px;
+            }
+            
+            .comentario-input {
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .btn-enviar {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            
+            .comentario-item {
+                padding: 15px;
+                margin-bottom: 12px;
+            }
+            
+            .comentario-texto {
+                font-size: 14px;
+            }
+            
+            .comentario-fecha {
+                font-size: 11px;
+            }
+            
+            .aviso-censura {
+                padding: 20px 30px;
+                font-size: 1.2rem;
+            }
+            
+            header {
+                padding: 0 5px;
+            }
+            
+            header h1 {
+                font-size: clamp(1.2rem, 5vw, 2rem) !important;
+                padding: 8px 15px;
+                margin: 5px;
+            }
+            
+            .navmenu {
+                gap: 8px;
+                flex-direction: column;
+            }
+            
+            .navmenu li {
+                width: 100%;
+            }
+            
+            .navmenu a {
+                display: block;
+                padding: 8px 15px;
+                font-size: clamp(0.85rem, 3vw, 1rem);
+            }
+            
+            .admin-controls {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .btn-admin {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+            
+            .modal-contraseña-contenido {
+                padding: 20px;
+                max-width: 90%;
+            }
+            
+            footer {
+                padding: 20px 0;
+                font-size: clamp(1rem, 3vw, 1.6rem);
+            }
+        }
+        
+        @media only screen and (max-width: 480px) {
+            .comentarios-section {
+                max-width: 98%;
+                width: 98%;
+                margin: 20px auto;
+                padding: 15px;
+            }
+            
+            .comentarios-section h2 {
+                font-size: clamp(1.2rem, 6vw, 1.8rem);
+                margin-bottom: 10px;
+            }
+            
+            .comentarios-section .miss-heed-text {
+                font-size: clamp(0.85rem, 3vw, 1rem);
+                padding: 10px;
+                margin-bottom: 20px;
+            }
+            
+            .comentario-input {
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            .btn-enviar {
+                padding: 8px 16px;
+                font-size: 13px;
+                width: 100%;
+            }
+            
+            .comentario-item {
+                padding: 12px;
+                margin-bottom: 10px;
+            }
+            
+            .comentario-texto {
+                font-size: 13px;
+            }
+            
+            .comentario-fecha {
+                font-size: 10px;
+            }
+            
+            .btn-eliminar {
+                width: 25px;
+                height: 25px;
+                font-size: 18px;
+                top: 8px;
+                right: 8px;
+            }
+            
+            body.modo-admin .comentario-item {
+                padding-right: 40px;
+            }
+            
+            header {
+                padding: 0;
+            }
+            
+            header h1 {
+                font-size: clamp(1rem, 6vw, 1.5rem) !important;
+                padding: 6px 10px;
+                margin: 5px;
+            }
+            
+            .navmenu {
+                gap: 5px;
+            }
+            
+            .navmenu a {
+                padding: 6px 10px;
+                font-size: clamp(0.75rem, 3.5vw, 0.9rem);
+            }
+            
+            .admin-controls {
+                top: 5px;
+                right: 5px;
+            }
+            
+            .btn-admin {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            
+            .modal-contraseña-contenido {
+                padding: 15px;
+                max-width: 95%;
+            }
+            
+            .modal-contraseña h3 {
+                font-size: 1.2rem;
+            }
+            
+            .modal-contraseña input {
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            .modal-contraseña-botones button {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            
+            footer {
+                padding: 15px 0;
+                font-size: clamp(0.9rem, 3.5vw, 1.4rem);
+            }
+        }
+    </style>	
+	
+</head>
+
+<body>
+
+<!-- Garabatos animados -->
+<div class="doodles-container">
+    <!-- Garabatos flotando desde abajo (1-10) -->
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#ff6b6b" stroke-width="3"/>
+            <circle cx="35" cy="40" r="5" fill="#ff6b6b"/>
+            <circle cx="65" cy="40" r="5" fill="#ff6b6b"/>
+            <path d="M 35 60 Q 50 70 65 60" stroke="#ff6b6b" stroke-width="3" fill="none"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 10 L 60 40 L 90 40 L 68 58 L 75 90 L 50 70 L 25 90 L 32 58 L 10 40 L 40 40 Z" fill="#ffd93d" stroke="#ff6b6b" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="35" fill="#6bcf7f" stroke="#4a9b5a" stroke-width="2"/>
+            <circle cx="40" cy="45" r="4" fill="#fff"/>
+            <circle cx="60" cy="45" r="4" fill="#fff"/>
+            <path d="M 40 60 Q 50 65 60 60" stroke="#fff" stroke-width="2" fill="none"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 20 L 70 45 L 95 50 L 75 70 L 50 90 L 25 70 L 5 50 L 30 45 Z" fill="#ff9ff3" stroke="#ff6b9d" stroke-width="2"/>
+            <circle cx="50" cy="50" r="8" fill="#fff"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="30" r="20" fill="#ffe66d" stroke="#ffd93d" stroke-width="2"/>
+            <path d="M 50 50 L 30 80 L 70 80 Z" fill="#ffe66d" stroke="#ffd93d" stroke-width="2"/>
+            <circle cx="43" cy="28" r="3" fill="#ff6b6b"/>
+            <circle cx="57" cy="28" r="3" fill="#ff6b6b"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 15 Q 30 20 30 40 Q 30 55 50 75 Q 70 55 70 40 Q 70 20 50 15" fill="#ff6b9d" stroke="#ff4757" stroke-width="2"/>
+            <circle cx="45" cy="38" r="3" fill="#fff"/>
+            <circle cx="55" cy="38" r="3" fill="#fff"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,10 60,40 90,40 68,58 75,90 50,70 25,90 32,58 10,40 40,40" fill="#74b9ff" stroke="#0984e3" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="30" fill="#a8e6cf" stroke="#6bcf7f" stroke-width="3"/>
+            <circle cx="50" cy="50" r="20" fill="none" stroke="#4a9b5a" stroke-width="2"/>
+            <circle cx="50" cy="50" r="10" fill="#4a9b5a"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="25" y="25" width="50" height="50" rx="10" fill="#ffd93d" stroke="#ff6b6b" stroke-width="2"/>
+            <circle cx="40" cy="40" r="5" fill="#ff6b6b"/>
+            <circle cx="60" cy="40" r="5" fill="#ff6b6b"/>
+            <path d="M 40 60 Q 50 65 60 60" stroke="#ff6b6b" stroke-width="2" fill="none"/>
+        </svg>
+    </div>
+    <div class="doodle float-up">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 10 L 90 50 L 50 90 L 10 50 Z" fill="#ff9ff3" stroke="#ff6b9d" stroke-width="2"/>
+            <circle cx="50" cy="50" r="15" fill="#fff"/>
+        </svg>
+    </div>
+    
+    <!-- Garabatos flotando desde la izquierda (11-16) -->
+    <div class="doodle float-right">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="35" fill="none" stroke="#74b9ff" stroke-width="4"/>
+            <circle cx="50" cy="50" r="25" fill="none" stroke="#0984e3" stroke-width="3"/>
+            <circle cx="50" cy="50" r="15" fill="#0984e3"/>
+        </svg>
+    </div>
+    <div class="doodle float-right">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 30 50 L 50 30 L 70 50 L 50 70 Z" fill="#6bcf7f" stroke="#4a9b5a" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle float-right">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="50" cy="50" rx="30" ry="20" fill="#ffe66d" stroke="#ffd93d" stroke-width="2"/>
+            <circle cx="40" cy="45" r="4" fill="#ff6b6b"/>
+            <circle cx="60" cy="45" r="4" fill="#ff6b6b"/>
+        </svg>
+    </div>
+    <div class="doodle float-right">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,20 70,60 50,80 30,60" fill="#ff6b9d" stroke="#ff4757" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle float-right">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="25" fill="#a8e6cf" stroke="#6bcf7f" stroke-width="3"/>
+            <path d="M 35 50 L 50 35 L 65 50 L 50 65 Z" fill="#4a9b5a"/>
+        </svg>
+    </div>
+    <div class="doodle float-right">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 10 Q 70 30 50 50 Q 30 70 50 90" stroke="#74b9ff" stroke-width="4" fill="none"/>
+            <circle cx="50" cy="50" r="8" fill="#0984e3"/>
+        </svg>
+    </div>
+    
+    <!-- Garabatos flotando desde la derecha (17-21) -->
+    <div class="doodle float-left">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="35" fill="#ff6b6b" opacity="0.7"/>
+            <circle cx="50" cy="50" r="25" fill="#ffd93d" opacity="0.8"/>
+            <circle cx="50" cy="50" r="15" fill="#ff6b6b"/>
+        </svg>
+    </div>
+    <div class="doodle float-left">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,15 75,40 75,60 50,85 25,60 25,40" fill="#6bcf7f" stroke="#4a9b5a" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle float-left">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="30" width="60" height="40" rx="5" fill="#ff9ff3" stroke="#ff6b9d" stroke-width="2"/>
+            <circle cx="35" cy="45" r="4" fill="#fff"/>
+            <circle cx="65" cy="45" r="4" fill="#fff"/>
+        </svg>
+    </div>
+    <div class="doodle float-left">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 20 L 80 50 L 50 80 L 20 50 Z" fill="#ffe66d" stroke="#ffd93d" stroke-width="2"/>
+            <circle cx="50" cy="50" r="12" fill="#ff6b6b"/>
+        </svg>
+    </div>
+    <div class="doodle float-left">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="50" cy="50" rx="25" ry="35" fill="#74b9ff" stroke="#0984e3" stroke-width="2"/>
+            <circle cx="50" cy="40" r="5" fill="#fff"/>
+            <path d="M 45 55 Q 50 60 55 55" stroke="#fff" stroke-width="2" fill="none"/>
+        </svg>
+    </div>
+    
+    <!-- Garabatos flotando desde arriba (22-27) -->
+    <div class="doodle float-down">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="30" fill="#ff6b6b" stroke="#ff4757" stroke-width="3"/>
+            <circle cx="40" cy="45" r="5" fill="#fff"/>
+            <circle cx="60" cy="45" r="5" fill="#fff"/>
+            <path d="M 40 60 Q 50 65 60 60" stroke="#fff" stroke-width="2" fill="none"/>
+        </svg>
+    </div>
+    <div class="doodle float-down">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,10 65,35 90,40 70,55 75,80 50,70 25,80 30,55 10,40 35,35" fill="#ffd93d" stroke="#ff6b6b" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle float-down">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="35" fill="#6bcf7f" opacity="0.8"/>
+            <circle cx="50" cy="50" r="25" fill="#4a9b5a" opacity="0.9"/>
+            <circle cx="50" cy="50" r="15" fill="#fff"/>
+        </svg>
+    </div>
+    <div class="doodle float-down">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 15 L 70 50 L 50 85 L 30 50 Z" fill="#ff9ff3" stroke="#ff6b9d" stroke-width="2"/>
+            <circle cx="50" cy="50" r="10" fill="#fff"/>
+        </svg>
+    </div>
+    <div class="doodle float-down">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="30" y="30" width="40" height="40" rx="8" fill="#ffe66d" stroke="#ffd93d" stroke-width="2"/>
+            <circle cx="42" cy="42" r="3" fill="#ff6b6b"/>
+            <circle cx="58" cy="42" r="3" fill="#ff6b6b"/>
+            <path d="M 42 58 Q 50 63 58 58" stroke="#ff6b6b" stroke-width="2" fill="none"/>
+        </svg>
+    </div>
+    <div class="doodle float-down">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="50" cy="50" rx="30" ry="25" fill="#74b9ff" stroke="#0984e3" stroke-width="2"/>
+            <circle cx="45" cy="45" r="4" fill="#fff"/>
+            <circle cx="55" cy="45" r="4" fill="#fff"/>
+            <path d="M 45 58 Q 50 63 55 58" stroke="#fff" stroke-width="2" fill="none"/>
+        </svg>
+    </div>
+    
+    <!-- Garabatos rotando en posiciones fijas (28-33) -->
+    <div class="doodle rotate-fixed">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 10 L 60 40 L 90 40 L 68 58 L 75 90 L 50 70 L 25 90 L 32 58 L 10 40 L 40 40 Z" fill="#ffd93d" stroke="#ff6b6b" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle rotate-fixed">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="35" fill="#6bcf7f" stroke="#4a9b5a" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle rotate-fixed">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 50 20 L 70 45 L 95 50 L 75 70 L 50 90 L 25 70 L 5 50 L 30 45 Z" fill="#ff9ff3" stroke="#ff6b9d" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle rotate-fixed">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="30" fill="#74b9ff" stroke="#0984e3" stroke-width="3"/>
+            <circle cx="50" cy="50" r="20" fill="#0984e3" opacity="0.5"/>
+        </svg>
+    </div>
+    <div class="doodle rotate-fixed">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,15 75,40 75,60 50,85 25,60 25,40" fill="#ffe66d" stroke="#ffd93d" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="doodle rotate-fixed">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="25" fill="#ff6b6b" stroke="#ff4757" stroke-width="2"/>
+            <circle cx="50" cy="50" r="15" fill="#fff"/>
+        </svg>
+    </div>
+</div>
+
+<!-- ESTA ES LA CABECERA CON EL MENÚ -->
+<header>   
+    <h1>Undercover Cuffs</h1>
+
+<nav>
+    <ul class="navmenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="characters.html">Characters</a></li>
+        <li><a href="video.html">Video</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="comments.html">Comments</a></li>
+    </ul>
+</nav>
+
+</header>
+
+<!-- BOTÓN DE MODO ADMIN -->
+<div class="admin-controls">
+    <button class="btn-admin" id="btn-admin">Admin</button>
+</div>
+
+<!-- MODAL DE CONTRASEÑA -->
+<div class="modal-contraseña" id="modal-contraseña">
+    <div class="modal-contraseña-contenido">
+        <h3>Modo Administrador</h3>
+        <p>Ingresa la contraseña para activar el modo administrador:</p>
+        <input type="password" id="input-contraseña" placeholder="Contraseña">
+        <div class="error-mensaje" id="error-mensaje">Contraseña incorrecta</div>
+        <div class="modal-contraseña-botones">
+            <button class="btn-cancelar" id="btn-cancelar">Cancelar</button>
+            <button class="btn-confirmar" id="btn-confirmar">Confirmar</button>
+        </div>
+    </div>
+</div>
+
+<!-- SECCIÓN DE COMENTARIOS -->
+<section class="comentarios-section" id="seccion-comentarios">
+    <h2>Comments</h2>
+    <p class="miss-heed-text">Miss Heed will be reading your comments!!</p>
+    <div class="comentario-form">
+        <textarea class="comentario-input" id="comentario-input" placeholder="Escribe tu comentario aquí..."></textarea>
+        <button class="btn-enviar" id="btn-enviar">Send Comment</button>
+    </div>
+    <div class="lista-comentarios" id="lista-comentarios">
+        <!-- Los comentarios se agregarán aquí dinámicamente -->
+    </div>
+</section>
+
+<!-- PIE DE PÁGINA -->
+<footer>Undercover Cuffs</footer>
+
+<script>
+    // Sistema de comentarios con censura
+    (function() {
+        // ============================================
+        // CONFIGURACIÓN DEL ADMINISTRADOR
+        // ============================================
+        // IMPORTANTE: Cambia esta contraseña por una que solo tú conozcas
+        // Para cambiar la contraseña, modifica el valor de ADMIN_PASSWORD a continuación
+        // Ejemplo: const ADMIN_PASSWORD = 'tu_contraseña_secreta';
+        // ============================================
+        const ADMIN_PASSWORD = 'admin123';
+        
+        // Variable para el estado del modo admin
+        let modoAdmin = false;
+        
+        // Contador de IDs para comentarios
+        let comentarioIdCounter = 0;
+        
+        // Función para verificar si el modo admin está activo
+        function esModoAdmin() {
+            return sessionStorage.getItem('modoAdmin') === 'true';
+        }
+        
+        // Función para activar el modo admin
+        function activarModoAdmin() {
+            modoAdmin = true;
+            sessionStorage.setItem('modoAdmin', 'true');
+            document.body.classList.add('modo-admin');
+            const btnAdmin = document.getElementById('btn-admin');
+            if (btnAdmin) {
+                btnAdmin.classList.add('activo');
+                btnAdmin.textContent = 'Admin ✓';
+            }
+            ocultarModalContraseña();
+            actualizarBotonesEliminar();
+        }
+        
+        // Función para desactivar el modo admin
+        function desactivarModoAdmin() {
+            modoAdmin = false;
+            sessionStorage.removeItem('modoAdmin');
+            document.body.classList.remove('modo-admin');
+            const btnAdmin = document.getElementById('btn-admin');
+            if (btnAdmin) {
+                btnAdmin.classList.remove('activo');
+                btnAdmin.textContent = 'Admin';
+            }
+            actualizarBotonesEliminar();
+        }
+        
+        // Función para mostrar el modal de contraseña
+        function mostrarModalContraseña() {
+            const modal = document.getElementById('modal-contraseña');
+            modal.classList.add('mostrar');
+            document.getElementById('input-contraseña').value = '';
+            document.getElementById('input-contraseña').focus();
+            document.getElementById('error-mensaje').classList.remove('mostrar');
+        }
+        
+        // Función para ocultar el modal de contraseña
+        function ocultarModalContraseña() {
+            const modal = document.getElementById('modal-contraseña');
+            modal.classList.remove('mostrar');
+            document.getElementById('input-contraseña').value = '';
+            document.getElementById('error-mensaje').classList.remove('mostrar');
+        }
+        
+        // Función para verificar la contraseña
+        function verificarContraseña(contraseña) {
+            return contraseña === ADMIN_PASSWORD;
+        }
+        
+        // Función para autenticar administrador
+        function autenticarAdmin() {
+            const contraseña = document.getElementById('input-contraseña').value;
+            
+            if (verificarContraseña(contraseña)) {
+                activarModoAdmin();
+            } else {
+                document.getElementById('error-mensaje').classList.add('mostrar');
+                document.getElementById('input-contraseña').value = '';
+                document.getElementById('input-contraseña').focus();
+            }
+        }
+        
+        // Función para eliminar comentario
+        function eliminarComentario(id) {
+            if (!esModoAdmin()) {
+                alert('No tienes permisos para eliminar comentarios.');
+                return;
+            }
+            
+            if (confirm('¿Estás seguro de que deseas eliminar este comentario?')) {
+                const comentario = document.getElementById(`comentario-${id}`);
+                if (comentario) {
+                    // Agregar clase de animación
+                    comentario.classList.add('eliminando');
+                    // Eliminar después de la animación
+                    setTimeout(() => {
+                        comentario.remove();
+                    }, 300);
+                }
+            }
+        }
+        
+        // Lista de palabras censuradas en múltiples idiomas
+        // Nota: Esta lista incluye palabras ofensivas, palabrotas, insultos y contenido inapropiado
+        const palabrasCensuradas = [
+            // Español - Palabrotas y ofensivas
+            'puta', 'puto', 'puta madre', 'puta mierda', 'hijo de puta', 'hija de puta',
+            'hijoputa', 'hijaputa', 'cabrón', 'cabrona', 'cabron', 'cabrona',
+            'mierda', 'joder', 'jodido', 'jodida', 'jódete', 'jodete', 'joda',
+            'coño', 'cojones', 'cagada', 'cagar', 'cagado', 'cagada', 'cagarse',
+            'marica', 'maricón', 'maricon', 'maricona', 'marica',
+            'gilipollas', 'capullo', 'tontolaba', 'mamón', 'mamona', 'mamarracho',
+            'zorra', 'zorro', 'perra', 'perro', 'cerdo', 'cerda', 'puerca',
+            'basura', 'escoria', 'desgraciado', 'desgraciada', 'maldito', 'maldita',
+            'imbécil', 'imbecil', 'idiota', 'estúpido', 'estupido', 'burro', 'burra',
+            'tonto', 'tonta', 'tontorrón', 'feo', 'fea',
+            
+            // Inglés - Profanity and offensive words
+            'fuck', 'fucking', 'fucked', 'fucker', 'motherfucker', 'motherfucking',
+            'shit', 'shitting', 'shitted', 'shitty', 'bullshit',
+            'ass', 'asshole', 'arse', 'arsehole', 'bitch', 'bitches',
+            'bastard', 'bastards', 'damn', 'damned', 'dammit', 'goddamn',
+            'hell', 'bloody', 'piss', 'pissing', 'pissed', 'piss off',
+            'dick', 'dickhead', 'cock', 'cocksucker', 'prick', 'pussy',
+            'cunt', 'whore', 'slut', 'hoe', 'nigger', 'nigga',
+            'retard', 'retarded', 'idiot', 'stupid', 'dumb', 'dumbass',
+            'moron', 'imbecile', 'fool', 'jackass', 'douchebag', 'douche',
+            'twat', 'wanker', 'tosser', 'bollocks', 'balls',
+            'faggot', 'fag', 'dyke', 'queer',
+            
+            // Francés - Mots offensants
+            'merde', 'putain', 'connard', 'connasse', 'salope', 'pute',
+            'bordel', 'enculé', 'enculer', 'foutre', 'baise', 'baiser',
+            'con', 'conne', 'connerie', 'salaud',
+            'crétin', 'crétine', 'idiot', 'idiote', 'imbécile', 'stupide',
+            'merdique', 'merdeux', 'chier', 'bâtard', 'batard',
+            
+            // Italiano - Parole offensive
+            'merda', 'cazzo', 'fanculo', 'fottuto', 'fottiti',
+            'stronzo', 'stronza', 'troia', 'puttana',
+            'bastardo', 'bastarda', 'coglione', 'coglioni', 'minchia',
+            'vaffanculo', 'fanculo',
+            'idiota', 'stupido', 'stupida', 'cretino', 'cretina',
+            'merdoso', 'merdosa',
+            
+            // Alemán - Beleidigende Wörter
+            'scheisse', 'scheiße', 'scheiss', 'scheiß', 'ficken', 'gefickt',
+            'ficker', 'arsch', 'arschloch', 'hurensohn', 'hure', 'nutte',
+            'bastard', 'mist', 'mistkerl', 'dummkopf', 'idiot',
+            'blöd', 'blöde', 'blöder', 'depp',
+            'schwachsinnig', 'schwachsinn', 'dumm',
+            'verflucht', 'verdammt', 'teufel',
+            
+            // Portugués - Palavras ofensivas
+            'merda', 'porra', 'caralho', 'foder', 'fodido', 'foda',
+            'puta', 'puto', 'filho da puta', 'filha da puta', 'desgraçado',
+            'desgraçada', 'babaca', 'idiota', 'estúpido', 'estúpida',
+            'imbecil', 'imbécil', 'burro', 'burra', 'tonto', 'tonta',
+            'cacete', 'cagar', 'cagado',
+            'bosta', 'bostinha', 'escroto', 'escrota', 'canalha',
+            
+            // Insultos raciales y étnicos (ofensivos)
+            'nigger', 'nigga', 'chink', 'jap', 'spic', 'spick',
+            'kike', 'gypsy', 'gypo',
+            
+            // Insultos relacionados con discapacidades (ofensivos)
+            'retard', 'retarded', 'retrasado', 'retrasada', 'mongol',
+            'mongoloid', 'down', 'downs', 'autist', 'autistic',
+            'spastic', 'espástico', 'espástica', 'cripple', 'lisiado', 'lisiada',
+            
+            // Insultos relacionados con género (ofensivos)
+            'whore', 'slut', 'prostitute', 'prostituta', 'hooker',
+            'cunt', 'pussy',
+            
+            // Palabras relacionadas con violencia (amenazas)
+            'kill yourself', 'mátate', 'go die', 'muérete', 'kill you',
+            'matarte', 'suicide', 'suicidio', 'suicidate', 'suicídate',
+            
+            // Expresiones ofensivas compuestas
+            'vete a la mierda', 'go to hell', 'fuck off', 'piss off',
+            'screw you', 'screw off', 'va te faire foutre',
+            'fuck you', 'jódete', 'damn you',
+            
+            // Variaciones con números y símbolos (para evitar evasiones)
+            'fuk', 'f*ck', 'f**k', 'sh1t', 'sh1t', '4ss', 'a55', 'a$$',
+            'b1tch', 'd1ck', 'c0ck', 'p0rn', 'n1gger', 'n1gga', 'n1gg3r',
+            'f4ggot', 'r3tard', 'n1gg3r',
+            
+            // Otras palabras ofensivas relacionadas con odio
+            'nazi', 'hitler', 'terrorist', 'terrorista',
+            'kill yourself', 'mátate', 'suicide', 'suicidio'
+        ];
+        
+        // Función para normalizar palabra (eliminar acentos, convertir a minúsculas)
+        function normalizarPalabra(palabra) {
+            return palabra
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .toLowerCase();
+        }
+        
+        // Variable para el contexto de audio
+        let audioContext = null;
+        
+        // Función para inicializar el contexto de audio
+        function initAudioContext() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            // Si el contexto está suspendido, reanudarlo (necesario en algunos navegadores)
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+        }
+        
+        // Función para generar sonido de bocina de payaso
+        function sonidoBocinaPayaso() {
+            try {
+                initAudioContext();
+                
+                const now = audioContext.currentTime;
+                const duration = 0.6;
+                
+                // Crear múltiples osciladores para un sonido más rico y realista
+                // Oscilador principal (sonido de bocina)
+                const osc1 = audioContext.createOscillator();
+                const gain1 = audioContext.createGain();
+                osc1.type = 'sawtooth';
+                osc1.frequency.setValueAtTime(180, now);
+                osc1.frequency.exponentialRampToValueAtTime(220, now + 0.15);
+                osc1.frequency.exponentialRampToValueAtTime(160, now + 0.3);
+                osc1.frequency.exponentialRampToValueAtTime(200, now + 0.45);
+                
+                gain1.gain.setValueAtTime(0, now);
+                gain1.gain.linearRampToValueAtTime(0.5, now + 0.05);
+                gain1.gain.exponentialRampToValueAtTime(0.01, now + duration);
+                
+                osc1.connect(gain1);
+                gain1.connect(audioContext.destination);
+                
+                // Oscilador secundario (armónico para darle más cuerpo)
+                const osc2 = audioContext.createOscillator();
+                const gain2 = audioContext.createGain();
+                osc2.type = 'square';
+                osc2.frequency.setValueAtTime(360, now); // Doble frecuencia del principal
+                osc2.frequency.exponentialRampToValueAtTime(440, now + 0.15);
+                osc2.frequency.exponentialRampToValueAtTime(320, now + 0.3);
+                osc2.frequency.exponentialRampToValueAtTime(400, now + 0.45);
+                
+                gain2.gain.setValueAtTime(0, now);
+                gain2.gain.linearRampToValueAtTime(0.2, now + 0.05);
+                gain2.gain.exponentialRampToValueAtTime(0.01, now + duration);
+                
+                osc2.connect(gain2);
+                gain2.connect(audioContext.destination);
+                
+                // Oscilador de trémolo (vibración característica de bocina)
+                const osc3 = audioContext.createOscillator();
+                const gain3 = audioContext.createGain();
+                const lfo = audioContext.createOscillator();
+                const lfoGain = audioContext.createGain();
+                
+                osc3.type = 'triangle';
+                osc3.frequency.setValueAtTime(150, now);
+                
+                lfo.type = 'sine';
+                lfo.frequency.setValueAtTime(8, now); // Frecuencia de trémolo
+                lfoGain.gain.setValueAtTime(30, now); // Intensidad del trémolo
+                
+                lfo.connect(lfoGain);
+                lfoGain.connect(osc3.frequency);
+                
+                gain3.gain.setValueAtTime(0, now);
+                gain3.gain.linearRampToValueAtTime(0.15, now + 0.05);
+                gain3.gain.exponentialRampToValueAtTime(0.01, now + duration);
+                
+                osc3.connect(gain3);
+                gain3.connect(audioContext.destination);
+                
+                // Iniciar todos los osciladores
+                osc1.start(now);
+                osc1.stop(now + duration);
+                osc2.start(now);
+                osc2.stop(now + duration);
+                osc3.start(now);
+                osc3.stop(now + duration);
+                lfo.start(now);
+                lfo.stop(now + duration);
+            } catch (error) {
+                console.error('Error al reproducir sonido:', error);
+                // Fallback: sonido simple si falla el complejo
+                try {
+                    const osc = audioContext.createOscillator();
+                    const gain = audioContext.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(200, audioContext.currentTime);
+                    gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+                    osc.connect(gain);
+                    gain.connect(audioContext.destination);
+                    osc.start();
+                    osc.stop(audioContext.currentTime + 0.4);
+                } catch (e) {
+                    console.error('Error en fallback de audio:', e);
+                }
+            }
+        }
+        
+        // Función para mostrar aviso de censura
+        function mostrarAvisoCensura() {
+            // Remover cualquier aviso anterior
+            const avisoAnterior = document.getElementById('aviso-censura');
+            if (avisoAnterior) {
+                avisoAnterior.remove();
+            }
+            
+            // Crear el elemento de aviso
+            const aviso = document.createElement('div');
+            aviso.id = 'aviso-censura';
+            aviso.className = 'aviso-censura';
+            aviso.textContent = '¡PALABRA CENSURADA!';
+            document.body.appendChild(aviso);
+            
+            // Reproducir sonido de bocina
+            sonidoBocinaPayaso();
+            
+            // Usar requestAnimationFrame para asegurar que el DOM esté actualizado
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    aviso.classList.add('show');
+                });
+            });
+            
+            // Ocultar el aviso después de 2.5 segundos
+            setTimeout(() => {
+                aviso.classList.remove('show');
+                aviso.classList.add('hide');
+                setTimeout(() => {
+                    if (aviso.parentNode) {
+                        aviso.parentNode.removeChild(aviso);
+                    }
+                }, 400);
+            }, 2500);
+        }
+        
+        // Función para censurar palabras
+        function censurarTexto(texto) {
+            let textoCensurado = texto;
+            let palabraCensurada = false;
+            
+            // Ordenar palabras por longitud (más largas primero) para evitar censurar partes de palabras compuestas
+            const palabrasOrdenadas = [...palabrasCensuradas].sort((a, b) => b.length - a.length);
+            
+            // Normalizar todas las palabras de la lista
+            const palabrasNormalizadas = palabrasOrdenadas.map(p => ({
+                original: p,
+                normalizada: normalizarPalabra(p),
+                tieneEspacios: p.includes(' ')
+            }));
+            
+            palabrasNormalizadas.forEach(({ original, normalizada, tieneEspacios }) => {
+                if (tieneEspacios) {
+                    // Para frases, buscar directamente en el texto
+                    const palabraEscapada = original.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    const regex = new RegExp(palabraEscapada.replace(/\s+/g, '\\s+'), 'gi');
+                    const matches = textoCensurado.match(regex);
+                    
+                    if (matches && matches.length > 0) {
+                        palabraCensurada = true;
+                        textoCensurado = textoCensurado.replace(regex, (match) => '*'.repeat(match.length));
+                    }
+                } else {
+                    // Para palabras individuales, usar expresión regular con límites de palabra
+                    // Escapar caracteres especiales
+                    const palabraEscapada = original.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    
+                    // Primero intentar con la palabra original (con acentos)
+                    const regex = new RegExp(`\\b${palabraEscapada}\\b`, 'gi');
+                    if (regex.test(textoCensurado)) {
+                        palabraCensurada = true;
+                        textoCensurado = textoCensurado.replace(regex, (match) => '*'.repeat(match.length));
+                    }
+                    
+                    // También buscar palabra normalizada (sin acentos) comparando palabra por palabra
+                    // Dividir texto en palabras usando expresión regular que respete límites de palabra
+                    const palabrasTexto = textoCensurado.split(/\b/);
+                    
+                    palabrasTexto.forEach((palabraTexto, index) => {
+                        // Solo procesar si es una palabra (no espacios ni puntuación)
+                        if (palabraTexto.trim() && /^[a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙâêîôûÂÊÎÔÛäëïöüÄËÏÖÜãõÃÕçÇñÑ]+$/.test(palabraTexto)) {
+                            const palabraTextoNormalizada = normalizarPalabra(palabraTexto);
+                            
+                            // Comparar palabras normalizadas (sin acentos)
+                            if (palabraTextoNormalizada === normalizada) {
+                                palabraCensurada = true;
+                                palabrasTexto[index] = '*'.repeat(palabraTexto.length);
+                            }
+                        }
+                    });
+                    
+                    // Reconstruir el texto
+                    textoCensurado = palabrasTexto.join('');
+                }
+            });
+            
+            // Si se encontró una palabra censurada, mostrar aviso
+            if (palabraCensurada) {
+                mostrarAvisoCensura();
+            }
+            
+            return textoCensurado;
+        }
+        
+        // Función para agregar comentario
+        function agregarComentario() {
+            const input = document.getElementById('comentario-input');
+            const textoOriginal = input.value.trim();
+            
+            if (textoOriginal === '') {
+                alert('Por favor, escribe un comentario.');
+                return;
+            }
+            
+            // Censurar el texto
+            const textoCensurado = censurarTexto(textoOriginal);
+            
+            // Generar ID único para el comentario
+            const comentarioId = comentarioIdCounter++;
+            
+            // Crear elemento de comentario
+            const comentarioItem = document.createElement('div');
+            comentarioItem.id = `comentario-${comentarioId}`;
+            comentarioItem.className = 'comentario-item';
+            
+            // Crear botón de eliminar
+            const btnEliminar = document.createElement('button');
+            btnEliminar.className = 'btn-eliminar';
+            btnEliminar.innerHTML = '×';
+            btnEliminar.title = 'Eliminar comentario';
+            btnEliminar.onclick = () => eliminarComentario(comentarioId);
+            
+            const comentarioTexto = document.createElement('div');
+            comentarioTexto.className = 'comentario-texto';
+            comentarioTexto.textContent = textoCensurado;
+            
+            const comentarioFecha = document.createElement('div');
+            comentarioFecha.className = 'comentario-fecha';
+            const fecha = new Date();
+            comentarioFecha.textContent = fecha.toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            comentarioItem.appendChild(btnEliminar);
+            comentarioItem.appendChild(comentarioTexto);
+            comentarioItem.appendChild(comentarioFecha);
+            
+            // Agregar a la lista de comentarios
+            const listaComentarios = document.getElementById('lista-comentarios');
+            listaComentarios.insertBefore(comentarioItem, listaComentarios.firstChild);
+            
+            // Limpiar el input
+            input.value = '';
+        }
+        
+        // Función para actualizar visibilidad de botones de eliminar
+        function actualizarBotonesEliminar() {
+            // Los botones se muestran/ocultan automáticamente mediante CSS cuando 
+            // se agrega/quita la clase 'modo-admin' al body
+            // Esta función está aquí por si necesitamos hacer algo adicional en el futuro
+        }
+        
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            const btnEnviar = document.getElementById('btn-enviar');
+            const inputComentario = document.getElementById('comentario-input');
+            const btnAdmin = document.getElementById('btn-admin');
+            const modalContraseña = document.getElementById('modal-contraseña');
+            const btnConfirmar = document.getElementById('btn-confirmar');
+            const btnCancelar = document.getElementById('btn-cancelar');
+            const inputContraseña = document.getElementById('input-contraseña');
+            
+            // Verificar si el modo admin ya está activo
+            if (esModoAdmin()) {
+                activarModoAdmin();
+            }
+            
+            // Event listener para el botón de admin
+            if (btnAdmin) {
+                btnAdmin.addEventListener('click', function() {
+                    if (esModoAdmin()) {
+                        // Si ya está en modo admin, desactivar
+                        if (confirm('¿Deseas desactivar el modo administrador?')) {
+                            desactivarModoAdmin();
+                        }
+                    } else {
+                        // Si no está en modo admin, mostrar modal
+                        mostrarModalContraseña();
+                    }
+                });
+            }
+            
+            // Event listener para el botón de confirmar
+            if (btnConfirmar) {
+                btnConfirmar.addEventListener('click', function() {
+                    autenticarAdmin();
+                });
+            }
+            
+            // Event listener para el botón de cancelar
+            if (btnCancelar) {
+                btnCancelar.addEventListener('click', function() {
+                    ocultarModalContraseña();
+                });
+            }
+            
+            // Event listener para la tecla Enter en el input de contraseña
+            if (inputContraseña) {
+                inputContraseña.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        autenticarAdmin();
+                    }
+                    // Cerrar con Escape
+                    if (e.key === 'Escape') {
+                        ocultarModalContraseña();
+                    }
+                });
+            }
+            
+            // Cerrar el modal al hacer clic fuera de él
+            if (modalContraseña) {
+                modalContraseña.addEventListener('click', function(e) {
+                    if (e.target === modalContraseña) {
+                        ocultarModalContraseña();
+                    }
+                });
+            }
+            
+            // Event listeners para comentarios
+            if (btnEnviar && inputComentario) {
+                // Enviar comentario al hacer clic en el botón
+                btnEnviar.addEventListener('click', agregarComentario);
+                
+                // Enviar comentario al presionar Ctrl+Enter o Cmd+Enter
+                inputComentario.addEventListener('keydown', function(e) {
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                        e.preventDefault();
+                        agregarComentario();
+                    }
+                });
+            }
+        });
+    })();
+
+</script>
+	
+</body>
+</html>
+
