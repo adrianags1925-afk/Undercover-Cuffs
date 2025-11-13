@@ -5,6 +5,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">	
 <meta charset="UTF-8">
+<!-- Permisos para reproducción automática de audio -->
+<meta http-equiv="Permissions-Policy" content="autoplay=(self), microphone=(), camera=()">
+<meta name="referrer" content="no-referrer">
 	
 <title>Video - UndercoverCuffs.HTML</title>
 	
@@ -237,6 +240,22 @@
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
                         ('ontouchstart' in window) || 
                         (navigator.maxTouchPoints > 0);
+        
+        // Intentar solicitar permisos de autoplay si está disponible
+        if ('permissions' in navigator && 'query' in navigator.permissions) {
+            navigator.permissions.query({ name: 'autoplay' }).then(function(result) {
+                if (result.state === 'granted') {
+                    console.log('✅ Permisos de autoplay concedidos');
+                } else if (result.state === 'prompt') {
+                    console.log('⚠️ Permisos de autoplay pendientes');
+                } else {
+                    console.log('❌ Permisos de autoplay denegados');
+                }
+            }).catch(function(error) {
+                // La API puede no estar disponible en todos los navegadores
+                console.log('ℹ️ API de permisos no disponible');
+            });
+        }
         
         // Función robusta para reproducir música
         function playMusic(force) {
