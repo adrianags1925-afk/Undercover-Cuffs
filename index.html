@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">	
 <meta charset="UTF-8">
 <!-- Permisos para reproducción automática de audio -->
-<meta http-equiv="Permissions-Policy" content="autoplay=(self), microphone=(), camera=()">
+<meta http-equiv="Permissions-Policy" content="autoplay=(self), microphone=(), camera=(), speaker=(self)">
 <meta name="referrer" content="no-referrer">
 	
 <title>UndercoverCuffs.HTML</title>
@@ -854,21 +854,80 @@ It will bring back childhood and laughter with a unique and wild experience.</p>
                         ('ontouchstart' in window) || 
                         (navigator.maxTouchPoints > 0);
         
-        // Intentar solicitar permisos de autoplay si está disponible
-        if ('permissions' in navigator && 'query' in navigator.permissions) {
-            navigator.permissions.query({ name: 'autoplay' }).then(function(result) {
-                if (result.state === 'granted') {
-                    console.log('✅ Permisos de autoplay concedidos');
-                } else if (result.state === 'prompt') {
-                    console.log('⚠️ Permisos de autoplay pendientes');
-                } else {
-                    console.log('❌ Permisos de autoplay denegados');
+        // Solicitar permisos de audio explícitamente
+        function requestAudioPermissions() {
+            // Intentar solicitar permisos de autoplay
+            if ('permissions' in navigator && 'query' in navigator.permissions) {
+                // Permisos de autoplay
+                navigator.permissions.query({ name: 'autoplay' }).then(function(result) {
+                    if (result.state === 'granted') {
+                        console.log('✅ Permisos de autoplay concedidos');
+                    } else if (result.state === 'prompt') {
+                        console.log('⚠️ Permisos de autoplay pendientes');
+                    } else {
+                        console.log('❌ Permisos de autoplay denegados');
+                    }
+                }).catch(function(error) {
+                    console.log('ℹ️ API de permisos de autoplay no disponible');
+                });
+                
+                // Intentar solicitar permisos de speaker/audio si está disponible
+                try {
+                    navigator.permissions.query({ name: 'speaker-selection' }).then(function(result) {
+                        if (result.state === 'granted') {
+                            console.log('✅ Permisos de audio/speaker concedidos');
+                        }
+                    }).catch(function(error) {
+                        // Esta API puede no estar disponible en todos los navegadores
+                    });
+                } catch (e) {
+                    // La API puede no existir
                 }
-            }).catch(function(error) {
-                // La API puede no estar disponible en todos los navegadores
-                console.log('ℹ️ API de permisos no disponible');
-            });
+            }
+            
+            // Solicitar permisos de audio mediante el contexto de audio (Web Audio API)
+            if (window.AudioContext || window.webkitAudioContext) {
+                try {
+                    var AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                    var audioContext = new AudioContextClass();
+                    
+                    // Si el contexto está suspendido, intentar reanudarlo
+                    if (audioContext.state === 'suspended') {
+                        audioContext.resume().then(function() {
+                            console.log('✅ Contexto de audio activado');
+                        }).catch(function(error) {
+                            console.log('⚠️ No se pudo activar el contexto de audio:', error);
+                        });
+                    }
+                    
+                    // Cerrar el contexto después de usarlo
+                    setTimeout(function() {
+                        if (audioContext && audioContext.close) {
+                            audioContext.close().catch(function() {});
+                        }
+                    }, 100);
+                } catch (e) {
+                    console.log('ℹ️ Web Audio API no disponible');
+                }
+            }
         }
+        
+        // Solicitar permisos al cargar la página
+        requestAudioPermissions();
+        
+        // También solicitar permisos cuando el usuario interactúe
+        var permissionsRequested = false;
+        function requestPermissionsOnInteraction() {
+            if (!permissionsRequested) {
+                permissionsRequested = true;
+                requestAudioPermissions();
+            }
+        }
+        
+        // Solicitar permisos en la primera interacción
+        document.addEventListener('click', requestPermissionsOnInteraction, { once: true });
+        document.addEventListener('touchstart', requestPermissionsOnInteraction, { once: true });
+        document.addEventListener('keydown', requestPermissionsOnInteraction, { once: true });
         
         // Función robusta para reproducir música
         function playMusic(force) {
