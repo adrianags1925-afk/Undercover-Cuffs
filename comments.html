@@ -283,6 +283,8 @@
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             font-weight: bold;
+            display: block;
+            margin: 0 auto;
         }
         
         .btn-enviar:hover {
@@ -296,16 +298,23 @@
         
         .lista-comentarios {
             margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
         
         .comentario-item {
             background: #f8f9fa;
             padding: 20px;
-            margin-bottom: 15px;
+            margin-bottom: 0;
             border-radius: 10px;
             border-left: 4px solid #74b9ff;
             animation: fadeIn 0.3s ease-in;
             transition: all 0.3s ease;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            position: relative;
+            padding-right: 20px;
         }
         
         @keyframes fadeIn {
@@ -339,19 +348,20 @@
             line-height: 1.6;
             color: #333;
             word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            margin-bottom: 10px;
+            padding-right: 40px;
         }
         
         .comentario-fecha {
             font-size: 12px;
             color: #999;
             margin-top: 10px;
+            padding-right: 40px;
         }
         
         /* Botón de eliminar comentario */
-        .comentario-item {
-            position: relative;
-            padding-right: 20px;
-        }
         
         .btn-eliminar {
             position: absolute;
@@ -539,6 +549,11 @@
             display: block;
         }
         
+        /* Audio de fondo oculto */
+        #background-audio {
+            display: none;
+        }
+        
         @media only screen and (max-width: 768px) {
             footer {
                 padding: 20px 0;
@@ -701,10 +716,10 @@
         
         @media only screen and (max-width: 768px) {
             .comentarios-section {
-                max-width: 95%;
-                width: 95%;
-                margin: 30px auto;
-                padding: 25px;
+                max-width: 98%;
+                width: 98%;
+                margin: 20px auto;
+                padding: 20px;
             }
             
             .comentarios-section h2 {
@@ -715,39 +730,68 @@
             .comentarios-section .miss-heed-text {
                 font-size: clamp(0.9rem, 2.5vw, 1.1rem);
                 padding: 12px;
-                margin-bottom: 25px;
+                margin-bottom: 20px;
+                line-height: 1.4;
             }
             
             .comentario-form {
-                margin-bottom: 25px;
+                margin-bottom: 20px;
             }
             
             .comentario-input {
                 padding: 12px;
-                font-size: 14px;
+                font-size: 16px;
+                min-height: 120px;
+                margin-bottom: 12px;
             }
             
             .btn-enviar {
-                padding: 10px 20px;
-                font-size: 14px;
+                padding: 12px 24px;
+                font-size: 15px;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .lista-comentarios {
+                margin-top: 20px;
+                gap: 12px;
             }
             
             .comentario-item {
                 padding: 15px;
-                margin-bottom: 12px;
+                margin-bottom: 0;
             }
             
             .comentario-texto {
-                font-size: 14px;
+                font-size: 15px;
+                line-height: 1.5;
+                padding-right: 35px;
+                margin-bottom: 8px;
             }
             
             .comentario-fecha {
                 font-size: 11px;
+                padding-right: 35px;
+            }
+            
+            .btn-eliminar {
+                width: 28px;
+                height: 28px;
+                font-size: 18px;
+                top: 8px;
+                right: 8px;
+            }
+            
+            body.modo-admin .comentario-item {
+                padding-right: 45px;
             }
             
             .aviso-censura {
-                padding: 20px 30px;
-                font-size: 1.2rem;
+                padding: 20px 25px;
+                font-size: 1.1rem;
+                max-width: 90%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
             
             header {
@@ -798,57 +842,101 @@
         
         @media only screen and (max-width: 480px) {
             .comentarios-section {
-                max-width: 98%;
-                width: 98%;
-                margin: 20px auto;
+                max-width: 100%;
+                width: 100%;
+                margin: 15px auto;
                 padding: 15px;
+                border-radius: 10px;
             }
             
             .comentarios-section h2 {
                 font-size: clamp(1.2rem, 6vw, 1.8rem);
                 margin-bottom: 10px;
+                padding: 0 5px;
             }
             
             .comentarios-section .miss-heed-text {
-                font-size: clamp(0.85rem, 3vw, 1rem);
+                font-size: clamp(0.85rem, 3.5vw, 1rem);
                 padding: 10px;
-                margin-bottom: 20px;
+                margin-bottom: 15px;
+                line-height: 1.4;
+                border-left: 3px solid #667eea;
+            }
+            
+            .comentario-form {
+                margin-bottom: 15px;
             }
             
             .comentario-input {
-                padding: 10px;
-                font-size: 14px;
+                padding: 12px;
+                font-size: 16px;
+                min-height: 100px;
+                margin-bottom: 10px;
+                border-radius: 8px;
             }
             
             .btn-enviar {
-                padding: 8px 16px;
-                font-size: 13px;
+                padding: 12px 20px;
+                font-size: 14px;
                 width: 100%;
+                max-width: none;
+                border-radius: 20px;
+            }
+            
+            .lista-comentarios {
+                margin-top: 15px;
+                gap: 10px;
             }
             
             .comentario-item {
                 padding: 12px;
-                margin-bottom: 10px;
+                margin-bottom: 0;
+                border-radius: 8px;
+                border-left: 3px solid #74b9ff;
             }
             
             .comentario-texto {
-                font-size: 13px;
+                font-size: 14px;
+                line-height: 1.5;
+                padding-right: 30px;
+                margin-bottom: 8px;
             }
             
             .comentario-fecha {
                 font-size: 10px;
+                padding-right: 30px;
+                margin-top: 8px;
             }
             
             .btn-eliminar {
-                width: 25px;
-                height: 25px;
-                font-size: 18px;
-                top: 8px;
-                right: 8px;
+                width: 24px;
+                height: 24px;
+                font-size: 16px;
+                top: 6px;
+                right: 6px;
             }
             
             body.modo-admin .comentario-item {
-                padding-right: 40px;
+                padding-right: 38px;
+            }
+            
+            body.modo-admin .comentario-texto,
+            body.modo-admin .comentario-fecha {
+                padding-right: 35px;
+            }
+            
+            .aviso-censura {
+                padding: 15px 20px;
+                font-size: 1rem;
+                max-width: 95%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border-radius: 15px;
+            }
+            
+            .aviso-censura::before {
+                font-size: 3em;
+                margin-bottom: 10px;
             }
             
             header {
@@ -883,20 +971,29 @@
             .modal-contraseña-contenido {
                 padding: 15px;
                 max-width: 95%;
+                margin: 10px;
             }
             
             .modal-contraseña h3 {
                 font-size: 1.2rem;
+                margin-bottom: 15px;
             }
             
             .modal-contraseña input {
                 padding: 10px;
                 font-size: 14px;
+                margin-bottom: 15px;
+            }
+            
+            .modal-contraseña-botones {
+                flex-direction: column;
+                gap: 8px;
             }
             
             .modal-contraseña-botones button {
-                padding: 8px 16px;
+                padding: 10px 16px;
                 font-size: 13px;
+                width: 100%;
             }
             
             footer {
@@ -1182,7 +1279,181 @@
 </section>
 
 <!-- PIE DE PÁGINA -->
-<footer>Undercover Cuffs</footer>
+<footer style="position: relative;">
+    <a href="office.html" class="footer-hidden-link" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer; text-decoration: none; z-index: 1; display: block;" aria-label="Office" title="Office"></a>
+    <span style="position: relative; z-index: 0; pointer-events: none;">Undercover Cuffs</span>
+</footer>
+
+<!-- Música de fondo (sin controles visibles) -->
+<audio id="background-audio" loop preload="auto" style="display: none;">
+    <!-- Música alegre pero tranquila libre de derechos de autor -->
+    <!-- Pixabay - música tranquila y alegre -->
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_73b40dc47e.mp3?filename=soft-background-music-112791.mp3" type="audio/mpeg">
+    <!-- Fallback: Pixabay (música tranquila alternativa) -->
+    <source src="https://cdn.pixabay.com/download/audio/2023/05/11/audio_1683814731.mp3?filename=peaceful-morning-118490.mp3" type="audio/mpeg">
+    <!-- Fallback adicional: SoundHelix -->
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento de audio.
+</audio>
+
+<script>
+    // Sistema de reproducción de música de fondo - Versión simplificada y robusta
+    (function() {
+        'use strict';
+        
+        const audio = document.getElementById('background-audio');
+        if (!audio) {
+            console.error('Elemento de audio no encontrado');
+            return;
+        }
+        
+        // Configurar volumen (30% para música tranquila y suave)
+        audio.volume = 0.3;
+        let musicPlaying = false;
+        let userInteracted = false;
+        
+        // Función para reproducir música
+        function playMusic() {
+            if (musicPlaying && !audio.paused) return;
+            
+            const playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(function() {
+                        musicPlaying = true;
+                        console.log('✅ Música reproduciéndose');
+                    })
+                    .catch(function(error) {
+                        console.log('⚠️ Autoplay bloqueado. La música se reproducirá al interactuar con la página.');
+                    });
+            }
+        }
+        
+        // Función para iniciar música en interacción del usuario
+        function startMusicOnInteraction() {
+            if (musicPlaying) return;
+            
+            userInteracted = true;
+            playMusic();
+        }
+        
+        // Lista de eventos de interacción
+        const interactionEvents = [
+            'click', 'touchstart', 'mousedown', 'keydown',
+            'scroll', 'wheel', 'mousemove', 'pointerdown', 'pointermove'
+        ];
+        
+        // Configurar listeners para interacción del usuario
+        function setupInteractionListeners() {
+            interactionEvents.forEach(function(eventType) {
+                document.addEventListener(eventType, startMusicOnInteraction, { once: true, passive: true });
+                window.addEventListener(eventType, startMusicOnInteraction, { once: true, passive: true });
+                if (document.body) {
+                    document.body.addEventListener(eventType, startMusicOnInteraction, { once: true, passive: true });
+                }
+            });
+        }
+        
+        // Intentar reproducir cuando el audio esté listo
+        audio.addEventListener('canplay', function() {
+            playMusic();
+        }, { once: true });
+        
+        audio.addEventListener('canplaythrough', function() {
+            playMusic();
+        }, { once: true });
+        
+        audio.addEventListener('loadeddata', function() {
+            setTimeout(playMusic, 200);
+        }, { once: true });
+        
+        // Configurar listeners de interacción inmediatamente
+        setupInteractionListeners();
+        
+        // Intentar reproducir después de que la página cargue
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(playMusic, 300);
+            });
+        } else {
+            setTimeout(playMusic, 300);
+        }
+        
+        // Intentar reproducir cuando la ventana cargue completamente
+        window.addEventListener('load', function() {
+            setTimeout(playMusic, 500);
+        }, { once: true });
+        
+        // Manejar cuando el audio termine (reiniciar loop)
+        audio.addEventListener('ended', function() {
+            audio.currentTime = 0;
+            if (musicPlaying || userInteracted) {
+                audio.play().catch(function() {});
+            }
+        });
+        
+        // Mantener la música reproduciéndose si se pausa
+        audio.addEventListener('pause', function() {
+            if (userInteracted && !audio.ended) {
+                setTimeout(function() {
+                    audio.play().catch(function() {});
+                }, 100);
+            }
+        });
+        
+        // Verificar periódicamente el estado de la música
+        setInterval(function() {
+            if (userInteracted && audio.paused && !audio.ended) {
+                audio.play()
+                    .then(function() {
+                        musicPlaying = true;
+                    })
+                    .catch(function() {});
+            }
+            // Si la música terminó, reiniciar
+            if (musicPlaying && audio.ended) {
+                audio.currentTime = 0;
+                audio.play().catch(function() {});
+            }
+        }, 1000);
+        
+        // Intentar reproducir inmediatamente después de un pequeño delay
+        setTimeout(playMusic, 100);
+        
+        // Intentos adicionales después de diferentes delays
+        [500, 1000, 2000].forEach(function(delay) {
+            setTimeout(playMusic, delay);
+        });
+        
+        // Verificar si el audio se carga correctamente
+        audio.addEventListener('error', function(e) {
+            console.error('❌ Error al cargar el audio:', e);
+            console.log('URL del audio:', audio.src || 'No hay URL');
+            if (audio.error) {
+                console.log('Código de error:', audio.error.code);
+                console.log('Mensaje de error:', audio.error.message);
+            }
+        });
+        
+        audio.addEventListener('loadedmetadata', function() {
+            console.log('✅ Metadata del audio cargada. Duración:', audio.duration, 'segundos');
+        });
+        
+        audio.addEventListener('loadeddata', function() {
+            console.log('✅ Datos del audio cargados');
+        });
+        
+        audio.addEventListener('play', function() {
+            console.log('▶️ Música iniciada');
+        });
+        
+        audio.addEventListener('playing', function() {
+            console.log('🎵 Música reproduciéndose');
+            musicPlaying = true;
+        });
+    })();
+</script>
 
 <script>
     // Sistema de comentarios con censura
@@ -1201,6 +1472,114 @@
         
         // Contador de IDs para comentarios
         let comentarioIdCounter = 0;
+        
+        // Clave para localStorage
+        const STORAGE_KEY = 'undercover_cuffs_comentarios';
+        const COUNTER_KEY = 'undercover_cuffs_comentario_counter';
+        
+        // Función para cargar comentarios desde localStorage
+        function cargarComentarios() {
+            try {
+                const comentariosGuardados = localStorage.getItem(STORAGE_KEY);
+                const counterGuardado = localStorage.getItem(COUNTER_KEY);
+                
+                if (counterGuardado) {
+                    comentarioIdCounter = parseInt(counterGuardado, 10) || 0;
+                }
+                
+                if (comentariosGuardados) {
+                    const comentarios = JSON.parse(comentariosGuardados);
+                    const listaComentarios = document.getElementById('lista-comentarios');
+                    
+                    // Ordenar comentarios por fecha (más recientes primero)
+                    comentarios.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+                    
+                    // Agregar comentarios al final en orden (más recientes primero)
+                    // Como están ordenados descendentemente, appendChild los agregará en el orden correcto
+                    comentarios.forEach(comentario => {
+                        crearElementoComentario(comentario.id, comentario.texto, comentario.fecha, false);
+                    });
+                }
+            } catch (error) {
+                console.error('Error al cargar comentarios:', error);
+            }
+        }
+        
+        // Función para guardar comentarios en localStorage
+        function guardarComentarios() {
+            try {
+                const comentariosItems = document.querySelectorAll('.comentario-item');
+                const comentarios = [];
+                
+                comentariosItems.forEach(item => {
+                    const id = parseInt(item.id.replace('comentario-', ''), 10);
+                    const texto = item.querySelector('.comentario-texto').textContent;
+                    // Obtener la fecha ISO del atributo data, o usar la fecha actual si no existe
+                    const fechaISO = item.getAttribute('data-fecha-iso') || new Date().toISOString();
+                    
+                    comentarios.push({
+                        id: id,
+                        texto: texto,
+                        fecha: fechaISO
+                    });
+                });
+                
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(comentarios));
+                localStorage.setItem(COUNTER_KEY, comentarioIdCounter.toString());
+            } catch (error) {
+                console.error('Error al guardar comentarios:', error);
+            }
+        }
+        
+        // Función para crear elemento de comentario (reutilizable)
+        function crearElementoComentario(id, texto, fechaISO, insertarAlPrincipio = true) {
+            const comentarioItem = document.createElement('div');
+            comentarioItem.id = `comentario-${id}`;
+            comentarioItem.className = 'comentario-item';
+            // Guardar la fecha ISO como atributo data para poder recuperarla al guardar
+            comentarioItem.setAttribute('data-fecha-iso', fechaISO);
+            
+            // Crear botón de eliminar
+            const btnEliminar = document.createElement('button');
+            btnEliminar.className = 'btn-eliminar';
+            btnEliminar.innerHTML = '×';
+            btnEliminar.title = 'Eliminar comentario';
+            btnEliminar.onclick = () => eliminarComentario(id);
+            
+            const comentarioTexto = document.createElement('div');
+            comentarioTexto.className = 'comentario-texto';
+            comentarioTexto.textContent = texto;
+            
+            const comentarioFecha = document.createElement('div');
+            comentarioFecha.className = 'comentario-fecha';
+            const fecha = new Date(fechaISO);
+            comentarioFecha.textContent = fecha.toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            comentarioItem.appendChild(btnEliminar);
+            comentarioItem.appendChild(comentarioTexto);
+            comentarioItem.appendChild(comentarioFecha);
+            
+            // Agregar a la lista de comentarios
+            const listaComentarios = document.getElementById('lista-comentarios');
+            if (insertarAlPrincipio) {
+                // Insertar al principio (para comentarios nuevos o cuando ya están ordenados)
+                const primerHijo = listaComentarios.firstChild;
+                if (primerHijo) {
+                    listaComentarios.insertBefore(comentarioItem, primerHijo);
+                } else {
+                    listaComentarios.appendChild(comentarioItem);
+                }
+            } else {
+                // Agregar al final (para comentarios cargados cuando se agregan en orden)
+                listaComentarios.appendChild(comentarioItem);
+            }
+        }
         
         // Función para verificar si el modo admin está activo
         function esModoAdmin() {
@@ -1284,6 +1663,8 @@
                     // Eliminar después de la animación
                     setTimeout(() => {
                         comentario.remove();
+                        // Guardar comentarios después de eliminar
+                        guardarComentarios();
                     }, 300);
                 }
             }
@@ -1615,41 +1996,13 @@
             
             // Generar ID único para el comentario
             const comentarioId = comentarioIdCounter++;
+            const fechaISO = new Date().toISOString();
             
             // Crear elemento de comentario
-            const comentarioItem = document.createElement('div');
-            comentarioItem.id = `comentario-${comentarioId}`;
-            comentarioItem.className = 'comentario-item';
+            crearElementoComentario(comentarioId, textoCensurado, fechaISO, true);
             
-            // Crear botón de eliminar
-            const btnEliminar = document.createElement('button');
-            btnEliminar.className = 'btn-eliminar';
-            btnEliminar.innerHTML = '×';
-            btnEliminar.title = 'Eliminar comentario';
-            btnEliminar.onclick = () => eliminarComentario(comentarioId);
-            
-            const comentarioTexto = document.createElement('div');
-            comentarioTexto.className = 'comentario-texto';
-            comentarioTexto.textContent = textoCensurado;
-            
-            const comentarioFecha = document.createElement('div');
-            comentarioFecha.className = 'comentario-fecha';
-            const fecha = new Date();
-            comentarioFecha.textContent = fecha.toLocaleDateString('es-ES', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            
-            comentarioItem.appendChild(btnEliminar);
-            comentarioItem.appendChild(comentarioTexto);
-            comentarioItem.appendChild(comentarioFecha);
-            
-            // Agregar a la lista de comentarios
-            const listaComentarios = document.getElementById('lista-comentarios');
-            listaComentarios.insertBefore(comentarioItem, listaComentarios.firstChild);
+            // Guardar en localStorage
+            guardarComentarios();
             
             // Limpiar el input
             input.value = '';
@@ -1671,6 +2024,9 @@
             const btnConfirmar = document.getElementById('btn-confirmar');
             const btnCancelar = document.getElementById('btn-cancelar');
             const inputContraseña = document.getElementById('input-contraseña');
+            
+            // Cargar comentarios guardados
+            cargarComentarios();
             
             // Verificar si el modo admin ya está activo
             if (esModoAdmin()) {

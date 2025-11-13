@@ -461,6 +461,11 @@
         .doodle svg {
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
+        
+        /* Audio de fondo oculto */
+        #background-audio {
+            display: none;
+        }
     </style>	
 	
 </head>
@@ -756,7 +761,7 @@ It will bring back childhood and laughter with a unique and wild experience.</p>
         <div class="swiper-container swiper-container-main" id="main-swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide"><img width="600" src="imagenes/IMG_1449(1).png" alt="Imagen 1"></div>
-                <div class="swiper-slide"><img width="600" src="imagenes/miss heed.png" alt="Imagen 2"></div>
+                <div class="swiper-slide"><img width="600" src="imagenes/620 sin título2_20251113123429.png" alt="Imagen 2"></div>
                 <div class="swiper-slide"><img width="600" src="imagenes/381 sin título11_20250411210148.png" alt="Imagen 3"></div>
                 <div class="swiper-slide"><img width="600" src="imagenes/IMG_3231.png" alt="Imagen 4"></div>
             </div>
@@ -797,7 +802,169 @@ It will bring back childhood and laughter with a unique and wild experience.</p>
 </div>
 
 <!-- PIE DE PÁGINA -->
-<footer>Undercover Cuffs</footer>
+<footer>
+    <a href="office.html" class="footer-hidden-link" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer; text-decoration: none; z-index: 1; display: block;" aria-label="Office" title="Office"></a>
+    <span style="position: relative; z-index: 0; pointer-events: none;">Undercover Cuffs</span>
+</footer>
+
+<!-- Música de fondo (sin controles visibles) -->
+<audio id="background-audio" loop preload="auto" style="display: none;">
+    <!-- Música alegre pero tranquila libre de derechos de autor -->
+    <!-- Pixabay - música tranquila y alegre -->
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_73b40dc47e.mp3?filename=soft-background-music-112791.mp3" type="audio/mpeg">
+    <!-- Fallback: Pixabay (música tranquila alternativa) -->
+    <source src="https://cdn.pixabay.com/download/audio/2023/05/11/audio_1683814731.mp3?filename=peaceful-morning-118490.mp3" type="audio/mpeg">
+    <!-- Fallback adicional: SoundHelix -->
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    Tu navegador no soporta el elemento de audio.
+</audio>
+
+<script>
+    // Sistema de reproducción de música de fondo - Versión simplificada y robusta
+    (function() {
+        'use strict';
+        
+        const audio = document.getElementById('background-audio');
+        if (!audio) {
+            console.error('Elemento de audio no encontrado');
+            return;
+        }
+        
+        // Configurar volumen (30% para música tranquila y suave)
+        audio.volume = 0.3;
+        let musicPlaying = false;
+        let userInteracted = false;
+        
+        // Función para reproducir música
+        function playMusic() {
+            if (musicPlaying) return;
+            
+            const playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(function() {
+                        musicPlaying = true;
+                        console.log('✅ Música reproduciéndose');
+                    })
+                    .catch(function(error) {
+                        console.log('⚠️ Autoplay bloqueado. La música se reproducirá al interactuar con la página.');
+                        // La música se iniciará cuando el usuario interactúe
+                    });
+            }
+        }
+        
+        // Función para iniciar música en interacción del usuario
+        function startMusicOnInteraction() {
+            if (musicPlaying) return;
+            
+            userInteracted = true;
+            playMusic();
+        }
+        
+        // Lista de eventos de interacción
+        const interactionEvents = [
+            'click', 'touchstart', 'mousedown', 'keydown',
+            'scroll', 'wheel', 'mousemove', 'pointerdown', 'pointermove'
+        ];
+        
+        // Configurar listeners para interacción del usuario
+        function setupInteractionListeners() {
+            interactionEvents.forEach(function(eventType) {
+                document.addEventListener(eventType, startMusicOnInteraction, { once: true, passive: true });
+                window.addEventListener(eventType, startMusicOnInteraction, { once: true, passive: true });
+                if (document.body) {
+                    document.body.addEventListener(eventType, startMusicOnInteraction, { once: true, passive: true });
+                }
+            });
+        }
+        
+        // Intentar reproducir cuando el audio esté listo
+        audio.addEventListener('canplay', function() {
+            playMusic();
+        }, { once: true });
+        
+        audio.addEventListener('canplaythrough', function() {
+            playMusic();
+        }, { once: true });
+        
+        audio.addEventListener('loadeddata', function() {
+            setTimeout(playMusic, 200);
+        }, { once: true });
+        
+        // Configurar listeners de interacción inmediatamente
+        setupInteractionListeners();
+        
+        // Intentar reproducir después de que la página cargue
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(playMusic, 300);
+            });
+        } else {
+            setTimeout(playMusic, 300);
+        }
+        
+        // Intentar reproducir cuando la ventana cargue completamente
+        window.addEventListener('load', function() {
+            setTimeout(playMusic, 500);
+        }, { once: true });
+        
+        // Manejar cuando el audio termine (reiniciar loop)
+        audio.addEventListener('ended', function() {
+            audio.currentTime = 0;
+            if (musicPlaying || userInteracted) {
+                audio.play().catch(function() {});
+            }
+        });
+        
+        // Mantener la música reproduciéndose si se pausa
+        audio.addEventListener('pause', function() {
+            if (userInteracted && !audio.ended) {
+                setTimeout(function() {
+                    audio.play().catch(function() {});
+                }, 100);
+            }
+        });
+        
+        // Verificar periódicamente el estado de la música
+        setInterval(function() {
+            if (userInteracted && audio.paused && !audio.ended) {
+                audio.play()
+                    .then(function() {
+                        musicPlaying = true;
+                    })
+                    .catch(function() {});
+            }
+            // Si la música terminó, reiniciar
+            if (musicPlaying && audio.ended) {
+                audio.currentTime = 0;
+                audio.play().catch(function() {});
+            }
+        }, 1000);
+        
+        // Intentar reproducir inmediatamente después de un pequeño delay
+        setTimeout(playMusic, 100);
+        
+        // Intentos adicionales después de diferentes delays
+        [500, 1000, 2000].forEach(function(delay) {
+            setTimeout(playMusic, delay);
+        });
+        
+        // Verificar si el audio se carga correctamente
+        audio.addEventListener('error', function(e) {
+            console.error('❌ Error al cargar el audio:', e);
+            console.log('URL del audio:', audio.src || 'No hay URL');
+        });
+        
+        audio.addEventListener('loadedmetadata', function() {
+            console.log('✅ Metadata del audio cargada. Duración:', audio.duration, 'segundos');
+        });
+        
+        audio.addEventListener('loadeddata', function() {
+            console.log('✅ Datos del audio cargados');
+        });
+    })();
+</script>
 
 	
 </body>
