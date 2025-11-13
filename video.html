@@ -207,7 +207,7 @@
 </audio>
 
 <script>
-    // Sistema de reproducción de música de fondo - Versión simplificada y robusta
+    // Sistema de reproducción de música de fondo - Optimizado para móviles
     (function() {
         'use strict';
         
@@ -221,10 +221,19 @@
         audio.volume = 0.3;
         let musicPlaying = false;
         let userInteracted = false;
+        let interactionListenersSetup = false;
+        
+        // Detectar si es un dispositivo móvil
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                        ('ontouchstart' in window) || 
+                        (navigator.maxTouchPoints > 0);
         
         // Función para reproducir música
         function playMusic() {
-            if (musicPlaying && !audio.paused) return;
+            // Si ya está reproduciéndose, no hacer nada
+            if (musicPlaying && !audio.paused && !audio.ended) {
+                return;
+            }
             
             const playPromise = audio.play();
             
@@ -235,65 +244,172 @@
                         console.log('✅ Música reproduciéndose');
                     })
                     .catch(function(error) {
-                        console.log('⚠️ Autoplay bloqueado. La música se reproducirá al interactuar con la página.');
+                        // Solo loguear si no hay interacción del usuario aún
+                        if (!userInteracted) {
+                            console.log('⚠️ Autoplay bloqueado. La música se reproducirá al interactuar con la página.');
+                        }
                     });
             }
         }
         
-        // Función para iniciar música en interacción del usuario
-        function startMusicOnInteraction() {
-            if (musicPlaying) return;
+        // Función para iniciar música en interacción del usuario (optimizada para móviles)
+        function startMusicOnInteraction(e) {
+            if (musicPlaying && !audio.paused) {
+                return;
+            }
             
-            userInteracted = true;
-            playMusic();
+            // Marcar que el usuario ha interactuado
+            if (!userInteracted) {
+                userInteracted = true;
+                
+                // En móviles, forzar reproducción inmediatamente
+                if (isMobile) {
+                    // Forzar que el audio no esté en muted
+                    audio.muted = false;
+                    
+                    // Intentar reproducir inmediatamente
+                    playMusic();
+                    
+                    // Múltiples intentos en móviles para asegurar reproducción
+                    setTimeout(function() {
+                        if (!musicPlaying) {
+                            audio.muted = false;
+                            playMusic();
+                        }
+                    }, 50);
+                    
+                    setTimeout(function() {
+                        if (!musicPlaying) {
+                            audio.muted = false;
+                            playMusic();
+                        }
+                    }, 100);
+                    
+                    setTimeout(function() {
+                        if (!musicPlaying) {
+                            audio.muted = false;
+                            playMusic();
+                        }
+                    }, 200);
+                    
+                    setTimeout(function() {
+                        if (!musicPlaying) {
+                            audio.muted = false;
+                            playMusic();
+                        }
+                    }, 500);
+                } else {
+                    // En desktop, solo intentar una vez
+                    playMusic();
+                }
+            } else {
+                // Si ya hubo interacción, solo intentar reproducir si está pausado
+                if (audio.paused && !audio.ended) {
+                    playMusic();
+                }
+            }
         }
         
-        // Lista de eventos de interacción
+        // Lista ampliada de eventos de interacción (especialmente para móviles)
         const interactionEvents = [
-            'click', 'touchstart', 'mousedown', 'keydown',
-            'scroll', 'wheel', 'mousemove', 'pointerdown', 'pointermove'
+            // Eventos táctiles (móviles)
+            'touchstart', 'touchend', 'touchmove', 'touchcancel',
+            // Eventos de mouse
+            'click', 'mousedown', 'mouseup', 'mousemove',
+            // Eventos de teclado
+            'keydown', 'keyup', 'keypress',
+            // Eventos de puntero (compatibilidad moderna)
+            'pointerdown', 'pointerup', 'pointermove', 'pointercancel',
+            // Eventos de scroll
+            'scroll', 'wheel', 'touchscroll',
+            // Eventos de orientación (móviles)
+            'orientationchange',
+            // Eventos de visibilidad
+            'visibilitychange'
         ];
         
-        // Configurar listeners para interacción del usuario
+        // Configurar listeners para interacción del usuario (sin 'once' para móviles)
         function setupInteractionListeners() {
+            if (interactionListenersSetup) return;
+            interactionListenersSetup = true;
+            
+            // Configurar listeners en múltiples niveles para máxima compatibilidad
+            const targets = [document, window];
+            if (document.body) {
+                targets.push(document.body);
+            }
+            if (document.documentElement) {
+                targets.push(document.documentElement);
+            }
+            
             interactionEvents.forEach(function(eventType) {
-                document.addEventListener(eventType, startMusicOnInteraction, { once: true, passive: true });
-                window.addEventListener(eventType, startMusicOnInteraction, { once: true, passive: true });
-                if (document.body) {
-                    document.body.addEventListener(eventType, startMusicOnInteraction, { once: true, passive: true });
-                }
+                targets.forEach(function(target) {
+                    // En móviles, no usar 'once' para asegurar que se capture la interacción
+                    const options = isMobile ? { passive: true } : { once: true, passive: true };
+                    target.addEventListener(eventType, startMusicOnInteraction, options);
+                });
             });
+        }
+        
+        // Configurar listeners de interacción INMEDIATAMENTE
+        setupInteractionListeners();
+        
+        // También configurar cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', setupInteractionListeners);
         }
         
         // Intentar reproducir cuando el audio esté listo
         audio.addEventListener('canplay', function() {
-            playMusic();
-        }, { once: true });
+            if (userInteracted || !isMobile) {
+                playMusic();
+            }
+        });
         
         audio.addEventListener('canplaythrough', function() {
-            playMusic();
-        }, { once: true });
+            if (userInteracted || !isMobile) {
+                playMusic();
+            }
+        });
         
         audio.addEventListener('loadeddata', function() {
-            setTimeout(playMusic, 200);
-        }, { once: true });
+            if (userInteracted || !isMobile) {
+                setTimeout(playMusic, 200);
+            }
+        });
         
-        // Configurar listeners de interacción inmediatamente
-        setupInteractionListeners();
+        audio.addEventListener('loadedmetadata', function() {
+            // En móviles, asegurar que los listeners estén configurados
+            if (isMobile) {
+                setupInteractionListeners();
+            }
+        });
         
         // Intentar reproducir después de que la página cargue
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(playMusic, 300);
+                setTimeout(function() {
+                    if (userInteracted || !isMobile) {
+                        playMusic();
+                    }
+                }, 300);
             });
         } else {
-            setTimeout(playMusic, 300);
+            setTimeout(function() {
+                if (userInteracted || !isMobile) {
+                    playMusic();
+                }
+            }, 300);
         }
         
         // Intentar reproducir cuando la ventana cargue completamente
         window.addEventListener('load', function() {
-            setTimeout(playMusic, 500);
-        }, { once: true });
+            setTimeout(function() {
+                if (userInteracted || !isMobile) {
+                    playMusic();
+                }
+            }, 500);
+        });
         
         // Manejar cuando el audio termine (reiniciar loop)
         audio.addEventListener('ended', function() {
@@ -307,12 +423,14 @@
         audio.addEventListener('pause', function() {
             if (userInteracted && !audio.ended) {
                 setTimeout(function() {
+                    if (!audio.paused) return;
                     audio.play().catch(function() {});
                 }, 100);
             }
         });
         
-        // Verificar periódicamente el estado de la música
+        // Verificar periódicamente el estado de la música (más frecuente en móviles)
+        const checkInterval = isMobile ? 500 : 1000;
         setInterval(function() {
             if (userInteracted && audio.paused && !audio.ended) {
                 audio.play()
@@ -326,15 +444,37 @@
                 audio.currentTime = 0;
                 audio.play().catch(function() {});
             }
-        }, 1000);
+        }, checkInterval);
         
         // Intentar reproducir inmediatamente después de un pequeño delay
         setTimeout(playMusic, 100);
         
         // Intentos adicionales después de diferentes delays
-        [500, 1000, 2000].forEach(function(delay) {
-            setTimeout(playMusic, delay);
+        [500, 1000, 2000, 3000].forEach(function(delay) {
+            setTimeout(function() {
+                if (userInteracted || !isMobile) {
+                    playMusic();
+                }
+            }, delay);
         });
+        
+        // En móviles, configurar listeners adicionales cuando la página esté visible
+        if (isMobile) {
+            document.addEventListener('visibilitychange', function() {
+                if (!document.hidden && userInteracted) {
+                    setTimeout(playMusic, 100);
+                }
+            });
+            
+            // Configurar listeners cuando la orientación cambie
+            window.addEventListener('orientationchange', function() {
+                setTimeout(function() {
+                    if (userInteracted) {
+                        playMusic();
+                    }
+                }, 300);
+            });
+        }
         
         // Verificar si el audio se carga correctamente
         audio.addEventListener('error', function(e) {
@@ -356,12 +496,18 @@
         
         audio.addEventListener('play', function() {
             console.log('▶️ Música iniciada');
+            musicPlaying = true;
         });
         
         audio.addEventListener('playing', function() {
             console.log('🎵 Música reproduciéndose');
             musicPlaying = true;
         });
+        
+        // Log para móviles
+        if (isMobile) {
+            console.log('📱 Dispositivo móvil detectado. La música se activará al tocar la pantalla.');
+        }
     })();
 </script>
 
