@@ -298,6 +298,89 @@
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
     }
     
+    .modal-description-wrapper {
+        max-width: 800px;
+        margin: 20px auto 0;
+        position: relative;
+    }
+    
+    .modal-description {
+        font-family: Consolas, 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Courier New', 'monospace';
+        font-size: clamp(1rem, 2.5vw, 1.3rem);
+        color: #fff;
+        text-align: center;
+        line-height: 1.6;
+        padding: 20px 100px;
+        background: rgba(34, 0, 3, 0.8);
+        border-radius: 8px;
+        border: 3px solid rgba(255, 189, 0, 0.5);
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .modal-description p {
+        margin: 10px 0;
+        text-align: center;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .modal-doodles {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+        z-index: 10;
+        pointer-events: none;
+    }
+    
+    .modal-doodle {
+        width: clamp(40px, 6vw, 60px);
+        height: clamp(40px, 6vw, 60px);
+        animation: floatDoodle 3s ease-in-out infinite;
+        display: block;
+    }
+    
+    .modal-doodle:nth-child(1) {
+        animation-delay: 0s;
+    }
+    
+    .modal-doodle:nth-child(2) {
+        animation-delay: 1s;
+    }
+    
+    .modal-doodle:nth-child(3) {
+        animation-delay: 2s;
+    }
+    
+    @keyframes floatDoodle {
+        0%, 100% {
+            transform: translateY(0) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-10px) rotate(5deg);
+        }
+    }
+    
+    .modal-doodle svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    }
+    
     .close {
         position: absolute;
         top: 20px;
@@ -350,6 +433,26 @@
             padding: 8px 15px;
             font-size: clamp(1.2rem, 4vw, 2rem);
         }
+        
+        .modal-description-wrapper {
+            max-width: 95%;
+        }
+        
+        .modal-description {
+            margin-top: 0;
+            padding: 15px 80px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+        }
+        
+        .modal-doodles {
+            right: 10px;
+            gap: 10px;
+        }
+        
+        .modal-doodle {
+            width: clamp(30px, 5vw, 50px);
+            height: clamp(30px, 5vw, 50px);
+        }
     }
     
     @media only screen and (max-width: 480px) {
@@ -373,6 +476,26 @@
             margin-top: 10px;
             padding: 6px 12px;
             font-size: clamp(1rem, 5vw, 1.5rem);
+        }
+        
+        .modal-description-wrapper {
+            max-width: 98%;
+        }
+        
+        .modal-description {
+            margin-top: 0;
+            padding: 12px 70px;
+            font-size: clamp(0.85rem, 3vw, 1rem);
+        }
+        
+        .modal-doodles {
+            right: 8px;
+            gap: 8px;
+        }
+        
+        .modal-doodle {
+            width: clamp(25px, 4vw, 40px);
+            height: clamp(25px, 4vw, 40px);
         }
     }
     
@@ -795,6 +918,7 @@
     <ul class="navmenu">
         <li><a href="index.html">Home</a></li>
         <li><a href="characters.html">Characters</a></li>
+        <li><a href="entertainment.html">Entertainment</a></li>
         <li><a href="video.html">Video</a></li>
         <li><a href="shop.html">Shop</a></li>
         <li><a href="comments.html">Comments</a></li>
@@ -810,43 +934,43 @@
         
         <div class="characters-grid">
             <!-- Personaje 1 -->
-            <div class="character-card" data-image="imagenes/IMG_1449(1).png" data-name="Thae">
+            <div class="character-card" data-image="imagenes/IMG_1449(1).png" data-name="Thae" data-description="Thae is the latest arrival from Undercover Cuffs, he does not have a steady job yet since chaos is his middle name. He is a little bit of a troublemaker, because he is such a wild person. Always ready for a fight.">
                 <img src="imagenes/IMG_1449(1).png" alt="Thae" class="character-image">
                 <div class="character-name">Thae</div>
             </div>
             
             <!-- Personaje 2 -->
-            <div class="character-card" data-image="imagenes/miss heed.png" data-name="Miss Heed">
+            <div class="character-card" data-image="imagenes/miss heed.png" data-name="Miss Heed" data-description="Miss Heed is a character with a mysterious and commanding presence. Her sharp wit and strategic mind make her a formidable force in the Undercover Cuffs universe. She navigates through challenges with elegance and determination.">
                 <img src="imagenes/miss heed.png" alt="Miss Heed" class="character-image">
                 <div class="character-name">Miss Heed</div>
             </div>
             
             <!-- Personaje 3 -->
-            <div class="character-card" data-image="imagenes/marth.png" data-name="Marth">
+            <div class="character-card" data-image="imagenes/marth.png" data-name="Marth" data-description="Marth brings a unique energy to the team with his adventurous spirit and quick thinking. Known for his resourcefulness and ability to adapt to any situation, he's always ready to take on the next challenge with enthusiasm.">
                 <img src="imagenes/marth.png" alt="Marth" class="character-image">
                 <div class="character-name">Marth</div>
             </div>
             
             <!-- Personaje 4 -->
-            <div class="character-card" data-image="imagenes/Dim.png" data-name="Dim">
+            <div class="character-card" data-image="imagenes/Dim.png" data-name="Dim" data-description="Dim is a character shrouded in mystery, with a calm demeanor that belies his sharp intelligence. His quiet observation skills and analytical mind make him an invaluable member of the team, always seeing what others might miss.">
                 <img src="imagenes/Dim.png" alt="Dim" class="character-image">
                 <div class="character-name">Dim</div>
             </div>
             
             <!-- Personaje 5 -->
-            <div class="character-card" data-image="imagenes/squofool.png" data-name="Squofool">
+            <div class="character-card" data-image="imagenes/squofool.png" data-name="Squofool" data-description="Squofool is the comedic relief of the group, bringing laughter and light-heartedness wherever he goes. Despite his playful nature, he has a heart of gold and is always there to support his friends when they need him most.">
                 <img src="imagenes/squofool.png" alt="Squofool" class="character-image">
                 <div class="character-name">Squofool</div>
             </div>
             
             <!-- Personaje 6 -->
-            <div class="character-card" data-image="imagenes/Noisy.png" data-name="Noisy">
+            <div class="character-card" data-image="imagenes/Noisy.png" data-name="Noisy" data-description="Noisy lives up to his name with an energetic and vibrant personality that fills every room he enters. His loud enthusiasm and infectious energy make him impossible to ignore, and he brings excitement to every adventure.">
                 <img src="imagenes/Noisy.png" alt="Noisy" class="character-image">
                 <div class="character-name">Noisy</div>
             </div>
             
             <!-- Personaje 7 -->
-            <div class="character-card" data-image="imagenes/Wyll.png" data-name="Wyll">
+            <div class="character-card" data-image="imagenes/Wyll.png" data-name="Wyll" data-description="Wyll is a character of depth and complexity, with a strong sense of justice and loyalty. His determination and courage inspire those around him, making him a natural leader who stands up for what he believes in.">
                 <img src="imagenes/Wyll.png" alt="Wyll" class="character-image">
                 <div class="character-name">Wyll</div>
             </div>
@@ -1304,6 +1428,33 @@
     <div class="modal-content">
         <img id="modalImage" class="modal-image" src="" alt="Character">
         <div id="modalName" class="modal-name"></div>
+        <div class="modal-description-wrapper">
+            <div id="modalDescription" class="modal-description">
+                <div class="modal-doodles">
+                    <div class="modal-doodle">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="#ff6b6b" stroke-width="3"/>
+                            <circle cx="35" cy="40" r="5" fill="#ff6b6b"/>
+                            <circle cx="65" cy="40" r="5" fill="#ff6b6b"/>
+                            <path d="M 35 60 Q 50 70 65 60" stroke="#ff6b6b" stroke-width="3" fill="none"/>
+                        </svg>
+                    </div>
+                    <div class="modal-doodle">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 50 10 L 60 40 L 90 40 L 68 58 L 75 90 L 50 70 L 25 90 L 32 58 L 10 40 L 40 40 Z" fill="#ffd93d" stroke="#ff6b6b" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="modal-doodle">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="35" fill="#6bcf7f" stroke="#4a9b5a" stroke-width="2"/>
+                            <circle cx="40" cy="45" r="4" fill="#fff"/>
+                            <circle cx="60" cy="45" r="4" fill="#fff"/>
+                            <path d="M 40 60 Q 50 65 60 60" stroke="#fff" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -1312,6 +1463,7 @@
     const modal = document.getElementById('characterModal');
     const modalImage = document.getElementById('modalImage');
     const modalName = document.getElementById('modalName');
+    const modalDescription = document.getElementById('modalDescription');
     const closeBtn = document.querySelector('.close');
     
     // Obtener todas las tarjetas de personajes que no están bloqueadas
@@ -1322,10 +1474,12 @@
         card.addEventListener('click', function() {
             const imageSrc = this.getAttribute('data-image');
             const characterName = this.getAttribute('data-name');
+            const characterDescription = this.getAttribute('data-description') || 'No description available.';
             
             modalImage.src = imageSrc;
             modalImage.alt = characterName;
             modalName.textContent = characterName;
+            modalDescription.innerHTML = '<p>' + characterDescription + '</p>';
             
             modal.classList.add('active');
             document.body.style.overflow = 'hidden'; // Prevenir scroll del body

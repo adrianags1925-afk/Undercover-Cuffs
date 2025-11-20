@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">	
+<meta charset="UTF-8">
+<meta http-equiv="Permissions-Policy" content="autoplay=(self), microphone=(), camera=(), speaker=(self)">
+<meta name="referrer" content="no-referrer">
+<title>Entertainment - Undercover Cuffs</title>
+<link href="css/UndercoverCuffs.css" rel="stylesheet" type="text/css">
+<style>
+    
+    main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: calc(100vh - 200px);
+        padding: 20px;
+    }
+    
+    .entertainment-container {
+        width: clamp(500px, 75vw, 800px);
+        height: clamp(500px, 75vw, 800px);
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        text-align: center;
+        position: relative;
+    }
+    
+    .entertainment-title {
+        color: #333;
+        font-size: clamp(24px, 4vw, 36px);
+        margin: 0 0 15px 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        padding: 0 !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+    }
+    
+    h2.entertainment-title {
+        background: transparent !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+    
+    .entertainment-content {
+        color: #333;
+        font-size: clamp(16px, 2vw, 20px);
+        line-height: 1.6;
+        max-width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 !important;
+        background-color: transparent !important;
+    }
+    
+    .entertainment-content p {
+        margin: 10px 0;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        text-align: center;
+        width: 100%;
+        padding: 0 !important;
+    }
+    
+    /* Animación de confeti cayendo */
+    .confetti-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        overflow: hidden;
+    }
+    
+    .confetti {
+        position: absolute;
+        opacity: 0.9;
+        animation: confettiFall linear infinite;
+    }
+    
+    .confetti svg {
+        width: clamp(15px, 3vw, 30px);
+        height: clamp(15px, 3vw, 30px);
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    }
+    
+    .confetti:nth-child(1) { left: 5%; animation-duration: 6s; animation-delay: 0s; }
+    .confetti:nth-child(2) { left: 12%; animation-duration: 7s; animation-delay: 0.3s; }
+    .confetti:nth-child(3) { left: 18%; animation-duration: 8s; animation-delay: 0.6s; }
+    .confetti:nth-child(4) { left: 25%; animation-duration: 6.5s; animation-delay: 0.9s; }
+    .confetti:nth-child(5) { left: 32%; animation-duration: 7.5s; animation-delay: 0.2s; }
+    .confetti:nth-child(6) { left: 38%; animation-duration: 8.5s; animation-delay: 0.5s; }
+    .confetti:nth-child(7) { left: 45%; animation-duration: 6.8s; animation-delay: 0.8s; }
+    .confetti:nth-child(8) { left: 52%; animation-duration: 7.8s; animation-delay: 0.1s; }
+    .confetti:nth-child(9) { left: 58%; animation-duration: 8.2s; animation-delay: 0.4s; }
+    .confetti:nth-child(10) { left: 65%; animation-duration: 6.3s; animation-delay: 0.7s; }
+    .confetti:nth-child(11) { left: 72%; animation-duration: 7.3s; animation-delay: 1s; }
+    .confetti:nth-child(12) { left: 78%; animation-duration: 8.8s; animation-delay: 0.2s; }
+    .confetti:nth-child(13) { left: 85%; animation-duration: 6.7s; animation-delay: 0.5s; }
+    .confetti:nth-child(14) { left: 92%; animation-duration: 7.7s; animation-delay: 0.8s; }
+    .confetti:nth-child(15) { left: 8%; animation-duration: 8.3s; animation-delay: 0.1s; }
+    .confetti:nth-child(16) { left: 15%; animation-duration: 6.4s; animation-delay: 0.4s; }
+    .confetti:nth-child(17) { left: 22%; animation-duration: 7.4s; animation-delay: 0.7s; }
+    .confetti:nth-child(18) { left: 28%; animation-duration: 8.4s; animation-delay: 1s; }
+    .confetti:nth-child(19) { left: 35%; animation-duration: 6.6s; animation-delay: 0.3s; }
+    .confetti:nth-child(20) { left: 42%; animation-duration: 7.6s; animation-delay: 0.6s; }
+    .confetti:nth-child(21) { left: 48%; animation-duration: 8.6s; animation-delay: 0.9s; }
+    .confetti:nth-child(22) { left: 55%; animation-duration: 6.2s; animation-delay: 0.2s; }
+    .confetti:nth-child(23) { left: 62%; animation-duration: 7.2s; animation-delay: 0.5s; }
+    .confetti:nth-child(24) { left: 68%; animation-duration: 8.1s; animation-delay: 0.8s; }
+    .confetti:nth-child(25) { left: 75%; animation-duration: 6.9s; animation-delay: 0.1s; }
+    .confetti:nth-child(26) { left: 82%; animation-duration: 7.9s; animation-delay: 0.4s; }
+    .confetti:nth-child(27) { left: 88%; animation-duration: 8.7s; animation-delay: 0.7s; }
+    .confetti:nth-child(28) { left: 95%; animation-duration: 6.1s; animation-delay: 1s; }
+    .confetti:nth-child(29) { left: 3%; animation-duration: 7.1s; animation-delay: 0.3s; }
+    .confetti:nth-child(30) { left: 10%; animation-duration: 8.9s; animation-delay: 0.6s; }
+    
+    @keyframes confettiFall {
+        0% {
+            transform: translateY(-100px) rotate(0deg);
+            opacity: 0;
+        }
+        5% {
+            opacity: 0.9;
+        }
+        95% {
+            opacity: 0.9;
+        }
+        100% {
+            transform: translateY(calc(100vh + 100px)) rotate(720deg);
+            opacity: 0;
+        }
+    }
+</style>
+	
+</head>
+
+<body>
+
+<!-- Animación de confeti cayendo -->
+<div class="confetti-container">
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="20" width="20" height="60" fill="#ff0000" transform="rotate(45 50 50)"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="20" width="20" height="60" fill="#00ff00" transform="rotate(45 50 50)"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="20" width="20" height="60" fill="#0000ff" transform="rotate(45 50 50)"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="20" width="20" height="60" fill="#ffff00" transform="rotate(45 50 50)"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="20" width="20" height="60" fill="#ff00ff" transform="rotate(45 50 50)"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="20" width="20" height="60" fill="#00ffff" transform="rotate(45 50 50)"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="25" fill="#ff0000"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="25" fill="#00ff00"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="25" fill="#0000ff"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="25" fill="#ffff00"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,20 70,60 30,60" fill="#ff00ff"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,20 70,60 30,60" fill="#00ffff"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="20" width="20" height="60" fill="#ff6600" transform="rotate(45 50 50)"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="20" width="20" height="60" fill="#6600ff" transform="rotate(45 50 50)"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="25" fill="#ff6600"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="25" fill="#6600ff"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,20 70,60 30,60" fill="#ff0000"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,20 70,60 30,60" fill="#00ff00"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="20" width="20" height="60" fill="#ffff00" transform="rotate(45 50 50)"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="20" width="20" height="60" fill="#ff00ff" transform="rotate(45 50 50)"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="25" fill="#00ffff"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,20 70,60 30,60" fill="#0000ff"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="20" width="20" height="60" fill="#ff6600" transform="rotate(45 50 50)"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="25" fill="#6600ff"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,20 70,60 30,60" fill="#ff00ff"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="20" width="20" height="60" fill="#00ffff" transform="rotate(45 50 50)"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="25" fill="#ff0000"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="50,20 70,60 30,60" fill="#ffff00"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="20" width="20" height="60" fill="#0000ff" transform="rotate(45 50 50)"/>
+        </svg>
+    </div>
+    <div class="confetti">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="25" fill="#00ff00"/>
+        </svg>
+    </div>
+</div>
+
+<!-- ESTA ES LA CABECERA CON EL MENÚ -->
+
+<header>   
+    <h1>Undercover Cuffs</h1>
+<nav>
+    <ul class="navmenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="characters.html">Characters</a></li>
+        <li><a href="entertainment.html">Entertainment</a></li>
+        <li><a href="video.html">Video</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="comments.html">Comments</a></li>
+    </ul>
+</nav>
+</header>
+<main>
+    <div class="entertainment-container">
+        <h2 class="entertainment-title">Entertainment</h2>
+        <div class="entertainment-content">
+            <p>Welcome to the Entertainment section of Undercover Cuffs!</p>
+            <p>This is where you'll find fun content, games, and interactive experiences related to our project.</p>
+            <p>Stay tuned for exciting updates and new entertainment features coming soon!</p>
+        </div>
+    </div>
+</main>
+<footer>
+    <a href="office.html" class="footer-hidden-link" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer; text-decoration: none; z-index: 1; display: block;" aria-label="Office" title="Office"></a>
+    <span style="position: relative; z-index: 0; pointer-events: none;">Undercover Cuffs</span>
+</footer>
+</body>
+</html>
