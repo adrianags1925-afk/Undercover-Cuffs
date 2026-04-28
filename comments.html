@@ -256,6 +256,9 @@
         
         .comentario-form {
             margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
         
         .comentario-input {
@@ -268,7 +271,7 @@
             resize: vertical;
             min-height: 100px;
             box-sizing: border-box;
-            margin-bottom: 15px;
+            margin-bottom: 0;
         }
         
         .comentario-input:focus {
@@ -280,14 +283,19 @@
             background: linear-gradient(135deg, #74b9ff, #0984e3);
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 12px 28px;
             font-size: 16px;
             border-radius: 25px;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             font-weight: bold;
-            display: block;
-            margin: 0 auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            align-self: flex-end;
+            min-width: 180px;
+            max-width: 100%;
+            white-space: nowrap;
         }
         
         .btn-enviar:hover {
@@ -734,13 +742,14 @@
             
             .comentario-form {
                 margin-bottom: 20px;
+                gap: 10px;
             }
             
             .comentario-input {
                 padding: 12px;
                 font-size: 16px;
                 min-height: 120px;
-                margin-bottom: 12px;
+                margin-bottom: 0;
             }
             
             .btn-enviar {
@@ -748,6 +757,8 @@
                 font-size: 15px;
                 width: 100%;
                 max-width: 300px;
+                align-self: center;
+                min-width: 0;
             }
             
             .lista-comentarios {
@@ -863,13 +874,14 @@
             
             .comentario-form {
                 margin-bottom: 15px;
+                gap: 8px;
             }
             
             .comentario-input {
                 padding: 12px;
                 font-size: 16px;
                 min-height: 100px;
-                margin-bottom: 10px;
+                margin-bottom: 0;
                 border-radius: 8px;
             }
             
@@ -879,6 +891,7 @@
                 width: 100%;
                 max-width: none;
                 border-radius: 20px;
+                align-self: stretch;
             }
             
             .lista-comentarios {
