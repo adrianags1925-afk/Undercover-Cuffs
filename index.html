@@ -152,60 +152,6 @@
             }
         }
         
-        /* Estilos para la sección de Chapters */
-        .chapters-section {
-            max-width: 1200px;
-            width: 95%;
-            margin: 50px auto;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            opacity: 0.7;
-            pointer-events: none;
-            cursor: not-allowed;
-        }
-        
-        .chapters-section h2 {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            margin-bottom: 30px;
-            text-align: center;
-            color: #666;
-            font-family: Consolas, 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Courier New', 'monospace';
-        }
-        
-        .chapter-item {
-            background: rgba(34, 0, 3, 0.8);
-            border: 4px solid #220003;
-            box-shadow: 10px 8px 0px 0px rgba(34, 0, 3, 0.6);
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 20px;
-            opacity: 0.85;
-            text-align: center;
-        }
-        
-        .chapter-item:hover {
-            transform: none;
-            box-shadow: 10px 8px 0px 0px rgba(34, 0, 3, 0.6);
-        }
-        
-        .chapter-content {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: bold;
-        }
-        
-        .chapter-content p {
-            margin: 0;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            color: rgba(255, 255, 255, 0.9);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            font-weight: bold;
-            letter-spacing: 0.05em;
-        }
-        
         /* Estilos responsive adicionales para header y navegación */
         @media only screen and (max-width: 768px) {
             header {
@@ -253,39 +199,9 @@
                 font-size: clamp(0.75rem, 3.5vw, 0.9rem);
             }
             
-            .chapters-section {
-                max-width: 95%;
-                width: 95%;
-                margin: 30px auto;
-                padding: 20px;
-            }
-            
-            .chapter-item {
-                padding: 20px;
-                margin-bottom: 15px;
-            }
-            
-            .chapter-content p {
-                font-size: clamp(1.3rem, 5vw, 2rem);
-            }
         }
         
         @media only screen and (max-width: 480px) {
-            .chapters-section {
-                max-width: 98%;
-                width: 98%;
-                margin: 20px auto;
-                padding: 15px;
-            }
-            
-            .chapter-item {
-                padding: 15px;
-                margin-bottom: 12px;
-            }
-            
-            .chapter-content p {
-                font-size: clamp(1.2rem, 6vw, 1.8rem);
-            }
         }
         
         /* Estilos para garabatos animados */
@@ -784,17 +700,6 @@
 
 </main>
 
-<!-- SECCIÓN DE CHAPTERS -->
-<section class="chapters-section">
-    <h2>Chapters</h2>
-    
-    <div class="chapter-item">
-        <div class="chapter-content">
-            <p>See you later!!!</p>
-        </div>
-    </div>
-</section>
-
 <!-- IMAGEN FINAL -->
 <div class="imagen-final">
     <img src="imagenes/IMG_3232.png" alt="Imagen final" id="imagen-final">
@@ -1161,17 +1066,11 @@
     })();
 </script>
 
-	
-</body>
-</html>
-
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const mainSwiper = new Swiper('#main-swiper', {
-                loop: false,
-                slidesPerView: 1,
-                centeredSlides: true,
+                loop: true,
                 navigation: {
                     nextEl: '#main-swiper .swiper-button-next',
                     prevEl: '#main-swiper .swiper-button-prev',
@@ -1226,15 +1125,8 @@
                 });
             });
         });
-        
-    let currentIndex = 0;
-    const slides = document.querySelector('.slides');
-    const totalSlides = document.querySelectorAll('.slides img').length;
 
-    function moveSlide(direction) {
-      currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
-      const slideWidth = document.querySelector('.carousel').offsetWidth;
-      slides.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-    }
+    </script>
 
-  </script>
+</body>
+</html>
