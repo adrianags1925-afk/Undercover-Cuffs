@@ -15,146 +15,78 @@
 	
     <style>
   
-        .swiper-container {
-            width: 100%;
-            max-width: 1080px;
-            margin: 30px auto;
-            overflow: hidden;
-            position: relative;
-            border-radius: 10px;
-            cursor:pointer;
-        }
-        .swiper-slide img {
-            display: block;
-            width: auto;
-            height: auto;
-            max-width: 100%;
-        }
-        #main-swiper .swiper-slide img {
-            width: 100%;
-            height: auto;
-            max-width: none;
-            margin: 0 auto;
-            object-fit: contain;
-        }
-        #main-swiper .swiper-wrapper {
-            display: block;
-        }
-        #main-swiper .swiper-slide {
-            display: none;
-            justify-content: center;
-            align-items: center;
-            min-height: 0;
-            height: auto;
-        }
-        #main-swiper .swiper-slide.is-active {
-            display: flex;
-        }
-        #main-swiper .swiper-pagination {
-            display: none;
-        }
-        .swiper-button-prev,
-        .swiper-button-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: clamp(30px, 6vw, 40px);
-            height: clamp(30px, 6vw, 40px);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: clamp(18px, 4vw, 24px);
-            cursor: pointer;
-            z-index: 10;
-        }
-        .swiper-button-prev {
-            left: 10px;
-        }
-        .swiper-button-next {
-            right: 10px;
-        }
-        .swiper-button-prev::after,
-        .swiper-button-next::after {
-            content: '';
-        }
-        .swiper-wrapper-container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            max-width: min(95%, 1400px);
+        .cards-wrapper {
+            max-width: min(95%, 1200px);
             margin: 30px auto;
             padding: 0 10px;
-            flex-wrap: wrap;
-            justify-content: center;
         }
-        .swiper-container-main {
-            width: min(100%, 1920px);
-            max-width: 1920px;
-            aspect-ratio: 16 / 9;
-            min-height: 240px;
+        .cards-deck {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .card-item {
+            border: none;
+            background: transparent;
+            padding: 0;
+            cursor: zoom-in;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+        }
+        .card-item img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .image-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .image-modal.active {
+            display: flex;
+        }
+        .image-modal img {
+            max-width: min(95vw, 1920px);
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+        }
+        .image-modal-close {
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            font-size: 38px;
+            color: #fff;
+            cursor: pointer;
+            line-height: 1;
         }
         @media only screen and (max-width: 768px) {
-            .swiper-container {
+            .cards-wrapper {
                 margin: 20px auto;
-                border-radius: 8px;
+                padding: 0 6px;
             }
-            
-            .swiper-wrapper-container {
-                margin: 20px auto;
-                gap: 15px;
-                flex-direction: column;
-            }
-            
-            .swiper-container-main {
-                width: 100%;
-                aspect-ratio: 16 / 9;
-            }
-            
-            #main-swiper .swiper-slide img {
-                width: 100%;
-                height: auto;
-            }
-            
-            .swiper-button-prev,
-            .swiper-button-next {
-                width: 35px;
-                height: 35px;
-                font-size: 20px;
-            }
-            
-            .swiper-button-prev {
-                left: 5px;
-            }
-            
-            .swiper-button-next {
-                right: 5px;
+            .cards-deck {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
             }
         }
         
         @media only screen and (max-width: 480px) {
-            .swiper-container {
+            .cards-wrapper {
                 margin: 15px auto;
-            }
-            
-            .swiper-wrapper-container {
-                margin: 15px auto;
-                gap: 10px;
                 padding: 0 5px;
             }
-            
-            .swiper-button-prev,
-            .swiper-button-next {
-                width: 30px;
-                height: 30px;
-                font-size: 18px;
-            }
-            
-            #main-swiper .swiper-slide img {
-                width: 100%;
-                height: auto;
+            .cards-deck {
+                grid-template-columns: 1fr;
+                gap: 10px;
             }
         }
         
@@ -678,18 +610,12 @@
 <article>
 <p class="Ch"><a href="characters.html">Characters</a></p>
 	
-	<div class="swiper-wrapper-container">
-        <div class="swiper swiper-container swiper-container-main" id="main-swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="./imagenes/swiper-1.png" alt="Imagen 1"></div>
-                <div class="swiper-slide"><img src="./imagenes/swiper-2.png" alt="Imagen 2"></div>
-                <div class="swiper-slide"><img src="./imagenes/swiper-3.png" alt="Imagen 3"></div>
-                <div class="swiper-slide"><img src="./imagenes/swiper-4.png" alt="Imagen 4"></div>
-            </div>
-
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-prev">&#10094;</div>
-            <div class="swiper-button-next">&#10095;</div>
+	<div class="cards-wrapper">
+        <div class="cards-deck" id="cards-deck">
+            <button class="card-item" data-image="./imagenes/swiper-1.png" aria-label="Ampliar imagen 1"><img src="./imagenes/swiper-1.png" alt="Imagen 1"></button>
+            <button class="card-item" data-image="./imagenes/swiper-2.png" aria-label="Ampliar imagen 2"><img src="./imagenes/swiper-2.png" alt="Imagen 2"></button>
+            <button class="card-item" data-image="./imagenes/swiper-3.png" aria-label="Ampliar imagen 3"><img src="./imagenes/swiper-3.png" alt="Imagen 3"></button>
+            <button class="card-item" data-image="./imagenes/swiper-4.png" aria-label="Ampliar imagen 4"><img src="./imagenes/swiper-4.png" alt="Imagen 4"></button>
         </div>
     </div>
 </article>
@@ -709,6 +635,11 @@
     <a href="office.html" class="footer-hidden-link" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer; text-decoration: none; z-index: 1; display: block;" aria-label="Office" title="Office"></a>
     <span style="position: relative; z-index: 0; pointer-events: none;">Undercover Cuffs</span>
 </footer>
+
+<div class="image-modal" id="image-modal">
+    <span class="image-modal-close" id="image-modal-close">&times;</span>
+    <img src="" alt="Imagen ampliada" id="image-modal-content">
+</div>
 
 <script>
     // Sistema de reproducción de música de fondo - SOLUCIÓN ROBUSTA PARA MÓVILES
@@ -1064,41 +995,38 @@
     })();
 </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const mainSwiper = document.getElementById('main-swiper');
-            if (!mainSwiper) return;
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cards = document.querySelectorAll('.card-item');
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('image-modal-content');
+        const closeBtn = document.getElementById('image-modal-close');
+        if (!cards.length || !modal || !modalImg || !closeBtn) return;
 
-            const slides = mainSwiper.querySelectorAll('.swiper-slide');
-            const prevBtn = mainSwiper.querySelector('.swiper-button-prev');
-            const nextBtn = mainSwiper.querySelector('.swiper-button-next');
-            let index = 0;
-
-            if (!slides.length) return;
-
-            function renderSlide() {
-                slides.forEach((slide, i) => {
-                    slide.classList.toggle('is-active', i === index);
-                });
-            }
-
-            function goNext() {
-                index = (index + 1) % slides.length;
-                renderSlide();
-            }
-
-            function goPrev() {
-                index = (index - 1 + slides.length) % slides.length;
-                renderSlide();
-            }
-
-            if (nextBtn) nextBtn.addEventListener('click', goNext);
-            if (prevBtn) prevBtn.addEventListener('click', goPrev);
-
-            renderSlide();
+        cards.forEach((card) => {
+            card.addEventListener('click', function () {
+                const src = card.getAttribute('data-image');
+                modalImg.src = src;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
         });
 
-    </script>
+        function closeModal() {
+            modal.classList.remove('active');
+            modalImg.src = '';
+            document.body.style.overflow = '';
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+        });
+    });
+</script>
 
 </body>
 </html>
