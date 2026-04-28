@@ -30,6 +30,11 @@
             display: block;
 			height: auto;
         }
+        #main-swiper .swiper-slide img {
+            width: 600px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
         .swiper-button-prev,
         .swiper-button-next {
             position: absolute;
@@ -676,9 +681,9 @@
 	<div class="swiper-wrapper-container">
         <div class="swiper-container swiper-container-main" id="main-swiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img width="600" src="imagenes/959 sin título_20260404202909.png" alt="Imagen 1"></div>
+                <div class="swiper-slide"><img width="600" src="./imagenes/swiper-1.png" alt="Imagen 1"></div>
                 <div class="swiper-slide"><img width="600" src="imagenes/IMG_4424(1).png" alt="Imagen 2"></div>
-                <div class="swiper-slide"><img width="600" src="imagenes/964 sin título_20260407193142.png" alt="Imagen 3"></div>
+                <div class="swiper-slide"><img width="600" src="./imagenes/swiper-3.png" alt="Imagen 3"></div>
                 <div class="swiper-slide"><img width="600" src="imagenes/IMG_3231.png" alt="Imagen 4"></div>
             </div>
 
@@ -1070,7 +1075,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const mainSwiper = new Swiper('#main-swiper', {
-                loop: true,
+                loop: false,
                 navigation: {
                     nextEl: '#main-swiper .swiper-button-next',
                     prevEl: '#main-swiper .swiper-button-prev',
