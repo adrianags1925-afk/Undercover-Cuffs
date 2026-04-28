@@ -12,7 +12,6 @@
 <title>UndercoverCuffs.HTML</title>
 	
 <link href="css/UndercoverCuffs.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 	
     <style>
   
@@ -38,12 +37,21 @@
             margin: 0 auto;
             object-fit: contain;
         }
+        #main-swiper .swiper-wrapper {
+            display: block;
+        }
         #main-swiper .swiper-slide {
-            display: flex;
+            display: none;
             justify-content: center;
             align-items: center;
             min-height: 0;
             height: auto;
+        }
+        #main-swiper .swiper-slide.is-active {
+            display: flex;
+        }
+        #main-swiper .swiper-pagination {
+            display: none;
         }
         .swiper-button-prev,
         .swiper-button-next {
@@ -1056,27 +1064,38 @@
     })();
 </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const mainSwiper = new Swiper('#main-swiper', {
-                loop: false,
-                slidesPerView: 1,
-                observer: true,
-                observeParents: true,
-                navigation: {
-                    nextEl: '#main-swiper .swiper-button-next',
-                    prevEl: '#main-swiper .swiper-button-prev',
-                },
-                pagination: {
-                    el: '#main-swiper .swiper-pagination',
-                    clickable: true,
-                },
-                autoplay: {
-                    delay: 3000,
-                    disableOnInteraction: false,
-                },
-            });
+            const mainSwiper = document.getElementById('main-swiper');
+            if (!mainSwiper) return;
+
+            const slides = mainSwiper.querySelectorAll('.swiper-slide');
+            const prevBtn = mainSwiper.querySelector('.swiper-button-prev');
+            const nextBtn = mainSwiper.querySelector('.swiper-button-next');
+            let index = 0;
+
+            if (!slides.length) return;
+
+            function renderSlide() {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('is-active', i === index);
+                });
+            }
+
+            function goNext() {
+                index = (index + 1) % slides.length;
+                renderSlide();
+            }
+
+            function goPrev() {
+                index = (index - 1 + slides.length) % slides.length;
+                renderSlide();
+            }
+
+            if (nextBtn) nextBtn.addEventListener('click', goNext);
+            if (prevBtn) prevBtn.addEventListener('click', goPrev);
+
+            renderSlide();
         });
 
     </script>
