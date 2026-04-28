@@ -26,6 +26,12 @@
             gap: 16px;
         }
         .card-item {
+            position: relative;
+            top: auto;
+            left: auto;
+            right: auto;
+            transform: none;
+            z-index: auto;
             border: none;
             background: transparent;
             padding: 0;
@@ -33,6 +39,8 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+            width: 100%;
+            display: block;
         }
         .card-item img {
             display: block;
@@ -612,7 +620,7 @@
 	
 	<div class="cards-wrapper">
         <div class="cards-deck" id="cards-deck">
-            <button class="card-item" data-image="./imagenes/swiper-1.png" aria-label="Ampliar imagen 1"><img src="./imagenes/swiper-1.png" alt="Imagen 1"></button>
+            <button class="card-item" data-image="imagenes/carnavalUC.png" aria-label="Ampliar imagen 1"><img src="imagenes/carnavalUC.png" alt="Imagen 1"></button>
             <button class="card-item" data-image="./imagenes/swiper-2.png" aria-label="Ampliar imagen 2"><img src="./imagenes/swiper-2.png" alt="Imagen 2"></button>
             <button class="card-item" data-image="./imagenes/swiper-3.png" aria-label="Ampliar imagen 3"><img src="./imagenes/swiper-3.png" alt="Imagen 3"></button>
             <button class="card-item" data-image="./imagenes/swiper-4.png" aria-label="Ampliar imagen 4"><img src="./imagenes/swiper-4.png" alt="Imagen 4"></button>
