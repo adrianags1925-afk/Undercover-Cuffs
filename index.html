@@ -72,19 +72,28 @@
             min-width: 0;
             width: 100%;
             background: rgba(0, 0, 0, 0.2);
+            aspect-ratio: 16 / 9;
         }
         #main-swiper .swiper-slide {
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: clamp(240px, 45vw, 520px);
+            min-height: 0;
+            height: 100%;
             background: rgba(0, 0, 0, 0.35);
         }
         #main-swiper .swiper-slide img {
-            width: 100%;
-            height: clamp(240px, 45vw, 520px);
-            object-fit: contain;
-            object-position: center;
+            width: 100% !important;
+            height: 100% !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            min-width: 100% !important;
+            min-height: 100% !important;
+            object-fit: cover !important;
+            object-position: center center !important;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
         .swiper-circular {
             width: clamp(150px, 25vw, 200px);
@@ -129,14 +138,16 @@
             
             .swiper-container-main {
                 width: 100%;
+                aspect-ratio: 16 / 9;
             }
             
             #main-swiper .swiper-slide {
-                min-height: clamp(220px, 55vw, 420px);
+                min-height: 0;
+                height: 100%;
             }
             
             #main-swiper .swiper-slide img {
-                height: clamp(220px, 55vw, 420px);
+                height: 100% !important;
             }
             
             .swiper-button-prev,
@@ -167,11 +178,12 @@
             }
             
             #main-swiper .swiper-slide {
-                min-height: clamp(190px, 62vw, 320px);
+                min-height: 0;
+                height: 100%;
             }
             
             #main-swiper .swiper-slide img {
-                height: clamp(190px, 62vw, 320px);
+                height: 100% !important;
             }
             
             .swiper-button-prev,
