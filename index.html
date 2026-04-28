@@ -34,6 +34,14 @@
             width: 600px;
             max-width: 100%;
             margin: 0 auto;
+            max-height: 340px;
+            object-fit: contain;
+        }
+        #main-swiper .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 360px;
         }
         .swiper-button-prev,
         .swiper-button-next {
@@ -122,6 +130,15 @@
                 width: 100%;
             }
             
+            #main-swiper .swiper-slide {
+                min-height: 300px;
+            }
+            
+            #main-swiper .swiper-slide img {
+                width: min(600px, 92vw);
+                max-height: 280px;
+            }
+            
             .swiper-button-prev,
             .swiper-button-next {
                 width: 35px;
@@ -154,6 +171,15 @@
                 width: 30px;
                 height: 30px;
                 font-size: 18px;
+            }
+            
+            #main-swiper .swiper-slide {
+                min-height: 220px;
+            }
+            
+            #main-swiper .swiper-slide img {
+                width: min(600px, 94vw);
+                max-height: 200px;
             }
         }
         
