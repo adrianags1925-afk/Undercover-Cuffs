@@ -134,7 +134,7 @@
             height: clamp(150px, 25vw, 200px);
             border-radius: 50%;
             background: blue;
-            display: none;
+            display: none !important;
             align-items: center;
             justify-content: center;
             position: relative;
@@ -1184,7 +1184,9 @@
                 }
                 
                 const mainSwiper = new Swiper('#main-swiper', {
-                    loop: true,
+                    loop: false,
+                    slidesPerView: 1,
+                    centeredSlides: true,
                     navigation: {
                         nextEl: '#main-swiper .swiper-button-next',
                         prevEl: '#main-swiper .swiper-button-prev',
@@ -1197,29 +1199,9 @@
                         delay: 3000,
                         disableOnInteraction: false,
                     },
-                    on: {
-                        slideChange: function() {
-                            const circularSwiper = document.getElementById('circular-swiper');
-                            // Cuando está en la cuarta imagen (índice 3, o cuando loop está activo y es la slide 3)
-                            const realIndex = this.realIndex;
-                            if (realIndex === 3) {
-                                circularSwiper.classList.add('active');
-                            } else {
-                                circularSwiper.classList.remove('active');
-                            }
-                        }
-                    }
                 });
                 
                 document.body.classList.add('swiper-ok');
-                
-                const circularSwiper = new Swiper('#circular-swiper', {
-                    loop: true,
-                    autoplay: {
-                        delay: 2000,
-                        disableOnInteraction: false,
-                    },
-                });
                 
                 // Inicializar otros swipers
                 const otherSwipers = document.querySelectorAll('.swiper-container:not(#main-swiper):not(#circular-swiper)');
