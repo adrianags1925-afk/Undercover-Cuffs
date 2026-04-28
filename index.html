@@ -26,15 +26,16 @@
             cursor:pointer;
         }
         .swiper-slide img {
-            width: 100%;
             display: block;
-			height: auto;
+            width: auto;
+            height: auto;
+            max-width: 100%;
         }
         #main-swiper .swiper-slide img {
-            width: 600px;
+            width: auto;
+            height: auto;
             max-width: 100%;
             margin: 0 auto;
-            max-height: 340px;
             object-fit: contain;
         }
         #main-swiper .swiper-slide {
@@ -101,13 +102,10 @@
                 width: 100%;
             }
             
-            #main-swiper .swiper-slide {
-                min-height: 300px;
-            }
-            
             #main-swiper .swiper-slide img {
-                width: min(600px, 92vw);
-                max-height: 280px;
+                width: auto;
+                max-width: 92vw;
+                height: auto;
             }
             
             .swiper-button-prev,
@@ -144,13 +142,10 @@
                 font-size: 18px;
             }
             
-            #main-swiper .swiper-slide {
-                min-height: 220px;
-            }
-            
             #main-swiper .swiper-slide img {
-                width: min(600px, 94vw);
-                max-height: 200px;
+                width: auto;
+                max-width: 94vw;
+                height: auto;
             }
         }
         
@@ -677,10 +672,10 @@
 	<div class="swiper-wrapper-container">
         <div class="swiper swiper-container swiper-container-main" id="main-swiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img width="600" src="./imagenes/swiper-1.png" alt="Imagen 1"></div>
-                <div class="swiper-slide"><img width="600" src="./imagenes/swiper-2.png" alt="Imagen 2"></div>
-                <div class="swiper-slide"><img width="600" src="./imagenes/swiper-3.png" alt="Imagen 3"></div>
-                <div class="swiper-slide"><img width="600" src="./imagenes/swiper-4.png" alt="Imagen 4"></div>
+                <div class="swiper-slide"><img src="./imagenes/swiper-1.png" alt="Imagen 1"></div>
+                <div class="swiper-slide"><img src="./imagenes/swiper-2.png" alt="Imagen 2"></div>
+                <div class="swiper-slide"><img src="./imagenes/swiper-3.png" alt="Imagen 3"></div>
+                <div class="swiper-slide"><img src="./imagenes/swiper-4.png" alt="Imagen 4"></div>
             </div>
 
             <div class="swiper-pagination"></div>
