@@ -61,7 +61,7 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            max-width: min(95%, 1180px);
+            max-width: min(95%, 1400px);
             margin: 30px auto;
             padding: 0 10px;
             flex-wrap: wrap;
@@ -70,76 +70,14 @@
         .swiper-container-main {
             flex: 1;
             min-width: 0;
-            width: min(100%, 900px);
-            background: rgba(0, 0, 0, 0.2);
-            aspect-ratio: 16 / 9;
-            max-height: 520px;
-        }
-        #main-swiper {
-            display: none !important;
-            overflow: visible !important;
-        }
-        .main-swiper-fallback {
-            width: min(100%, 900px);
-            max-width: 900px;
-            margin: 0 auto;
-            border-radius: 10px;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.35);
-            aspect-ratio: 16 / 9;
-            max-height: 520px;
-        }
-        .main-swiper-fallback-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
             width: 100%;
-            height: 100%;
-            gap: 6px;
-            padding: 6px;
-            box-sizing: border-box;
-        }
-        .main-swiper-fallback-grid img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-            border-radius: 8px;
-        }
-        #main-swiper .swiper-slide {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 0;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.35);
-        }
-        #main-swiper .swiper-slide img {
-            width: 100% !important;
-            height: 100% !important;
-            max-width: 100% !important;
-            max-height: 100% !important;
-            min-width: 100% !important;
-            min-height: 100% !important;
-            object-fit: cover !important;
-            object-position: center center !important;
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-        #main-swiper .swiper-button-prev {
-            left: -56px;
-        }
-        #main-swiper .swiper-button-next {
-            right: -56px;
         }
         .swiper-circular {
             width: clamp(150px, 25vw, 200px);
             height: clamp(150px, 25vw, 200px);
             border-radius: 50%;
             background: blue;
-            display: none !important;
+            display: none;
             align-items: center;
             justify-content: center;
             position: relative;
@@ -177,23 +115,6 @@
             
             .swiper-container-main {
                 width: 100%;
-                aspect-ratio: 16 / 9;
-                max-height: 420px;
-            }
-
-            .main-swiper-fallback {
-                width: 100%;
-                max-width: 100%;
-                max-height: 420px;
-            }
-            
-            #main-swiper .swiper-slide {
-                min-height: 0;
-                height: 100%;
-            }
-            
-            #main-swiper .swiper-slide img {
-                height: 100% !important;
             }
             
             .swiper-button-prev,
@@ -210,14 +131,6 @@
             .swiper-button-next {
                 right: 5px;
             }
-
-            #main-swiper .swiper-button-prev {
-                left: -46px;
-            }
-            
-            #main-swiper .swiper-button-next {
-                right: -46px;
-            }
         }
         
         @media only screen and (max-width: 480px) {
@@ -230,23 +143,6 @@
                 gap: 10px;
                 padding: 0 5px;
             }
-
-            .swiper-container-main {
-                max-height: 300px;
-            }
-            
-            .main-swiper-fallback {
-                max-height: 300px;
-            }
-            
-            #main-swiper .swiper-slide {
-                min-height: 0;
-                height: 100%;
-            }
-            
-            #main-swiper .swiper-slide img {
-                height: 100% !important;
-            }
             
             .swiper-button-prev,
             .swiper-button-next {
@@ -254,14 +150,60 @@
                 height: 30px;
                 font-size: 18px;
             }
-
-            #main-swiper .swiper-button-prev {
-                left: -36px;
-            }
-            
-            #main-swiper .swiper-button-next {
-                right: -36px;
-            }
+        }
+        
+        /* Estilos para la sección de Chapters */
+        .chapters-section {
+            max-width: 1200px;
+            width: 95%;
+            margin: 50px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0.7;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+        
+        .chapters-section h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 30px;
+            text-align: center;
+            color: #666;
+            font-family: Consolas, 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Courier New', 'monospace';
+        }
+        
+        .chapter-item {
+            background: rgba(34, 0, 3, 0.8);
+            border: 4px solid #220003;
+            box-shadow: 10px 8px 0px 0px rgba(34, 0, 3, 0.6);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            opacity: 0.85;
+            text-align: center;
+        }
+        
+        .chapter-item:hover {
+            transform: none;
+            box-shadow: 10px 8px 0px 0px rgba(34, 0, 3, 0.6);
+        }
+        
+        .chapter-content {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: bold;
+        }
+        
+        .chapter-content p {
+            margin: 0;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            font-weight: bold;
+            letter-spacing: 0.05em;
         }
         
         /* Estilos responsive adicionales para header y navegación */
@@ -311,9 +253,39 @@
                 font-size: clamp(0.75rem, 3.5vw, 0.9rem);
             }
             
+            .chapters-section {
+                max-width: 95%;
+                width: 95%;
+                margin: 30px auto;
+                padding: 20px;
+            }
+            
+            .chapter-item {
+                padding: 20px;
+                margin-bottom: 15px;
+            }
+            
+            .chapter-content p {
+                font-size: clamp(1.3rem, 5vw, 2rem);
+            }
         }
         
         @media only screen and (max-width: 480px) {
+            .chapters-section {
+                max-width: 98%;
+                width: 98%;
+                margin: 20px auto;
+                padding: 15px;
+            }
+            
+            .chapter-item {
+                padding: 15px;
+                margin-bottom: 12px;
+            }
+            
+            .chapter-content p {
+                font-size: clamp(1.2rem, 6vw, 1.8rem);
+            }
         }
         
         /* Estilos para garabatos animados */
@@ -731,6 +703,7 @@
     <ul class="navmenu">
         <li><a href="characters.html">Characters</a></li>
         <li><a href="entertainment.html">Entertainment</a></li>
+        <li><a href="video.html">Video</a></li>
         <li><a href="shop.html">Shop</a></li>
         <li><a href="comments.html">Comments</a></li>
     </ul>
@@ -785,20 +758,12 @@
 <p class="Ch"><a href="characters.html">Characters</a></p>
 	
 	<div class="swiper-wrapper-container">
-        <div class="main-swiper-fallback">
-            <div class="main-swiper-fallback-grid">
-                <img src="./imagenes/swiper-1.png" alt="Imagen 1">
-                <img src="./imagenes/swiper-2.png" alt="Imagen 2">
-                <img src="./imagenes/swiper-3.png" alt="Imagen 3">
-                <img src="./imagenes/swiper-4.png" alt="Imagen 4">
-            </div>
-        </div>
         <div class="swiper-container swiper-container-main" id="main-swiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img width="600" src="./imagenes/swiper-1.png" alt="Imagen 1"></div>
-                <div class="swiper-slide"><img width="600" src="./imagenes/swiper-2.png" alt="Imagen 2"></div>
-                <div class="swiper-slide"><img width="600" src="./imagenes/swiper-3.png" alt="Imagen 3"></div>
-                <div class="swiper-slide"><img width="600" src="./imagenes/swiper-4.png" alt="Imagen 4"></div>
+                <div class="swiper-slide"><img width="600" src="imagenes/959 sin título_20260404202909.png" alt="Imagen 1"></div>
+                <div class="swiper-slide"><img width="600" src="imagenes/IMG_4424(1).png" alt="Imagen 2"></div>
+                <div class="swiper-slide"><img width="600" src="imagenes/964 sin título_20260407193142.png" alt="Imagen 3"></div>
+                <div class="swiper-slide"><img width="600" src="imagenes/IMG_3231.png" alt="Imagen 4"></div>
             </div>
 
             <div class="swiper-pagination"></div>
@@ -818,6 +783,17 @@
 <!-- ******************************* FIN DE LOS ARTÍCULOS ******************************* -->
 
 </main>
+
+<!-- SECCIÓN DE CHAPTERS -->
+<section class="chapters-section">
+    <h2>Chapters</h2>
+    
+    <div class="chapter-item">
+        <div class="chapter-content">
+            <p>See you later!!!</p>
+        </div>
+    </div>
+</section>
 
 <!-- IMAGEN FINAL -->
 <div class="imagen-final">
@@ -1185,8 +1161,80 @@
     })();
 </script>
 
-    <script>
-    </script>
-
+	
 </body>
 </html>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mainSwiper = new Swiper('#main-swiper', {
+                loop: false,
+                slidesPerView: 1,
+                centeredSlides: true,
+                navigation: {
+                    nextEl: '#main-swiper .swiper-button-next',
+                    prevEl: '#main-swiper .swiper-button-prev',
+                },
+                pagination: {
+                    el: '#main-swiper .swiper-pagination',
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                on: {
+                    slideChange: function() {
+                        const circularSwiper = document.getElementById('circular-swiper');
+                        // Cuando está en la cuarta imagen (índice 3, o cuando loop está activo y es la slide 3)
+                        const realIndex = this.realIndex;
+                        if (realIndex === 3) {
+                            circularSwiper.classList.add('active');
+                        } else {
+                            circularSwiper.classList.remove('active');
+                        }
+                    }
+                }
+            });
+            
+            const circularSwiper = new Swiper('#circular-swiper', {
+                loop: true,
+                autoplay: {
+                    delay: 2000,
+                    disableOnInteraction: false,
+                },
+            });
+            
+            // Inicializar otros swipers
+            const otherSwipers = document.querySelectorAll('.swiper-container:not(#main-swiper):not(#circular-swiper)');
+            otherSwipers.forEach(container => {
+                new Swiper(container, {
+                    loop: true,
+                    navigation: {
+                        nextEl: container.querySelector('.swiper-button-next'),
+                        prevEl: container.querySelector('.swiper-button-prev'),
+                    },
+                    pagination: {
+                        el: container.querySelector('.swiper-pagination'),
+                        clickable: true,
+                    },
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    },
+                });
+            });
+        });
+        
+    let currentIndex = 0;
+    const slides = document.querySelector('.slides');
+    const totalSlides = document.querySelectorAll('.slides img').length;
+
+    function moveSlide(direction) {
+      currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
+      const slideWidth = document.querySelector('.carousel').offsetWidth;
+      slides.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    }
+
+  </script>
