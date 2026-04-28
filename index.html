@@ -76,6 +76,7 @@
         }
         #main-swiper {
             display: none;
+            overflow: visible !important;
         }
         body.swiper-ok #main-swiper {
             display: block;
@@ -119,6 +120,12 @@
             display: block !important;
             visibility: visible !important;
             opacity: 1 !important;
+        }
+        #main-swiper .swiper-button-prev {
+            left: -56px;
+        }
+        #main-swiper .swiper-button-next {
+            right: -56px;
         }
         .swiper-circular {
             width: clamp(150px, 25vw, 200px);
@@ -189,6 +196,14 @@
             .swiper-button-next {
                 right: 5px;
             }
+
+            #main-swiper .swiper-button-prev {
+                left: -46px;
+            }
+            
+            #main-swiper .swiper-button-next {
+                right: -46px;
+            }
         }
         
         @media only screen and (max-width: 480px) {
@@ -216,6 +231,14 @@
                 width: 30px;
                 height: 30px;
                 font-size: 18px;
+            }
+
+            #main-swiper .swiper-button-prev {
+                left: -36px;
+            }
+            
+            #main-swiper .swiper-button-next {
+                right: -36px;
             }
         }
         
