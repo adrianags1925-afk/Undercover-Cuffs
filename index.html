@@ -74,6 +74,31 @@
             background: rgba(0, 0, 0, 0.2);
             aspect-ratio: 16 / 9;
         }
+        #main-swiper {
+            display: none;
+        }
+        body.swiper-ok #main-swiper {
+            display: block;
+        }
+        .main-swiper-fallback {
+            width: 100%;
+            max-width: 1080px;
+            margin: 0 auto;
+            border-radius: 10px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.35);
+            aspect-ratio: 16 / 9;
+        }
+        .main-swiper-fallback img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+        body.swiper-ok .main-swiper-fallback {
+            display: none;
+        }
         #main-swiper .swiper-slide {
             display: flex;
             align-items: center;
@@ -715,6 +740,9 @@
 <p class="Ch"><a href="characters.html">Characters</a></p>
 	
 	<div class="swiper-wrapper-container">
+        <div class="main-swiper-fallback">
+            <img src="imagenes/IMG_4403(1).png" alt="Imagen destacada">
+        </div>
         <div class="swiper-container swiper-container-main" id="main-swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide"><img width="600" src="imagenes/IMG_4403(1).png" alt="Imagen 1"></div>
@@ -1110,61 +1138,71 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const mainSwiper = new Swiper('#main-swiper', {
-                loop: true,
-                navigation: {
-                    nextEl: '#main-swiper .swiper-button-next',
-                    prevEl: '#main-swiper .swiper-button-prev',
-                },
-                pagination: {
-                    el: '#main-swiper .swiper-pagination',
-                    clickable: true,
-                },
-                autoplay: {
-                    delay: 3000,
-                    disableOnInteraction: false,
-                },
-                on: {
-                    slideChange: function() {
-                        const circularSwiper = document.getElementById('circular-swiper');
-                        // Cuando está en la cuarta imagen (índice 3, o cuando loop está activo y es la slide 3)
-                        const realIndex = this.realIndex;
-                        if (realIndex === 3) {
-                            circularSwiper.classList.add('active');
-                        } else {
-                            circularSwiper.classList.remove('active');
-                        }
-                    }
+            try {
+                if (typeof Swiper === 'undefined') {
+                    throw new Error('Swiper no disponible');
                 }
-            });
-            
-            const circularSwiper = new Swiper('#circular-swiper', {
-                loop: true,
-                autoplay: {
-                    delay: 2000,
-                    disableOnInteraction: false,
-                },
-            });
-            
-            // Inicializar otros swipers
-            const otherSwipers = document.querySelectorAll('.swiper-container:not(#main-swiper):not(#circular-swiper)');
-            otherSwipers.forEach(container => {
-                new Swiper(container, {
+                
+                const mainSwiper = new Swiper('#main-swiper', {
                     loop: true,
                     navigation: {
-                        nextEl: container.querySelector('.swiper-button-next'),
-                        prevEl: container.querySelector('.swiper-button-prev'),
+                        nextEl: '#main-swiper .swiper-button-next',
+                        prevEl: '#main-swiper .swiper-button-prev',
                     },
                     pagination: {
-                        el: container.querySelector('.swiper-pagination'),
+                        el: '#main-swiper .swiper-pagination',
                         clickable: true,
                     },
                     autoplay: {
                         delay: 3000,
                         disableOnInteraction: false,
                     },
+                    on: {
+                        slideChange: function() {
+                            const circularSwiper = document.getElementById('circular-swiper');
+                            // Cuando está en la cuarta imagen (índice 3, o cuando loop está activo y es la slide 3)
+                            const realIndex = this.realIndex;
+                            if (realIndex === 3) {
+                                circularSwiper.classList.add('active');
+                            } else {
+                                circularSwiper.classList.remove('active');
+                            }
+                        }
+                    }
                 });
-            });
+                
+                document.body.classList.add('swiper-ok');
+                
+                const circularSwiper = new Swiper('#circular-swiper', {
+                    loop: true,
+                    autoplay: {
+                        delay: 2000,
+                        disableOnInteraction: false,
+                    },
+                });
+                
+                // Inicializar otros swipers
+                const otherSwipers = document.querySelectorAll('.swiper-container:not(#main-swiper):not(#circular-swiper)');
+                otherSwipers.forEach(container => {
+                    new Swiper(container, {
+                        loop: true,
+                        navigation: {
+                            nextEl: container.querySelector('.swiper-button-next'),
+                            prevEl: container.querySelector('.swiper-button-prev'),
+                        },
+                        pagination: {
+                            el: container.querySelector('.swiper-pagination'),
+                            clickable: true,
+                        },
+                        autoplay: {
+                            delay: 3000,
+                            disableOnInteraction: false,
+                        },
+                    });
+                });
+            } catch (error) {
+                console.error('No se pudo inicializar el swiper principal:', error);
+            }
         });
         
     let currentIndex = 0;
