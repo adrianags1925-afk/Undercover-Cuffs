@@ -71,6 +71,20 @@
             flex: 1;
             min-width: 0;
             width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        #main-swiper .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: clamp(240px, 45vw, 520px);
+            background: rgba(0, 0, 0, 0.35);
+        }
+        #main-swiper .swiper-slide img {
+            width: 100%;
+            height: clamp(240px, 45vw, 520px);
+            object-fit: contain;
+            object-position: center;
         }
         .swiper-circular {
             width: clamp(150px, 25vw, 200px);
@@ -117,6 +131,14 @@
                 width: 100%;
             }
             
+            #main-swiper .swiper-slide {
+                min-height: clamp(220px, 55vw, 420px);
+            }
+            
+            #main-swiper .swiper-slide img {
+                height: clamp(220px, 55vw, 420px);
+            }
+            
             .swiper-button-prev,
             .swiper-button-next {
                 width: 35px;
@@ -142,6 +164,14 @@
                 margin: 15px auto;
                 gap: 10px;
                 padding: 0 5px;
+            }
+            
+            #main-swiper .swiper-slide {
+                min-height: clamp(190px, 62vw, 320px);
+            }
+            
+            #main-swiper .swiper-slide img {
+                height: clamp(190px, 62vw, 320px);
             }
             
             .swiper-button-prev,
