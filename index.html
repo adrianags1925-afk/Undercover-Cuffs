@@ -152,60 +152,6 @@
             }
         }
         
-        /* Estilos para la sección de Chapters */
-        .chapters-section {
-            max-width: 1200px;
-            width: 95%;
-            margin: 50px auto;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            opacity: 0.7;
-            pointer-events: none;
-            cursor: not-allowed;
-        }
-        
-        .chapters-section h2 {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            margin-bottom: 30px;
-            text-align: center;
-            color: #666;
-            font-family: Consolas, 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Courier New', 'monospace';
-        }
-        
-        .chapter-item {
-            background: rgba(34, 0, 3, 0.8);
-            border: 4px solid #220003;
-            box-shadow: 10px 8px 0px 0px rgba(34, 0, 3, 0.6);
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 20px;
-            opacity: 0.85;
-            text-align: center;
-        }
-        
-        .chapter-item:hover {
-            transform: none;
-            box-shadow: 10px 8px 0px 0px rgba(34, 0, 3, 0.6);
-        }
-        
-        .chapter-content {
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: bold;
-        }
-        
-        .chapter-content p {
-            margin: 0;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            color: rgba(255, 255, 255, 0.9);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-            font-weight: bold;
-            letter-spacing: 0.05em;
-        }
-        
         /* Estilos responsive adicionales para header y navegación */
         @media only screen and (max-width: 768px) {
             header {
@@ -253,39 +199,9 @@
                 font-size: clamp(0.75rem, 3.5vw, 0.9rem);
             }
             
-            .chapters-section {
-                max-width: 95%;
-                width: 95%;
-                margin: 30px auto;
-                padding: 20px;
-            }
-            
-            .chapter-item {
-                padding: 20px;
-                margin-bottom: 15px;
-            }
-            
-            .chapter-content p {
-                font-size: clamp(1.3rem, 5vw, 2rem);
-            }
         }
         
         @media only screen and (max-width: 480px) {
-            .chapters-section {
-                max-width: 98%;
-                width: 98%;
-                margin: 20px auto;
-                padding: 15px;
-            }
-            
-            .chapter-item {
-                padding: 15px;
-                margin-bottom: 12px;
-            }
-            
-            .chapter-content p {
-                font-size: clamp(1.2rem, 6vw, 1.8rem);
-            }
         }
         
         /* Estilos para garabatos animados */
@@ -463,11 +379,6 @@
         
         .doodle svg {
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-        }
-        
-        /* Audio de fondo oculto */
-        #background-audio {
-            display: none;
         }
         
     </style>	
@@ -708,7 +619,6 @@
     <ul class="navmenu">
         <li><a href="characters.html">Characters</a></li>
         <li><a href="entertainment.html">Entertainment</a></li>
-        <li><a href="video.html">Video</a></li>
         <li><a href="shop.html">Shop</a></li>
         <li><a href="comments.html">Comments</a></li>
     </ul>
@@ -744,13 +654,13 @@
         <div>
             <p class="o"> </p>
                 
-            <p>Undercover Cuffs is a project in development since 2021. From the beginning, the plan was to preserve the youthful and mischievous essence from every perspective, from a child's perspective to a mature, adult one.
+            <p>Undercover Cuffs is an independent project that’s been quietly brewing since 2021. It started as a wild mix of half-finished ideas, scattered stories, and “I’ll finish this someday” moments… (spoiler: I didn’t).
 
-The characters are designed to meet unique censorship and filming needs.
-
-It will recreate the essence of old Xbox and PS Vita games.
-
-It will bring back childhood and laughter with a unique and wild experience.</p>
+                But a few months ago, I had a thought—why not actually take this seriously?
+                
+                Now I want to invite you into my world: creative, chaotic, and a little unpredictable. And my biggest dream? To share it all with you.
+                
+                So grab a seat, get comfortable, and enjoy what’s coming next.</p>
                 
             <p class="E">¡Enjoy you´r stay and be you´r self!</p>
             <p class="y" id="y"> </p>
@@ -789,17 +699,6 @@ It will bring back childhood and laughter with a unique and wild experience.</p>
 
 </main>
 
-<!-- SECCIÓN DE CHAPTERS -->
-<section class="chapters-section">
-    <h2>Chapters</h2>
-    
-    <div class="chapter-item">
-        <div class="chapter-content">
-            <p>See you later!!!</p>
-        </div>
-    </div>
-</section>
-
 <!-- IMAGEN FINAL -->
 <div class="imagen-final">
     <img src="imagenes/IMG_3232.png" alt="Imagen final" id="imagen-final">
@@ -812,19 +711,6 @@ It will bring back childhood and laughter with a unique and wild experience.</p>
     <span style="position: relative; z-index: 0; pointer-events: none;">Undercover Cuffs</span>
 </footer>
 
-<!-- Música de fondo (sin controles visibles) -->
-<!-- playsinline es CRÍTICO para iOS -->
-<audio id="background-audio" loop preload="auto" playsinline webkit-playsinline style="display: none;">
-    <!-- Música alegre pero tranquila libre de derechos de autor -->
-    <!-- Pixabay - música tranquila y alegre -->
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_73b40dc47e.mp3?filename=soft-background-music-112791.mp3" type="audio/mpeg">
-    <!-- Fallback: Pixabay (música tranquila alternativa) -->
-    <source src="https://cdn.pixabay.com/download/audio/2023/05/11/audio_1683814731.mp3?filename=peaceful-morning-118490.mp3" type="audio/mpeg">
-    <!-- Fallback adicional: SoundHelix -->
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
-    Tu navegador no soporta el elemento de audio.
-</audio>
-
 <script>
     // Sistema de reproducción de música de fondo - SOLUCIÓN ROBUSTA PARA MÓVILES
     (function() {
@@ -832,7 +718,6 @@ It will bring back childhood and laughter with a unique and wild experience.</p>
         
         const audio = document.getElementById('background-audio');
         if (!audio) {
-            console.error('Elemento de audio no encontrado');
             return;
         }
         

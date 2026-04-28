@@ -69,10 +69,6 @@
         }
     }
     
-    /* Audio de fondo oculto */
-    #background-audio {
-        display: none;
-    }
 </style>
 </head>
 <body>
@@ -88,19 +84,6 @@
         <p class="lock-text">Under Construction</p>
     </div>
     
-    <!-- Música de fondo (sin controles visibles) -->
-    <!-- playsinline es CRÍTICO para iOS -->
-    <audio id="background-audio" loop preload="auto" playsinline webkit-playsinline style="display: none;">
-        <!-- Música alegre pero tranquila libre de derechos de autor -->
-        <!-- Pixabay - música tranquila y alegre -->
-        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_73b40dc47e.mp3?filename=soft-background-music-112791.mp3" type="audio/mpeg">
-        <!-- Fallback: Pixabay (música tranquila alternativa) -->
-        <source src="https://cdn.pixabay.com/download/audio/2023/05/11/audio_1683814731.mp3?filename=peaceful-morning-118490.mp3" type="audio/mpeg">
-        <!-- Fallback adicional: SoundHelix -->
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
-        Tu navegador no soporta el elemento de audio.
-    </audio>
-    
     <script>
         // Sistema de reproducción de música de fondo - SOLUCIÓN ROBUSTA PARA MÓVILES
         (function() {
@@ -108,7 +91,6 @@
             
             const audio = document.getElementById('background-audio');
             if (!audio) {
-                console.error('Elemento de audio no encontrado');
                 return;
             }
             
