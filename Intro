@@ -1,296 +1,119 @@
 <!doctype html>
-
-<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es">
 <head>
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">	
-<meta charset="UTF-8">
-	
-<title>UndercoverCuffs.HTML</title>
-	
-<link href="css/UndercoverCuffs.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-	
-    <style>
-  
-        .swiper-container {
-            width: 100%;
-            max-width: 1080px;
-            margin: 50px auto;
-            overflow: hidden;
-            position: relative;
-            border-radius: 10px;
-            cursor:pointer;
-        }
-        .swiper-slide img {
-            width: 100%;
-            display: block;
-			height: auto;
-        }
-        .swiper-button-prev,
-        .swiper-button-next {
-            position: absolute;
-            top: calc(50% + 20px);
-            transform: translateY(-50%);
-            width: 40px;
-            height: 40px;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 10;
-        }
-        .swiper-button-prev {
-            left: 10px;
-        }
-        .swiper-button-next {
-            right: 10px;
-        }
-        .swiper-button-prev::after,
-        .swiper-button-next::after {
-            content: '';
-        }
-        .swiper-wrapper-container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            max-width: 1400px;
-            margin: 50px auto;
-        }
-        .swiper-container-main {
-            flex: 1;
-        }
-        .swiper-circular {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: blue;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .swiper-circular.active {
-            display: flex;
-        }
-        .swiper-circular .swiper-wrapper {
-            width: 100%;
-            height: 100%;
-        }
-        .swiper-circular .swiper-slide {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-        }
-    </style>	
-	
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Página oficial de presentación del proyecto narrativo Undercover Cuffs.">
+  <meta name="theme-color" content="#09060a">
+  <meta property="og:title" content="Undercover Cuffs · Presentación oficial">
+  <meta property="og:description" content="Página oficial de presentación del proyecto narrativo Undercover Cuffs.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/img/logo.png">
+  <title>Undercover Cuffs · Presentación oficial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@400;600;700;800&family=Special+Elite&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-
 <body>
-
-<!-- ESTA ES LA CABECERA CON EL MENÚ -->
-
-<header>   
-    <h1>Undercover Cuffs</h1>
-
-<nav>
-    <ul class="navmenu">
-        <li><a href="characters.html" >Characters</a> </li>
-        <li><a href="https://youtube.com/@tomateviviente5393?feature=shared" target="_blank">Video</a></li>
-        <li><a href="shop.html" >Shop</a></li>
-    </ul>
-</nav>
-
-
-
+<div class="noise-layer" aria-hidden="true"></div>
+<div class="spotlight" aria-hidden="true"></div>
+<header class="site-header" data-scrolled="false">
+  <a class="brand" href="index.html" aria-label="Inicio de Undercover Cuffs">
+    <img src="assets/img/logo2.png" alt="Logo de Undercover Cuffs">
+    <span>Undercover Cuffs</span>
+  </a>
+  <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  <nav class="site-nav" aria-label="Navegación principal">
+    <a href="index.html">Inicio</a>
+    <a href="characters.html">Personajes</a>
+    <a href="secrets.html">Archivos ocultos</a>
+    <a href="entertainment.html">Extras</a>
+    <a href="comments.html">Comentarios</a>
+    <a href="shop.html">Tienda</a>
+  </nav>
 </header>
-
-<!-- IMAGEN PRINCIPAL -->
-<div class="imagen-principal">
-    <img src="imagenes/IMG_3230.png" alt="Imagen principal" id="imagen-principal">
-</div>
-
-<!-- ARTÍCULOS -->
-
 <main>
-
-
-<article>
-<h2>¿What is Undercover Cuffs?</h2>
-
-<ul class="redes_sociales">
-    <li><a href="https://www.instagram.com/undercover_cuffs?igsh=ejJlb2VtMHoyanA3&utm_source=qr" target="_blank"><img alt src="imagenes/insta.jpeg"></a></li>
-    <li><a href="https://youtube.com/@tomateviviente5393?feature=shared" target="_blank"><img alt src="imagenes/logotipo-rojo-youtube-logotipo-redes-sociales_197792-1803.jpg.avif"></a></li>
-    <li><a href="https://x.com/sese778944?s=21" target="_blank"><img alt src="imagenes/twitter-new-logo-x-768x514.jpg"></a></li>
-</ul>
-</article>
-
-	
-<article>
-    <div class="info">
-        <div>
-            <p class="o"> </p>
-                
-            <p>Undercover Cuffs is a project in development since 2021. From the beginning, the plan was to preserve the youthful and mischievous essence from every perspective, from a child's perspective to a mature, adult one.
-
-The characters are designed to meet unique censorship and filming needs.
-
-It will recreate the essence of old Xbox and PS Vita games.
-
-It will bring back childhood and laughter with a unique and wild experience.</p>
-                
-            <p class="E">¡Enjoy you´r stay and be you´r self!</p>
-            <p class="y" id="y"> </p>
-
-        </div>
+  <section class="hero section-reveal">
+    <div class="hero-copy">
+      <p class="eyebrow">Expediente abierto · Desde 2021</p>
+      <h1>Una historia adorablemente rara con algo escondido debajo.</h1>
+      <p class="hero-text">Undercover Cuffs presenta un universo de personajes traviesos, humor incómodo, estética juguetona y una capa secreta más oscura para quien se atreva a mirar dos veces.</p>
+      <div class="hero-actions">
+        <a class="btn primary magnetic" href="characters.html">Conocer personajes</a>
+        <a class="btn ghost magnetic" href="secrets.html">Abrir archivos ocultos</a>
+      </div>
     </div>
-</article>
-
-<article>
-<p class="Ch"><a href="characters"></a>Characters</p>
-	
-	<div class="swiper-wrapper-container">
-        <div class="swiper-container swiper-container-main" id="main-swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img width="600" src="imagenes/IMG_1449(1).png" alt="Imagen 1"></div>
-                <div class="swiper-slide"><img width="600" src="imagenes/miss heed.png" alt="Imagen 2"></div>
-                <div class="swiper-slide"><img width="600" src="imagenes/381 sin título11_20250411210148.png" alt="Imagen 3"></div>
-                <div class="swiper-slide"><img width="600" src="imagenes/IMG_3231.png" alt="Imagen 4"></div>
-            </div>
-
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-prev">&#10094;</div>
-            <div class="swiper-button-next">&#10095;</div>
-        </div>
-        
-        <div class="swiper-circular" id="circular-swiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">BOO!</div>
-                <div class="swiper-slide">HAHAHA</div>
-            </div>
-        </div>
+    <div class="hero-art float-card">
+      <img src="assets/img/img-3230.png" alt="Imagen principal de Undercover Cuffs" class="js-lightbox">
+      <button class="sound-orb" type="button" data-audio="assets/audio/fukouna-girl.mp3">Activar ambiente</button>
     </div>
-</article>
+  </section>
 
-<article>
+  <section class="split section-reveal">
+    <article class="panel">
+      <h2>¿Qué es Undercover Cuffs?</h2>
+      <p>Es un proyecto narrativo y visual en desarrollo que mezcla energía infantil, humor caótico y misterio. La web funciona como carta de presentación del universo, sus personajes, sus pistas y el contenido que acompaña al lanzamiento.</p>
+    </article>
+    <article class="panel red-panel">
+      <h2>La intención</h2>
+      <p>Mostrar el proyecto de forma memorable: primero parece divertido, luego aparecen detalles extraños, archivos escondidos y piezas que invitan a seguir explorando.</p>
+    </article>
+  </section>
 
-    <div style="display:flex; border:solid 0px; justify-content: center; align-items:center">
-	   <video loop controls class="video"> <source src="videos/IMG_0-2.MOV" type="video/mp4"> </video>
-    </div>  
-</article>
-
-<article>	
-    <div class="swiper-container">
-
-        <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="imagenes/108 sin título2_20241226140403.png" alt="Imagen 1"></div>
-            <div class="swiper-slide"><img src="imagenes/177 sin título_20241226142657.png" alt="Imagen 1"></div>
-            <div class="swiper-slide"><img src="imagenes/106 sin título_20241226140307.png" alt="Imagen 1"></div>
-        </div>
-
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev">&#10094;</div>
-        <div class="swiper-button-next">&#10095;</div>
-
+  <section class="section-reveal">
+    <div class="section-heading">
+      <p class="eyebrow">Galería inicial</p>
+      <h2>Primer vistazo al expediente</h2>
     </div>
-</article>	
+    <div class="carousel" data-carousel>
+      <button class="carousel-btn prev" type="button" aria-label="Imagen anterior">‹</button>
+      <div class="carousel-track">
+<figure class="story-slide"><img src="assets/img/img-3230.png" alt="Arte de Undercover Cuffs" class="js-lightbox"></figure>
+<figure class="story-slide"><img src="assets/img/img-3231.png" alt="Arte de Undercover Cuffs" class="js-lightbox"></figure>
+<figure class="story-slide"><img src="assets/img/img-3232.png" alt="Arte de Undercover Cuffs" class="js-lightbox"></figure>
+<figure class="story-slide"><img src="assets/img/logo.png" alt="Arte de Undercover Cuffs" class="js-lightbox"></figure>
+<!-- no las he puesto porque las he visto feas pero si las quieres simplemente descomenta el codigo: <figure class="story-slide"><img src="assets/img/logo2.png" alt="Arte de Undercover Cuffs" class="js-lightbox"></figure> -->
+<!-- no las he puesto porque las he visto feas pero si las quieres simplemente descomenta el codigo: <figure class="story-slide"><img src="assets/img/fondo-old.png" alt="Arte de Undercover Cuffs" class="js-lightbox"></figure> -->
+<!-- no las he puesto porque las he visto feas pero si las quieres simplemente descomenta el codigo: <figure class="story-slide"><img src="assets/img/fondo.jpg" alt="Arte de Undercover Cuffs" class="js-lightbox"></figure> -->
+<!-- no las he puesto porque las he visto feas pero si las quieres simplemente descomenta el codigo: <figure class="story-slide"><img src="assets/img/fondo2.jpg" alt="Arte de Undercover Cuffs" class="js-lightbox"></figure> -->
+<!-- no las he puesto porque las he visto feas pero si las quieres simplemente descomenta el codigo: <figure class="story-slide"><img src="assets/img/fondo3.jpg" alt="Arte de Undercover Cuffs" class="js-lightbox"></figure> -->
+      </div>
+      <button class="carousel-btn next" type="button" aria-label="Imagen siguiente">›</button>
+    </div>
+  </section>
 
-<!-- ******************************* FIN DE LOS ARTÍCULOS ******************************* -->
+  <section class="section-reveal social-section">
+    <div class="section-heading">
+      <p class="eyebrow">Sigue el rastro</p>
+      <h2>Redes del proyecto</h2>
+    </div>
+    <div class="social-grid"><a href="https://www.instagram.com/undercover_cuffs?igsh=ejJlb2VtMHoyanA3&utm_source=qr" target="_blank" rel="noopener" class="social-card"><img src="assets/img/insta.jpeg" alt="Instagram"><span>Instagram</span></a>
+<a href="https://youtube.com/@tomateviviente5393?feature=shared" target="_blank" rel="noopener" class="social-card"><img src="assets/img/logotipo-rojo-youtube-logotipo-redes-sociales-197792-1803-jpg.avif" alt="YouTube"><span>YouTube</span></a>
+<a href="https://x.com/sese778944?s=21" target="_blank" rel="noopener" class="social-card"><img src="assets/img/twitter-new-logo-x-768x514.jpg" alt="X"><span>X</span></a></div>
+  </section>
 
+  <section class="section-reveal video-feature">
+    <div>
+      <p class="eyebrow">Material visual</p>
+      <h2>Una muestra en movimiento</h2>
+      <p>El vídeo conserva el material original del proyecto y queda integrado como pieza de presentación.</p>
+    </div>
+    <video controls loop playsinline poster="assets/img/img-3232.png">
+      <source src="assets/video/img-0-2.mov" type="video/mp4">
+      Tu navegador no puede reproducir este vídeo.
+    </video>
+  </section>
 </main>
-
-<!-- IMAGEN FINAL -->
-<div class="imagen-final">
-    <img src="imagenes/IMG_3232.png" alt="Imagen final" id="imagen-final">
-    <h1 style="font-size: 4em; text-align: center; margin-top: 20px; font-weight: bold; background: transparent; border: none; padding: 0;">WELCOME</h1>
+<footer class="site-footer">
+  <p>Undercover Cuffs · Proyecto narrativo en desarrollo</p>
+  <p class="footer-small">Misterio, humor raro y archivos que quizá no deberían abrirse.</p>
+</footer>
+<div class="lightbox" aria-hidden="true">
+  <button class="lightbox-close" type="button" aria-label="Cerrar imagen">×</button>
+  <img src="" alt="">
+  <p></p>
 </div>
-
-<!-- PIE DE PÁGINA -->
-<footer>Undercover Cuffs</footer>
-
-	
+<script src="assets/js/main.js"></script>
 </body>
 </html>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const mainSwiper = new Swiper('#main-swiper', {
-                loop: true,
-                navigation: {
-                    nextEl: '#main-swiper .swiper-button-next',
-                    prevEl: '#main-swiper .swiper-button-prev',
-                },
-                pagination: {
-                    el: '#main-swiper .swiper-pagination',
-                    clickable: true,
-                },
-                autoplay: {
-                    delay: 3000,
-                    disableOnInteraction: false,
-                },
-                on: {
-                    slideChange: function() {
-                        const circularSwiper = document.getElementById('circular-swiper');
-                        // Cuando está en la cuarta imagen (índice 3, o cuando loop está activo y es la slide 3)
-                        const realIndex = this.realIndex;
-                        if (realIndex === 3) {
-                            circularSwiper.classList.add('active');
-                        } else {
-                            circularSwiper.classList.remove('active');
-                        }
-                    }
-                }
-            });
-            
-            const circularSwiper = new Swiper('#circular-swiper', {
-                loop: true,
-                autoplay: {
-                    delay: 2000,
-                    disableOnInteraction: false,
-                },
-            });
-            
-            // Inicializar otros swipers
-            const otherSwipers = document.querySelectorAll('.swiper-container:not(#main-swiper):not(#circular-swiper)');
-            otherSwipers.forEach(container => {
-                new Swiper(container, {
-                    loop: true,
-                    navigation: {
-                        nextEl: container.querySelector('.swiper-button-next'),
-                        prevEl: container.querySelector('.swiper-button-prev'),
-                    },
-                    pagination: {
-                        el: container.querySelector('.swiper-pagination'),
-                        clickable: true,
-                    },
-                    autoplay: {
-                        delay: 3000,
-                        disableOnInteraction: false,
-                    },
-                });
-            });
-        });
-        
-    let currentIndex = 0;
-    const slides = document.querySelector('.slides');
-    const totalSlides = document.querySelectorAll('.slides img').length;
-
-    function moveSlide(direction) {
-      currentIndex = (currentIndex + direction + totalSlides) % totalSlides;
-      const slideWidth = document.querySelector('.carousel').offsetWidth;
-      slides.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-    }
-
-  </script>
