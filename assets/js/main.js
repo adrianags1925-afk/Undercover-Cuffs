@@ -1,10 +1,19 @@
-
 const $ = (s, c=document) => c.querySelector(s);
 const $$ = (s, c=document) => [...c.querySelectorAll(s)];
 
 window.addEventListener('pointermove', e => {
   document.documentElement.style.setProperty('--mx', `${e.clientX}px`);
   document.documentElement.style.setProperty('--my', `${e.clientY}px`);
+});
+
+const warningModal = $('[data-warning-modal]');
+const warningAccept = $('[data-warning-accept]');
+if (warningModal && sessionStorage.getItem('undercover-warning-ok') === 'yes') {
+  warningModal.classList.add('is-hidden');
+}
+warningAccept?.addEventListener('click', () => {
+  sessionStorage.setItem('undercover-warning-ok', 'yes');
+  warningModal?.classList.add('is-hidden');
 });
 
 const toggle = $('.menu-toggle');
@@ -14,6 +23,10 @@ if(toggle && nav){
     const open = nav.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', String(open));
   });
+  $$('.site-nav a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }));
 }
 
 const io = new IntersectionObserver(entries=>{
@@ -23,12 +36,13 @@ $$('.section-reveal').forEach(el=>io.observe(el));
 
 $$('[data-carousel]').forEach(carousel=>{
   const track = $('.carousel-track', carousel);
-  $('.next', carousel)?.addEventListener('click',()=>track.scrollBy({left:track.clientWidth*.8, behavior:'smooth'}));
-  $('.prev', carousel)?.addEventListener('click',()=>track.scrollBy({left:-track.clientWidth*.8, behavior:'smooth'}));
+  $('.next', carousel)?.addEventListener('click',()=>track.scrollBy({left:track.clientWidth*.82, behavior:'smooth'}));
+  $('.prev', carousel)?.addEventListener('click',()=>track.scrollBy({left:-track.clientWidth*.82, behavior:'smooth'}));
 });
 
 $$('[data-tilt]').forEach(card=>{
   card.addEventListener('pointermove', e=>{
+    if (matchMedia('(pointer: coarse)').matches) return;
     const r = card.getBoundingClientRect();
     const x = (e.clientX - r.left) / r.width - .5;
     const y = (e.clientY - r.top) / r.height - .5;
@@ -43,7 +57,7 @@ const lbText = $('.lightbox p');
 $$('.js-lightbox, .archive-card img, .secret-file img').forEach(img=>{
   img.addEventListener('click',()=>{
     if(!lightbox) return;
-    lbImg.src = img.src;
+    lbImg.src = img.currentSrc || img.src;
     lbImg.alt = img.alt || 'Imagen ampliada';
     lbText.textContent = img.alt || '';
     lightbox.classList.add('is-open');
@@ -60,36 +74,27 @@ $('.lightbox-close')?.addEventListener('click',closeLightbox);
 lightbox?.addEventListener('click',e=>{if(e.target===lightbox) closeLightbox();});
 window.addEventListener('keydown',e=>{if(e.key==='Escape') closeLightbox();});
 
-let currentAudio = null;
-$$('.sound-orb').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const src = btn.dataset.audio;
-    if(!src) return;
-    if(currentAudio){ currentAudio.pause(); currentAudio=null; $$('.sound-orb').forEach(b=>b.classList.remove('is-playing')); }
-    else { currentAudio = new Audio(src); currentAudio.loop = true; currentAudio.volume = .35; currentAudio.play().then(()=>btn.classList.add('is-playing')).catch(()=>{}); }
-  });
-});
-
 const unlock = $('.unlock-form');
 if(unlock){
   unlock.addEventListener('submit',e=>{
     e.preventDefault();
-    const value = new FormData(unlock).get('code').toLowerCase().replace(/\s+/g,'');
+    const value = String(new FormData(unlock).get('code') || '').toLowerCase().replace(/\s+/g,'');
     const ok = ['undercovercuffs','undercover','cuffs'].includes(value);
-    $('.unlock-result').textContent = ok ? 'Acceso concedido. Los archivos ya están abiertos.' : 'Clave incorrecta. El expediente sigue cerrado.';
+    const result = $('.unlock-result');
+    if(result) result.textContent = ok ? 'Acceso concedido. Los archivos ya están abiertos.' : 'Clave incorrecta. El expediente sigue cerrado.';
     $('[data-secret-grid]')?.classList.toggle('is-locked', !ok);
   });
 }
 
 const banned = ['puta','mierda','gilipollas','idiota','imbecil','imbécil'];
 function cleanText(text){
-  let result = text.trim();
+  let result = String(text || '').trim();
   banned.forEach(w=>{ result = result.replace(new RegExp(w,'gi'),'***'); });
   return result;
 }
 const commentForm = $('.comment-form');
 const commentList = $('.comment-list');
-const key='undercover-comments-v2';
+const key='undercover-comments-v3';
 function renderComments(){
   if(!commentList) return;
   const items = JSON.parse(localStorage.getItem(key) || '[]');

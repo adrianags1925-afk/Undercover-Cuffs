@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b6f88605-4dbd-4eea-be88-4c5bbf358137" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/audio/3.m4a" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/audio/dim-voice-3.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/audio/fukouna-girl.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/audio/v09044ec0000bumcqomc4ahilk864r10-online-audio-converter-com.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/audio/v09044g40000c4k161rc77u1bd13oo5g-online-audio-converter-com.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/audio/v12044gd0000crmscbvog65ml3kmpvp0-online-audio-converter-com-2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/3721746.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/character-01.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/character-02.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/character-03.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/cover-undercover-cuffs.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/dim.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/eng-icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/fondo-old.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/fondo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/fondo1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/fondo2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/fondo3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/icon-undercover-cuffs.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/img-3230.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/logo2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/secret-01.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/secret-02.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/secret-03.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/img/shop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;AinhoaAyoroaRubio&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/adrianags1925-afk/Undercover-Cuffs.git&quot;,
+    &quot;accountId&quot;: &quot;f632808b-8ccc-4efe-8cb5-99cff6fdaaf2&quot;
+  }
+}</component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3D2HScKBDya5OtAhFxf1SaLWZ5e" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-PS-261.23567.149" />
+        <option value="bundled-php-predefined-a98d8de5180a-022fa7b8ab75-com.jetbrains.php.sharedIndexes-PS-261.23567.149" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b6f88605-4dbd-4eea-be88-4c5bbf358137" name="Changes" comment="" />
+      <created>1777473244993</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1777473244993</updated>
+      <workItem from="1777473246699" duration="3200000" />
+      <workItem from="1777476675090" duration="1270000" />
+      <workItem from="1777479583641" duration="408000" />
+      <workItem from="1777571675684" duration="2110000" />
+      <workItem from="1777576620164" duration="599000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
